@@ -1,6 +1,4 @@
-package ie.ucd.pawns;
-
-import ie.ucd.Person;
+package ie.ucd.items;
 
 public class PersonPawn extends Pawn {
 
@@ -11,6 +9,10 @@ public class PersonPawn extends Pawn {
 		this.name = name;
 		
 		
+	}
+	
+	public Person getName() {
+		return name;
 	}
 	
 }
