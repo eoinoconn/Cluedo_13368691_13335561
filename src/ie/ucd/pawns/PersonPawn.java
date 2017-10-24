@@ -9,6 +9,8 @@ public class PersonPawn extends Pawn {
 	public PersonPawn(int[] location, Person name) {
 		this.setLocation(location);
 		this.name = name;
+		
+		
 	}
 	
 }
