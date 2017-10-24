@@ -8,18 +8,16 @@ public class GameBoard {
 		this.grid = grid;
 	}
 	
-	public int[] getOptions(int[] location) {
+	// Method to return the current grid square and the numbers corresponding to the 
+	public int[] getOptions(PersonPawn pawn) {
+		int[] location = pawn.getLocation();
 		int[] options = new int[5]; // some array of numbers representing options
-		xloc = location[0];
-		yloc = location[1];
-		// first check current location - am I at a doorway?
-		if(grid[xloc][yloc]>0) {
-			//at a doorway
-		}
-		if(grid[xloc+1][yloc+1]!=null) {
-			//this cell can be moved into
-		}
-		// repeat for below and left and right
+		options[0] = grid[location[0]][location[1]]; //current position
+		options[1] = grid[location[0]+1][location[1]]; //cell above
+		options[2] = grid[location[0]-1][location[1]]; //cell below
+		options[3] = grid[location[0]][location[1]-1]; //cell left
+		options[4] = grid[location[0]][location[1]+1]; //cell right
+		return options;
 	}
 	
 }
