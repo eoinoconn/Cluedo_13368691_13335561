@@ -1,6 +1,4 @@
-package ie.ucd.pawns;
-
-import ie.ucd.Weapon;
+package ie.ucd.items;
 
 public class WeaponPawn extends Pawn {
 
@@ -9,5 +7,9 @@ public class WeaponPawn extends Pawn {
 	public WeaponPawn(int[] location, Weapon name) {
 		this.setLocation(location);
 		this.name = name;
+	}
+	
+	public Weapon getName() {
+		return name;
 	}
 }

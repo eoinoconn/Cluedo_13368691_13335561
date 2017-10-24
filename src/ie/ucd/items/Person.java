@@ -1,4 +1,4 @@
-package ie.ucd;
+package ie.ucd.items;
 
 public enum Person {
 

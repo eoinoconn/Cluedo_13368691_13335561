@@ -1,4 +1,4 @@
-package ie.ucd.pawns;
+package ie.ucd.items;
 
 public abstract class Pawn {
 
