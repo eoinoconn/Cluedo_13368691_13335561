@@ -8,8 +8,9 @@ public abstract class Pawn {
 		return location;
 	}
 	
-	public void setLocation(int[] location) {
-		this.location = location;
+	public void setLocation(int xlocation, int ylocation) {
+		location[0] = xlocation;
+		location[1] = ylocation;
 	}
 	
 }
