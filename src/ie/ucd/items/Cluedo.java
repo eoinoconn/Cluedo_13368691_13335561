@@ -40,6 +40,7 @@ public class Cluedo {
         	for(int i=0;i<testStr.length;i++) {
         		results[i] = Integer.parseInt(testStr[i]);
         	}
+        	
         }
         sc.close();
 	}
