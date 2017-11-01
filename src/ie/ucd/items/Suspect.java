@@ -1,6 +1,6 @@
 package ie.ucd.items;
 
-public enum Person {
+public enum Suspect {
 
 	DENNIS, MAC, CHARLIE, FRANK, DEE, RICKETYCRICKET 
 }
