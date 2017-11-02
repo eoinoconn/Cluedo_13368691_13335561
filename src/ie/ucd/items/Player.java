@@ -7,8 +7,8 @@ public class Player {
 	private SuspectPawn character;
 	private int moves;
 	
-	public Player(Suspect name) {
-		this.character = new SuspectPawn(0, 0, name); //place pawn with specified name in start location
+	public Player(int xlocation, int ylocation, Suspect name) {
+		this.character = new SuspectPawn(xlocation, ylocation, name); //place pawn with specified name in start location
 		moves = 0;
 	}
 	
