@@ -53,6 +53,7 @@ public class Cluedo {
 			System.out.println("Please enter your name:");
 			// TODO catch exceptions
 			String str = sc.next();
+			sc.nextLine();
 			playerCollection.put(str, new Player()); // personCollection.get(players)));
 			System.out.println("Welcome to the game " + str + '!');
 		
