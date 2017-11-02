@@ -1,49 +1,14 @@
 package ie.ucd.items;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 public class GameBoard {
 
 	private static final int DIMENSIONS = 9;
 	private int[][] grid = new int[DIMENSIONS][DIMENSIONS];
 	
-	public GameBoard(String fileName) {
+	public GameBoard(int[][] grid) {
         
-		File file = new File(fileName);
-        List<List<String>> lines = new ArrayList<>();
-        Scanner inputStream;
-
-        try{
-            inputStream = new Scanner(file);
-
-            while(inputStream.hasNext()){
-                String line= inputStream.next();
-                String[] values = line.split(",");
-                // this adds the currently parsed line to the 2-dimensional string array
-                lines.add(Arrays.asList(values));
-            }
-
-            inputStream.close();
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
- 
-        int lineNo = 0;
-        for(List<String> line: lines) {
-            int columnNo = 0;
-            for (String value: line) {
-            	grid[lineNo][columnNo] = Integer.parseInt(value);
-                columnNo++;
-            }
-            lineNo++;
-        }
-        //System.out.println(Arrays.deepToString(grid));
+		this.grid = grid;
 	}
 	
 	// Method to return the current grid square and the numbers corresponding to the 
@@ -66,4 +31,19 @@ public class GameBoard {
 		return options;
 	}
 	
+	public int[] getRoomLocation(Room room) {
+		int[] location = new int[2];
+		for (int i = 0; i < DIMENSIONS; i++) {
+	        for (int j = 0; j < DIMENSIONS; j++) {
+	            if (grid[i][j]==room.ordinal()+10 && (grid[i+1][j]==room.ordinal() || grid[i-1][j]==room.ordinal() || grid[i][j+1]==room.ordinal() || grid[i][j-1]==room.ordinal())) {
+	                // if room in room adjacent to doorway
+	            	location[0] = i;
+	                location[1] = j;
+	            	return location;
+	            }
+	        }
+		}
+		return location; // will return -1, 0 as location if room number not found in grid
+		
+	}
 }

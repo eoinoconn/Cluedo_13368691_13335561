@@ -1,13 +1,47 @@
 package ie.ucd.items;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Cluedo {
 	public static void main(String [] args) throws Exception {
 		
+//	CSV reading incase not copied by Eoin to his branch
+//		File file = new File(fileName);
+//        List<List<String>> lines = new ArrayList<>();
+//        Scanner inputStream;
+//
+//        try{
+//            inputStream = new Scanner(file);
+//
+//            while(inputStream.hasNext()){
+//                String line= inputStream.next();
+//                String[] values = line.split(",");
+//                // this adds the currently parsed line to the 2-dimensional string array
+//                lines.add(Arrays.asList(values));
+//            }
+//
+//            inputStream.close();
+//        }catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+// 
+//        int lineNo = 0;
+//        for(List<String> line: lines) {
+//            int columnNo = 0;
+//            for (String value: line) {
+//            	grid[lineNo][columnNo] = Integer.parseInt(value);
+//                columnNo++;
+//            }
+//            lineNo++;
+//        }
 		
 		// TODO Initialise gameboard
 		// TODO randomly assign weapon pawns
