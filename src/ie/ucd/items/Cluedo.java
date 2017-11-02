@@ -18,11 +18,11 @@ public class Cluedo {
 		// Create instances of game cards
 		// Store game cards in cardDeck
 		ArrayList<Card> cardDeck = new ArrayList<Card>();
-		ArrayList<Person> personCollection = new ArrayList<Person>();
-		for (Person per : Person.values())
+		ArrayList<Suspect> suspectCollection = new ArrayList<Suspect>();
+		for (Suspect per : Suspect.values())
 		{
-			cardDeck.add(new PersonCard(per));
-			personCollection.add(per);
+			cardDeck.add(new SuspectCard(per));
+			suspectCollection.add(per);
 		}
 		for (Weapon wep : Weapon.values())
 		{
@@ -54,9 +54,9 @@ public class Cluedo {
 			// TODO catch exceptions
 			String str = sc.next();
 			sc.nextLine();
-			playerCollection.put(str, new Player()); // personCollection.get(players)));
+			playerCollection.put(str, new Player(suspectCollection.get(players)));
 			System.out.println("Welcome to the game " + str + '!');
-		
+			System.out.println("You are player " + suspectCollection.get(players));
 			
 			// Check if other players are present
 			System.out.println("Would you like to add another player? (Y/N)");
