@@ -1,6 +1,5 @@
 package ie.ucd.items;
 
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
@@ -8,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class Cluedo {
 	public static void main(String [] args) throws Exception {
@@ -49,8 +49,7 @@ public class Cluedo {
 	    // Initialise gameboard
 		
 	    GameBoard gameBoard = new GameBoard(grid);
-	    
-	    // TODO randomly assign weapon pawns
+	   
 		
 		
 		// TODO This could be replaced at a later date with a facade		
@@ -64,18 +63,16 @@ public class Cluedo {
 			cardDeck.add(new SuspectCard(per));
 			suspectCollection.add(per);
 		}
-		for (Weapon wep : Weapon.values())
-		{
-			cardDeck.add(new WeaponCard(wep));
-		}
 		for (Room ro : Room.values())
 		{
 			cardDeck.add(new RoomCard());
 			roomCollection.add(ro);
 		}
-		
 		Collections.shuffle(roomCollection);
-
+		for (Weapon wep : Weapon.values())
+		{
+			cardDeck.add(new WeaponCard(wep));
+		}
 
 		
 		System.out.println("Welcome to Cluedo!! By eoin and Andy.");
@@ -84,8 +81,8 @@ public class Cluedo {
 		Scanner sc = new Scanner(System.in);
 		boolean anotherPlayer = false;
 		ArrayList<Player> playerCollection = new ArrayList<Player>();
-		int players = 0;
-		int susnum = 0;
+		int numPlayers = 0;
+		int numSuspects = 0;
 		int suspectIndex = 0;
 		int[] playerLocation = new int[2];
 		
@@ -93,7 +90,7 @@ public class Cluedo {
 		do {
 			
 			// Input player name and initialise player object
-			System.out.println("Hello player " + (++players) + '.');
+			System.out.println("Hello player " + (++numPlayers) + '.');
 			System.out.println("Please enter your name:");
 			// TODO catch exceptions
 			String str = sc.next();
@@ -103,19 +100,19 @@ public class Cluedo {
 			// See who they'd like to be
 			System.out.println("Who would you like to play as?");
 			//print out all the remaining suspects
-			susnum = 0;
+			numSuspects = 0;
 			for(Suspect sus: suspectCollection) {
-				System.out.println((susnum+1) + " " + sus.toString());
-				susnum++;
+				System.out.println((numSuspects+1) + " " + sus.toString());
+				numSuspects++;
 			}
 			
 			// Take their choice of suspect
-			System.out.println("Enter a number between 1 & " + susnum + ":");
+			System.out.println("Enter a number between 1 & " + numSuspects + ":");
 			suspectIndex = sc.nextInt()-1;
-			System.out.println(str + ", you are player " + suspectCollection.get(suspectIndex));
+			System.out.println(str + ", you are suspect " + suspectCollection.get(suspectIndex));
 			
 			// Get location of room they're starting in
-			playerLocation = gameBoard.getRoomLocation(roomCollection.get(players - 1));
+			playerLocation = gameBoard.getRoomLocation(roomCollection.get(numPlayers - 1));
 			
 			// Create player with starting location and suspect type
 			playerCollection.add(new Player(playerLocation[0], playerLocation[1], suspectCollection.get(suspectIndex)));
@@ -132,6 +129,36 @@ public class Cluedo {
 			} else anotherPlayer = false;
 			
 		} while (anotherPlayer);
+		
+		
+		Random rand = new Random();
+		int turns, numMoves;
+		int whoseGo;
+		for(turns = 0; turns < 100; turns++) {
+			for(whoseGo = 0; whoseGo < numPlayers; whoseGo++) {
+				
+				Player currentPlayer = playerCollection.get(whoseGo);
+				sc.nextLine();
+				
+				System.out.println("Okay player " + whoseGo + ". It's your turn!");
+				System.out.println("Lets roll the dice!!");
+				
+				currentPlayer.setMoves(rand.nextInt(10) + 2);
+				
+				System.out.println("You have " + currentPlayer.getMoves() + " moves.");
+				System.out.println("You are at location "); //TODO get location method
+				System.out.println("Where would you like to move?(Up/Down/Left/Right)");
+				
+				String str = sc.nextLine();
+				switch(Character.toUpperCase(str.charAt(0))){
+				case 'U':
+					
+				}
+				
+			
+			}
+		}
 		sc.close();
+		
 	}
 }
