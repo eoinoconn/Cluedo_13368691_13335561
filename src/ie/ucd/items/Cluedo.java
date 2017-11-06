@@ -48,7 +48,7 @@ public class Cluedo {
 	
 	    // Initialise gameboard
 		
-	    GameBoard gameBoard = new GameBoard(grid);
+	    GameBoard gameBoard = GameBoard.getInstance(grid);
 	   
 		
 		
@@ -140,6 +140,7 @@ public class Cluedo {
 		int turns, numMoves;
 		int whoseGo, e;
 		boolean turnOver = false;
+		boolean moving = true;
 		// Turns loop, keeps play moving in circle
 		for(turns = 0; turns < 100; turns++) {
 			// Player loop, iterates through each player, each turn
@@ -173,25 +174,25 @@ public class Cluedo {
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
-						if(numMoves < 1) {
+						// Enter move-mode
+						moving = true;
+						while((numMoves > 0) & (moving)) {
 							System.out.println("Sorry, you do not have any moves left");
-							break;
-						}
-						System.out.println("Where would you like to move? (Up/Down/Left/Right)");
-						str = sc.nextLine();
-						e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
-						switch(e) {
-						case(0):
-							break;
-						case(1):
-							numMoves--;
-							break;
-						case(-1):
-							System.out.println("Sorry, you can't move there.");
-							break;
-						default:
-							System.exit(1);		//Error with Turn.makeMove();
-						}
+							System.out.println("Where would you like to move? (Up/Down/Left/Right)");
+							str = sc.nextLine();
+							e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
+							switch(e) {
+							case(0):
+								break;
+							case(1):
+								numMoves--;
+								break;
+							case(-1):
+								System.out.println("Sorry, you can't move there.");
+								break;
+							default:
+								System.exit(1);		//Error with Turn.makeMove();
+							}
 						location = currentPlayer.getSuspectPawn().getLocation();
 						System.out.println("New location is " + location[0] + ',' + location[1] + ". You have " + numMoves + " moves left");
 						break;
