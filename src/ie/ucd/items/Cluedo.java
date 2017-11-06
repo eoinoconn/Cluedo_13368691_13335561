@@ -55,9 +55,12 @@ public class Cluedo {
 		// TODO This could be replaced at a later date with a facade		
 		// Create instances of game cards
 		// Store game cards in cardDeck
+	    int i = 0;
+	    int[] location = new int[2];
 		ArrayList<Card> cardDeck = new ArrayList<Card>();
 		ArrayList<Suspect> suspectCollection = new ArrayList<Suspect>();
 		ArrayList<Room> roomCollection = new ArrayList<Room>();
+		ArrayList<WeaponPawn>  weaponPawnCollection = new ArrayList<WeaponPawn>();
 		for (Suspect per : Suspect.values())
 		{
 			cardDeck.add(new SuspectCard(per));
@@ -72,6 +75,8 @@ public class Cluedo {
 		for (Weapon wep : Weapon.values())
 		{
 			cardDeck.add(new WeaponCard(wep));
+			location = gameBoard.getRoomLocation(roomCollection.get(i++));
+			weaponPawnCollection.add(new WeaponPawn(location[0], location[1], wep));
 		}
 
 		
@@ -84,7 +89,6 @@ public class Cluedo {
 		int numPlayers = 0;
 		int numSuspects = 0;
 		int suspectIndex = 0;
-		int[] playerLocation = new int[2];
 		
 		// Loop to repeatedly ask for new players
 		do {
@@ -108,14 +112,14 @@ public class Cluedo {
 			
 			// Take their choice of suspect
 			System.out.println("Enter a number between 1 & " + numSuspects + ":");
-			suspectIndex = sc.nextInt()-1;
+			suspectIndex = sc.nextInt() - 1;
 			System.out.println(str + ", you are suspect " + suspectCollection.get(suspectIndex));
 			
 			// Get location of room they're starting in
-			playerLocation = gameBoard.getRoomLocation(roomCollection.get(numPlayers - 1));
+			location = gameBoard.getRoomLocation(roomCollection.get(numPlayers - 1));
 			
 			// Create player with starting location and suspect type
-			playerCollection.add(new Player(playerLocation[0], playerLocation[1], suspectCollection.get(suspectIndex)));
+			playerCollection.add(new Player(location[0], location[1], suspectCollection.get(suspectIndex)));
 			
 			// Now that that suspect is in the game we remove it from consideration for other players
 			suspectCollection.remove(suspectIndex);
@@ -132,26 +136,35 @@ public class Cluedo {
 		
 		
 		Random rand = new Random();
-		int turns;
-		int whoseGo, i;
+		int turns, numMoves;
+		int whoseGo;
+		// Turns loop, keeps play moving in circle
 		for(turns = 0; turns < 100; turns++) {
+			// Player loop, iterates through each player, each turn
 			for(whoseGo = 0; whoseGo < numPlayers; whoseGo++) {
 				
+				// Select current turns player
 				Player currentPlayer = playerCollection.get(whoseGo);
+
+				// Inform players whos turn it is
+				System.out.println("Okay player " + (whoseGo + 1) + ". It's your turn!");
+				System.out.println("Press return to continue");
 				sc.nextLine();
 				
-				System.out.println("Okay player " + whoseGo + ". It's your turn!");
+				// Randomly assign number of moves
 				System.out.println("Lets roll the dice!!");
+				/* As a normal set of playing die is skewed for certain 
+				 * values of roles the random integer is called twice
+				 * to simulate this real life instance. 
+				 */
+				numMoves = rand.nextInt(5) + rand.nextInt(5) + 2;
 				
-				currentPlayer.setMoves(rand.nextInt(10) + 2);
+				// Inform player of his moves and location
+				location = currentPlayer.suspectPawn.getLocation();
+				System.out.println("You have " + numMoves + " moves.");
+				System.out.println("You are at location " + location[0] + ' ' + location[1]);
 				
-				System.out.println("You have " + currentPlayer.getMoves() + " moves.");
-				System.out.println("You are at location "); //TODO get location method
-				
-				for(i = 0; i < currentPlayer.getMoves(); i++) {
-					currentPlayer.makeMove(gameBoard);
-				}
-				
+				// Implement player moves interface
 				
 			
 			}
