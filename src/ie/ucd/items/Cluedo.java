@@ -16,7 +16,7 @@ public class Cluedo {
 		File file = new File(fileName);
 	    List<List<String>> lines = new ArrayList<>();
 	    Scanner inputStream;
-	    int[][] grid = new int[9][9];
+	    int[][] grid = new int[25][25];
 	    
 	    
 	    // Open file, scan grid into lines list
@@ -136,8 +136,9 @@ public class Cluedo {
 		
 		
 		Random rand = new Random();
+		Turn turn = new Turn();
 		int turns, numMoves;
-		int whoseGo;
+		int whoseGo, e;
 		boolean turnOver = false;
 		// Turns loop, keeps play moving in circle
 		for(turns = 0; turns < 100; turns++) {
@@ -161,7 +162,7 @@ public class Cluedo {
 				numMoves = rand.nextInt(5) + rand.nextInt(5) + 2;
 				
 				// Inform player of his moves and location
-				location = currentPlayer.suspectPawn.getLocation();
+				location = currentPlayer.getSuspectPawn().getLocation();
 				System.out.println("You have " + numMoves + " moves.");
 				System.out.println("You are at location " + location[0] + ' ' + location[1]);
 				
@@ -172,13 +173,33 @@ public class Cluedo {
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
-						
-					
-	
+						if(numMoves < 1) {
+							System.out.println("Sorry, you do not have any moves left");
+							break;
+						}
+						System.out.println("Where would you like to move? (Up/Down/Left/Right)");
+						str = sc.nextLine();
+						e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
+						switch(e) {
+						case(0):
+							break;
+						case(1):
+							numMoves--;
+							break;
+						case(-1):
+							System.out.println("Sorry, you can't move there.");
+							break;
+						default:
+							System.exit(1);		//Error with Turn.makeMove();
+						}
+						location = currentPlayer.getSuspectPawn().getLocation();
+						System.out.println("New location is " + location[0] + ',' + location[1] + ". You have " + numMoves + " moves left");
+						break;
 					case('H'):
 					case('A'):
 					case('E'):
 						turnOver = true;
+						break;
 					default:
 					}
 				}
