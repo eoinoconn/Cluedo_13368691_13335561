@@ -3,7 +3,7 @@ package ie.ucd.items;
 
 public class GameBoard {
 
-	private static final int DIMENSIONS = 9;
+	private static final int DIMENSIONS = 25;
 	private int[][] grid = new int[DIMENSIONS][DIMENSIONS];
 	
 	public GameBoard(int[][] grid) {
@@ -45,6 +45,26 @@ public class GameBoard {
 	        }
 		}
 		return location; // will return first grid square if no door found
-		
+	}
+	
+	public void printBoard(SuspectPawn suspectPawn) {
+		for (int i = 0; i < DIMENSIONS; i++) {
+	        for (int j = 0; j < DIMENSIONS; j++) {
+	        	if(i==suspectPawn.getLocation()[0] && j==suspectPawn.getLocation()[1]) {
+	        		System.out.print('@'); // '@' = pawn location
+	        	}
+	        	else if(grid[i][j]<10) {
+					System.out.print(' '); // ' ' = doorway
+				}
+	        	else if(grid[i][j]==10) {
+	        		System.out.print('*'); // '*' = corridor
+	        	}
+				else {
+					System.out.print('#'); // '#' = room
+				}
+	        }
+	        System.out.print('\n');
+		}
+		System.out.println("'@' = pawn location, '*' = corridor, '#' = room, ' ' = doorway");
 	}
 }
