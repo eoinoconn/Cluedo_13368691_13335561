@@ -38,7 +38,6 @@ public class Cluedo {
 		Turn turn = new Turn();
 		int numPlayers = playerCollection.size();
 		int turnsPlayed, numMovesRemaining, whoseGo, e;
-		int[] location = new int[2];
 		boolean playerTurnOver = false;
 		boolean inMoveMode = true;
 		
@@ -66,7 +65,6 @@ public class Cluedo {
 				numMovesRemaining = rand.nextInt(5) + rand.nextInt(5) + 2;
 				
 				// Inform player of his moves and location
-				location = currentPlayer.getSuspectPawn().getLocation();
 				System.out.println("You have " + numMovesRemaining + " moves.");
 				
 				// Begin action loop where the player makes his decisions for their turn

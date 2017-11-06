@@ -74,6 +74,6 @@ public class GameBoard {
 	        }
 	        System.out.print('\n');
 		}
-		System.out.println("'@' = pawn location, '*' = corridor, '#' = room, ' ' = doorway");
+		System.out.println("'@' = pawn location, ' ' = corridor, '#' = room, '*' = doorway");
 	}
 }
