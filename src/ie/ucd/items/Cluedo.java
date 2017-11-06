@@ -132,8 +132,8 @@ public class Cluedo {
 		
 		
 		Random rand = new Random();
-		int turns, numMoves;
-		int whoseGo;
+		int turns;
+		int whoseGo, i;
 		for(turns = 0; turns < 100; turns++) {
 			for(whoseGo = 0; whoseGo < numPlayers; whoseGo++) {
 				
@@ -147,13 +147,11 @@ public class Cluedo {
 				
 				System.out.println("You have " + currentPlayer.getMoves() + " moves.");
 				System.out.println("You are at location "); //TODO get location method
-				System.out.println("Where would you like to move?(Up/Down/Left/Right)");
 				
-				String str = sc.nextLine();
-				switch(Character.toUpperCase(str.charAt(0))){
-				case 'U':
-					
+				for(i = 0; i < currentPlayer.getMoves(); i++) {
+					currentPlayer.makeMove(gameBoard);
 				}
+				
 				
 			
 			}
