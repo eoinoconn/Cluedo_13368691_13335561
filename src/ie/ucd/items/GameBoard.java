@@ -59,6 +59,9 @@ public class GameBoard {
 	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
 	        		System.out.print('@'); // '@' = pawn location
 	        	}
+	        	else if(grid[i][j]==0) {
+	        		System.out.print('X'); // 'X' = out of bounds
+	        	}
 	        	else if(grid[i][j]<10) {
 					System.out.print(' '); // ' ' = doorway
 				}
