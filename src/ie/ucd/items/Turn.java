@@ -11,7 +11,7 @@ public class Turn {
 		case 'u':	
 			if(options[1]>0) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);
-				if(options[1]<10) {
+				if(options[1]<=10) {
 					return 1; 		// return 1 if moved in corridor
 				}
 				return 0;			// return 0 if moved in room
@@ -20,7 +20,7 @@ public class Turn {
 		case 'd':
 			if(options[2]>0) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]+1);
-				if(options[2]<10) { // do not decrement moves if in a room
+				if(options[2]<=10) { // do not decrement moves if in a room
 					return 1; 		// return 1 if moved in corridor
 				}
 				return 0;			// return 0 if moved in room
@@ -29,7 +29,7 @@ public class Turn {
 		case 'l':
 			if(options[3]>0) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0]-1, suspectPawn.getLocation()[1]);
-				if(options[3]<10) { // do not decrement moves if in a room
+				if(options[3]<=10) { // do not decrement moves if in a room
 					return 1; 		// return 1 if moved in corridor
 				}
 				return 0;			// return 0 if moved in room
@@ -38,7 +38,7 @@ public class Turn {
 		case 'r':
 			if(options[4]>0) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0]+1, suspectPawn.getLocation()[1]);
-				if(options[4]<10) { // do not decrement moves if in a room
+				if(options[4]<=10) { // do not decrement moves if in a room
 					return 1; 		// return 1 if moved in corridor
 				}
 				return 0;			// return 0 if moved in room
