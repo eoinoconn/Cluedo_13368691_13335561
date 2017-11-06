@@ -53,11 +53,10 @@ public class Cluedo {
 
 				// Inform players whos turn it is
 				System.out.println("Okay player " + (whoseGo + 1) + ". It's your turn!");
-				System.out.println("Press return to continue");
+				System.out.println("Press return to roll the dice");
 				sc.nextLine();
 				
 				// Randomly assign number of moves
-				System.out.println("Lets roll the dice!!");
 				/* As a normal set of playing die is skewed for certain 
 				 * values of roles the random integer is called twice
 				 * to simulate this real life instance. 
@@ -71,6 +70,8 @@ public class Cluedo {
 				playerTurnOver = false;
 				while(!playerTurnOver) {
 					
+					// Print gameboard
+					gameBoard.printBoard(currentPlayer.getSuspectPawn());
 					// Ask user which action they would like to perform
 					System.out.println("Would you like to enter move mode, test a hypothesis, make an accusation or end your turn?(M/H/A/E)");
 					String str = sc.nextLine();

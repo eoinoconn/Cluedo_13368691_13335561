@@ -42,7 +42,7 @@ public class GameBoard {
 		// check only the space not adjacent to the edge of the board as there are never doors
 		for (int i = 1; i < DIMENSIONS-1; i++) {
 	        for (int j = 1; j < DIMENSIONS-1; j++) {
-	            if (grid[i][j]==room.ordinal()+10 && (grid[i+1][j]==room.ordinal() || grid[i-1][j]==room.ordinal() || grid[i][j+1]==room.ordinal() || grid[i][j-1]==room.ordinal())) {
+	            if (grid[i][j]==room.ordinal()+11 && (grid[i+1][j]==room.ordinal()+1 || grid[i-1][j]==room.ordinal()+1 || grid[i][j+1]==room.ordinal()+1 || grid[i][j-1]==room.ordinal()+1)) {
 	                // if room in room adjacent to doorway
 	            	location[0] = j;
 	                location[1] = i;
@@ -57,19 +57,19 @@ public class GameBoard {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
 	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
-	        		System.out.print('@'); // '@' = pawn location
+	        		System.out.print("@ "); // '@' = pawn location
 	        	}
 	        	else if(grid[i][j]==0) {
-	        		System.out.print('X'); // 'X' = out of bounds
+	        		System.out.printf("X "); // 'X' = out of bounds
 	        	}
 	        	else if(grid[i][j]<10) {
-					System.out.print('*'); // ' ' = doorway
+					System.out.printf("* "); // ' ' = doorway
 				}
 	        	else if(grid[i][j]==10) {
-	        		System.out.print(' '); // '*' = corridor
+	        		System.out.printf("' "); // '*' = corridor
 	        	}
 				else {
-					System.out.print('#'); // '#' = room
+					System.out.printf("# "); // '#' = room
 				}
 	        }
 	        System.out.print('\n');
