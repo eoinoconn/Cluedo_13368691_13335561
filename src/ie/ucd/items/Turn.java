@@ -46,8 +46,7 @@ public class Turn {
 			}
 			return -1;				// return -1 if could not move
 		default:
-			return -1;				// return -1 if could not move
-				
+			return -2;				// return -2 if invalid option entered
 		}
 
 	}
