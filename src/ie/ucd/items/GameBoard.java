@@ -56,7 +56,7 @@ public class GameBoard {
 	public void printBoard(SuspectPawn suspectPawn) {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	if(i==suspectPawn.getLocation()[0] && j==suspectPawn.getLocation()[1]) {
+	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
 	        		System.out.print('@'); // '@' = pawn location
 	        	}
 	        	else if(grid[i][j]<10) {
