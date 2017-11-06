@@ -21,18 +21,18 @@ public class GameBoard {
 	public int[] getOptions(SuspectPawn pawn) {
 		int[] location = pawn.getLocation();
 		int[] options = new int[5]; // some array of numbers representing options
-		options[0] = grid[location[0]][location[1]]; //current position
+		options[0] = grid[location[1]][location[0]]; //current position
 		if((location[1]-1)>=0) { // ensure space above is not out of bounds
-			options[1] = grid[location[0]][location[1]-1];
+			options[1] = grid[location[1]-1][location[0]];
 		}
 		if((location[1]+1)<DIMENSIONS) { // ensure space below is not out of bounds
-			options[2] = grid[location[0]][location[1]+1];
+			options[2] = grid[location[1]+1][location[0]];
 		}
 		if((location[0]-1)>=0) { // ensure space to the left is not out of bounds
-			options[3] = grid[location[0]-1][location[1]];
+			options[3] = grid[location[1]][location[0]-1];
 		}
 		if((location[0]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
-			options[4] = grid[location[0]+1][location[1]];
+			options[4] = grid[location[1]][location[0]+1];
 		}
 		return options;
 	}
@@ -44,8 +44,8 @@ public class GameBoard {
 	        for (int j = 1; j < DIMENSIONS-1; j++) {
 	            if (grid[i][j]==room.ordinal()+10 && (grid[i+1][j]==room.ordinal() || grid[i-1][j]==room.ordinal() || grid[i][j+1]==room.ordinal() || grid[i][j-1]==room.ordinal())) {
 	                // if room in room adjacent to doorway
-	            	location[0] = i;
-	                location[1] = j;
+	            	location[0] = j;
+	                location[1] = i;
 	            	return location;
 	            }
 	        }
@@ -59,11 +59,14 @@ public class GameBoard {
 	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
 	        		System.out.print('@'); // '@' = pawn location
 	        	}
+	        	else if(grid[i][j]==0) {
+	        		System.out.print('X'); // 'X' = out of bounds
+	        	}
 	        	else if(grid[i][j]<10) {
-					System.out.print(' '); // ' ' = doorway
+					System.out.print('*'); // ' ' = doorway
 				}
 	        	else if(grid[i][j]==10) {
-	        		System.out.print('*'); // '*' = corridor
+	        		System.out.print(' '); // '*' = corridor
 	        	}
 				else {
 					System.out.print('#'); // '#' = room
