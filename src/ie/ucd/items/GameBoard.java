@@ -3,11 +3,17 @@ package ie.ucd.items;
 
 public class GameBoard {
 
+	private static GameBoard uniqueInstance = null;
 	private static final int DIMENSIONS = 25;
 	private int[][] grid = new int[DIMENSIONS][DIMENSIONS];
 	
-	public GameBoard(int[][] grid) {
-        
+	public static GameBoard getInstance(int[][] grid) {
+		if(uniqueInstance == null)
+			uniqueInstance = new GameBoard(grid);
+		return uniqueInstance;
+	}
+	
+	private GameBoard(int[][] grid) {
 		this.grid = grid;
 	}
 	
