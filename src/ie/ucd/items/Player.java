@@ -1,10 +1,10 @@
 package ie.ucd.items;
 
-import java.util.Scanner;
+
 
 public class Player {
 	
-	private SuspectPawn suspectPawn;
+	public SuspectPawn suspectPawn;
 	private int moves;
 	
 	public Player(int xlocation, int ylocation, Suspect name) {
@@ -22,15 +22,13 @@ public class Player {
 	
 	
 	
-	public boolean makeMove(GameBoard board) {
+	public boolean makeMove(char movement, GameBoard board) {
 		int[] options = board.getOptions(suspectPawn);
 		System.out.println("\t" + options[1] + "\n" + options[3] + "\t" + options[0] + "\t" + options[4] +"\n" + "\t" + options[2]);
 		System.out.println("Select Direction: 'u' for up, 'd' for down, 'l' for left, 'r' for right");
 		
-		Scanner sd = new Scanner(System.in);
-		String movement = sd.nextLine();
-		sd.close();
-		switch(Character.toLowerCase(movement.charAt(0))) {
+		
+		switch(movement) {
 		case 'u':	
 			if(options[1]>0) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);

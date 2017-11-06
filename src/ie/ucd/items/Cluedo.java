@@ -138,6 +138,7 @@ public class Cluedo {
 		Random rand = new Random();
 		int turns, numMoves;
 		int whoseGo;
+		boolean turnOver = false;
 		// Turns loop, keeps play moving in circle
 		for(turns = 0; turns < 100; turns++) {
 			// Player loop, iterates through each player, each turn
@@ -164,7 +165,23 @@ public class Cluedo {
 				System.out.println("You have " + numMoves + " moves.");
 				System.out.println("You are at location " + location[0] + ' ' + location[1]);
 				
-				// Implement player moves interface
+				// Begin action loop where the player makes his decisions for their turn
+				turnOver = false;
+				while(!turnOver) {
+					System.out.println("Would you like to make a move, test a hypothesis, make an accusation or end your turn?(M/H/A/E)");
+					String str = sc.nextLine();
+					switch(Character.toUpperCase(str.charAt(0))) {
+					case('M'):
+						
+					
+	
+					case('H'):
+					case('A'):
+					case('E'):
+						turnOver = true;
+					default:
+					}
+				}
 				
 			
 			}
