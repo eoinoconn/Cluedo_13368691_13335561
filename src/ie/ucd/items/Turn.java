@@ -5,8 +5,6 @@ public class Turn {
 	public int makeMove(char direction, SuspectPawn suspectPawn, GameBoard board) {
 		int[] options = board.getOptions(suspectPawn);
 //		System.out.println("\t" + options[1] + "\n" + options[3] + "\t" + options[0] + "\t" + options[4] +"\n" + "\t" + options[2]);
-		board.printBoard(suspectPawn);
-		System.out.println("Select Direction: 'u' for up, 'd' for down, 'l' for left, 'r' for right");
 		
 		switch(direction) {
 		case 'u':	

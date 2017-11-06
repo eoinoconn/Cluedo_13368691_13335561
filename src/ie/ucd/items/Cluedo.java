@@ -170,38 +170,81 @@ public class Cluedo {
 				// Begin action loop where the player makes his decisions for their turn
 				turnOver = false;
 				while(!turnOver) {
-					System.out.println("Would you like to make a move, test a hypothesis, make an accusation or end your turn?(M/H/A/E)");
+					
+					// Ask user which action they would like to perform
+					System.out.println("Would you like to enter move mode, test a hypothesis, make an accusation or end your turn?(M/H/A/E)");
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
-						// Enter move-mode
+						// Enter move-mode contained in while loop
 						moving = true;
 						while((numMoves > 0) & (moving)) {
-							System.out.println("Sorry, you do not have any moves left");
-							System.out.println("Where would you like to move? (Up/Down/Left/Right)");
+							
+							// Print gameboard
+							gameBoard.printBoard(currentPlayer.getSuspectPawn());
+							
+							// Tell the user how many moves they have left
+							System.out.println("You have " + numMoves + " moves remaining");
+							
+							// Check where the player wants to move
+							System.out.println("Where would you like to move? (Up/Down/Left/Right/Finish)");
 							str = sc.nextLine();
-							e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
-							switch(e) {
-							case(0):
-								break;
-							case(1):
-								numMoves--;
-								break;
-							case(-1):
-								System.out.println("Sorry, you can't move there.");
-								break;
-							default:
-								System.exit(1);		//Error with Turn.makeMove();
+							
+							// If user enters F, exit move mode
+							if(Character.toUpperCase(str.charAt(0)) == 'F') {
+								moving = false;
 							}
-						location = currentPlayer.getSuspectPawn().getLocation();
-						System.out.println("New location is " + location[0] + ',' + location[1] + ". You have " + numMoves + " moves left");
+							// Else perform move and check move occurred
+							else{
+								e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
+							
+								switch(e) {
+								
+								case(0):		// Player moves in a room, do not decrement moves
+									
+									break;
+								
+								case(1):		// Player moves in a corridor, decrement moves
+									
+									numMoves--;
+									break;
+									
+								case(-1):		// Player attempt to make illegal move
+									
+									System.out.println("Sorry, you can't move there.");
+									break;
+									
+								case(-2):		// Player enters unexpected input
+									
+									System.out.println("Input not recognised");
+									break;
+									
+								default:		// Unexpected error
+									System.exit(1);		//Error with Turn.makeMove();
+									
+								}
+							}
+							
+							
+							
+						}
 						break;
 					case('H'):
+						
+						break;
+						
 					case('A'):
+						
+						break;
+						
 					case('E'):
+						
 						turnOver = true;
 						break;
+						
 					default:
+						System.out.println("Unexpected input, try again");
+						break;
 					}
 				}
 				
