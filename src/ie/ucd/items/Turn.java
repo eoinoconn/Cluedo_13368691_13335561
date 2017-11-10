@@ -1,7 +1,43 @@
 package ie.ucd.items;
 
+import java.util.ArrayList;
+
 public class Turn {
 
+	public void makeHypothesis(int id, Room room, Suspect suspect, Weapon weapon, ArrayList<Player> playerCollection) {
+		
+		// Loop to iterate through every Player
+		for (int i = 0; i < playerCollection.size(); i++) {
+			
+			// Check each players hand for the mentioned hypothesis
+			// Take in the first card that refutes the hypothesis
+			Card refute = playerCollection.get(i).checkCards(room, suspect, weapon);
+			if (refute != null) {
+				// Create the string to add to the notebooks of all players
+				String str_1 = "Player " + id + " suspects that " + suspect.toString() + " committed the murder with the " + weapon.toString() + " in the " + room.toString();
+				String str_2 = str_1 + "\nPlayer " + i + " refuted Player " + id + "s hypothesis";
+				
+				// Then add that string to the notebook of the un-involved players
+				for(int j = 0; j < playerCollection.size(); j++) {
+					if (j == i || j == id) continue;
+					playerCollection.get(j).getNotebook().addEvent(str_2);
+				}
+				
+				// create the relevant string to add to the current players notebook
+				str_2 = str_1 +"\nPlayer " + i + "refuted your hypothesis with " + refute.toString();
+				playerCollection.get(id).getNotebook().addEvent(str_2);
+				
+				// create the string to add to the refuting players notebook
+				str_2 = str_1 + "\nYou refuted Player " + id +"s hypothesis with " + refute.toString();
+				playerCollection.get(i).getNotebook().addEvent(str_2);
+
+				// Exit the loop
+				break;
+			}
+			
+		}
+	}
+	
 	public int makeMove(char direction, SuspectPawn suspectPawn, GameBoard board) {
 		int[] options = board.getOptions(suspectPawn);
 		
