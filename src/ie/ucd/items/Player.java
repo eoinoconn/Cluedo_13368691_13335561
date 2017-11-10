@@ -34,15 +34,19 @@ public class Player {
 	}
 
 	public Card checkCards(Room room, Suspect suspect, Weapon weapon) {
+		
+		// iterate through each card in hand
 		for(int i = 0; i < cardHand.size(); i++) {
 			Card currentCard = cardHand.get(i);
+			
+			// Check if and of the hypothesis statement match players cards
 			if((currentCard instanceof RoomCard && ((RoomCard) currentCard).getName() == room) ||
 				(currentCard instanceof WeaponCard && ((WeaponCard) currentCard).getName() == weapon) ||
 				(currentCard instanceof SuspectCard && ((SuspectCard) currentCard).getName() == suspect)) {
-				return currentCard;
+				return currentCard;	// Found card, refuting hypothesis
 			}
 		}
-		return null;
+		return null;	// Did not find card, do not refute hypothesis
 	}
 	
 	public void giveCard(Card card) {
