@@ -71,7 +71,7 @@ public class Cluedo {
 					// Print gameboard
 					gameBoard.printBoard(currentPlayer.getSuspectPawn());
 					// Ask user which action they would like to perform
-					System.out.println("Would you like to enter move mode, test a hypothesis, make an accusation or end your turn?(M/H/A/E)");
+					System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
@@ -128,7 +128,42 @@ public class Cluedo {
 							
 						}
 						break;
+					case('N'):
+						// Get number of entries to print from user
+						System.out.println("How many notebook entries would you like to view?");
+						str = sc.nextLine();
+						String entries = currentPlayer.getNotebook().lastNEntries(Integer.parseInt(str));
+						System.out.println(entries);
+					
+						break;
 					case('H'):
+						System.out.println("Who do think is the murder?");
+						//print out all the remaining suspects
+						int i = 1;
+						for(Suspect sus: Suspect.values()) {
+							System.out.println(i + " " + sus.toString());
+							i++;
+						}
+						int suspectIndex = sc.nextInt() - 1;
+						System.out.println("With which weapon?");
+						i = 1;
+						for(Weapon weap: Weapon.values()) {
+							System.out.println(i + " " + weap.toString());
+							i++;
+						}
+						int weaponIndex = sc.nextInt() - 1;
+						System.out.println("In which room?");
+						i = 1;
+						for(Room ro: Room.values()) {
+							System.out.println(i + " " + ro.toString());
+							i++;
+						}
+						int roomIndex = sc.nextInt() - 1;
+						Suspect murderer = Suspect.values()[suspectIndex];
+						Weapon murderWeapon = Weapon.values()[weaponIndex];
+						Room murderRoom = Room.values()[roomIndex];
+						String h = turn.makeHypothesis(whoseGo, murderRoom, murderer, murderWeapon, playerCollection);
+						System.out.println(h);
 						
 						break;
 						

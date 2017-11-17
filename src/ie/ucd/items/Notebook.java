@@ -9,6 +9,7 @@ public class Notebook {
 	private int size;
 	
 	public Notebook() {
+		events = new ArrayList<String>();
 		size = 0;
 	}
 	
@@ -22,11 +23,13 @@ public class Notebook {
 	 */
 	public String lastNEntries(int N) {
 		String str = "";
-		for (int i = (size - N); i < size; i++) {
-			str += (events.get(i) + "\n");
+		if(N<=size) {
+			for (int i = (size - N); i < size; i++) {
+				str += (events.get(i) + "\n");
+			}
+			return str;
 		}
-		return str;
+		return "Too many entries! There are " + Integer.toString(size) + " entries in this notebook\n";
 	}
-	
 	
 }

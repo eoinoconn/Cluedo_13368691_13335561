@@ -86,9 +86,12 @@ public class Setup {
 		 
 		// first pick the murderer, murder weapon and murder room
 		Random rand = new Random();
-		murdererCards.add(cardDeck.remove(rand.nextInt(Suspect.values().length-1))); // remove random suspect card
-		murdererCards.add(cardDeck.remove(Suspect.values().length+rand.nextInt(Room.values().length-1))); // remove random room card
-		murdererCards.add(cardDeck.remove(Suspect.values().length+Room.values().length+rand.nextInt(Weapon.values().length-1))); // remove random weapon card
+		// remove random suspect card
+		murdererCards.add(cardDeck.remove(rand.nextInt(Suspect.values().length-1)));
+		// remove random room card
+		murdererCards.add(cardDeck.remove(Suspect.values().length-1+rand.nextInt(Room.values().length-1)));
+		// remove random weapon card
+		murdererCards.add(cardDeck.remove(Suspect.values().length-1+Room.values().length-1+rand.nextInt(Weapon.values().length-1)));
 		
 		// deal remaining cards randomly to players
 		Collections.shuffle(cardDeck);

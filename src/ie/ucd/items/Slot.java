@@ -2,7 +2,7 @@ package ie.ucd.items;
 
 public class Slot {
 
-	private int type; // -1 if not set, 0 if in doorway, 1 if in room, 2 if in corridor
+	private int type; // 0 if not set, 1 if in corridor, 2 if in doorway, 3 if in room
 	private int number; // 0 if in corridor/doorway, room number if in room
 	
 	public Slot() {
