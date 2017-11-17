@@ -18,9 +18,9 @@ public class GameBoard {
 	        for (int j = 0; j < DIMENSIONS; j++) {
 	        	if(grid[i][j] % 10 > 0) {
 	        		if(grid[i][j]<10)
-	        			this.grid[i][j].setType(0); // 1 if in room, 0 if at doorway
+	        			this.grid[i][j].setType(0); // 0 if at doorway
 	        		else
-	        			this.grid[i][j].setType(1);
+	        			this.grid[i][j].setType(1); // 1 if in room
 	        	}
 	        	else if(grid[i][j]==10){
 	        		this.grid[i][j].setType(2); // 2 if in corridor
