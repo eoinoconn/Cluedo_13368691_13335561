@@ -17,15 +17,20 @@ public class GameBoard {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
 	        	if(grid[i][j] % 10 > 0) {
-	        		if(grid[i][j]<10)
+	        		if(grid[i][j]<10) {
+	        			this.grid[i][j] = new Slot();
 	        			this.grid[i][j].setType(0); // 0 if at doorway
-	        		else
+	        		}else {
+	        			this.grid[i][j] = new Slot();
 	        			this.grid[i][j].setType(1); // 1 if in room
+	        		}
 	        	}
 	        	else if(grid[i][j]==10){
+	        		this.grid[i][j] = new Slot();
 	        		this.grid[i][j].setType(2); // 2 if in corridor
 	        	}
-   	            this.grid[i][j].setNumber(grid[i][j] % 10);
+	        	this.grid[i][j] = new Slot();
+	        	this.grid[i][j].setNumber(grid[i][j] % 10);
 	        }
 		}
 	}
