@@ -55,39 +55,39 @@ public class Turn {
 		
 		switch(direction) {
 		case 'u':
-			if(options[1]>0 && !((options[0]==10 && options[1]>10)||(options[0]>10 && options[1]==10))) { // not at moving off board or into wall
+			if(options[1]>0 && !((options[0]==1 && options[1]==3)||(options[0]==3 && options[1]==1))) { // not at moving off board or into wall
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);
-				if(options[1]<=10) {
-					return 1; 		// return 1 if moved in corridor
+				if(options[1]<3||options[0]==2) {
+					return 1; 		// return 1 if used up a move
 				}
-				return 0;			// return 0 if moved in room
+				return 0;			// return 0 if did not use up a move
 			}
 			return -1;				// return -1 if could not move
 		case 'd':
-			if(options[2]>0 && !((options[0]==10 && options[2]>10)||(options[0]>10 && options[2]==10))) {
+			if(options[2]>0 && !((options[0]==1 && options[2]==3)||(options[0]==3 && options[2]==1))) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]+1);
-				if(options[2]<=10) { // do not decrement moves if in a room
-					return 1; 		// return 1 if moved in corridor
+				if(options[2]<3||options[0]==2) { 
+					return 1; 		// return 1 if used up a move
 				}
-				return 0;			// return 0 if moved in room
+				return 0;			// return 0 if did not use up a move
 			}
 			return -1;				// return -1 if could not move
 		case 'l':
-			if(options[3]>0 && !((options[0]==10 && options[3]>10)||(options[0]>10 && options[3]==10))) {
+			if(options[3]>0 && !((options[0]==1 && options[3]==3)||(options[0]==3 && options[3]==1))) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0]-1, suspectPawn.getLocation()[1]);
-				if(options[3]<=10) { // do not decrement moves if in a room
-					return 1; 		// return 1 if moved in corridor
+				if(options[3]<3||options[0]==2) { 
+					return 1; 		// return 1 if used up a move
 				}
-				return 0;			// return 0 if moved in room
+				return 0;			// return 0 if did not use up a move
 			}
 			return -1;				// return -1 if could not move
 		case 'r':
-			if(options[4]>0 && !((options[0]==10 && options[4]>10)||(options[0]>10 && options[4]==10))) {
+			if(options[4]>0 && !((options[0]==1 && options[4]==3)||(options[0]==3 && options[4]==1))) {
 				suspectPawn.setLocation(suspectPawn.getLocation()[0]+1, suspectPawn.getLocation()[1]);
-				if(options[4]<=10) { // do not decrement moves if in a room
-					return 1; 		// return 1 if moved in corridor
+				if(options[4]<3||options[0]==2) { 
+					return 1; 		// return 1 if used up a move
 				}
-				return 0;			// return 0 if moved in room
+				return 0;			// return 0 if did not use up a move
 			}
 			return -1;				// return -1 if could not move
 		default:

@@ -6,7 +6,7 @@ public class Slot {
 	private int number; // 0 if in corridor/doorway, room number if in room
 	
 	public Slot() {
-		type = -1;
+		type = 0;
 		number = 0;
 	}
 	

@@ -19,18 +19,22 @@ public class GameBoard {
 	        	if(grid[i][j] % 10 > 0) {
 	        		if(grid[i][j]<10) {
 	        			this.grid[i][j] = new Slot();
-	        			this.grid[i][j].setType(0); // 0 if at doorway
+	        			this.grid[i][j].setType(2); // 2 if at doorway
+	        			this.grid[i][j].setNumber(grid[i][j] % 10);
 	        		}else {
 	        			this.grid[i][j] = new Slot();
-	        			this.grid[i][j].setType(1); // 1 if in room
+	        			this.grid[i][j].setType(3); // 3 if in room
+	        			this.grid[i][j].setNumber(grid[i][j] % 10);
 	        		}
 	        	}
 	        	else if(grid[i][j]==10){
 	        		this.grid[i][j] = new Slot();
-	        		this.grid[i][j].setType(2); // 2 if in corridor
+	        		this.grid[i][j].setType(1); // 1 if in corridor
+	        		this.grid[i][j].setNumber(grid[i][j] % 10);
 	        	}
-	        	this.grid[i][j] = new Slot();
-	        	this.grid[i][j].setNumber(grid[i][j] % 10);
+	        	else {
+	        		this.grid[i][j] = new Slot();
+	        	}
 	        }
 		}
 	}
@@ -60,7 +64,7 @@ public class GameBoard {
 		// check only the space not adjacent to the edge of the board as there are never doors
 		for (int i = 1; i < DIMENSIONS-1; i++) {
 	        for (int j = 1; j < DIMENSIONS-1; j++) {
-	        	if (grid[i][j].getNumber()==room.ordinal()+1 && (grid[i+1][j].getType()==0 || grid[i-1][j].getType()==0 || grid[i][j+1].getType()==0 || grid[i][j-1].getType()==0)) {
+	        	if (grid[i][j].getNumber()==room.ordinal()+1 && (grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2)) {
 	                // if in room adjacent to doorway
 	            	location[0] = j;
 	                location[1] = i;
@@ -77,14 +81,14 @@ public class GameBoard {
 	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
 	        		System.out.print("@ "); // '@' = pawn location
 	        	}
-	        	else if(grid[i][j].getType()==0) {
-					System.out.printf("* "); // ' ' = doorway
-				}
 	        	else if(grid[i][j].getType()==1) {
-	        		System.out.printf("# "); // '#' = room
+	        		System.out.printf("' "); // '' ' = corridor
 	        	}
 	        	else if(grid[i][j].getType()==2) {
-	        		System.out.printf("' "); // '*' = corridor
+					System.out.printf("* "); // '* ' = doorway
+	        	}
+	        	else if(grid[i][j].getType()==3) {
+	        		System.out.printf("# "); // '#' = room
 	        	}
 				else {
 					System.out.printf("X "); // 'X' = out of bounds

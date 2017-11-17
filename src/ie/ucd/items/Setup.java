@@ -61,6 +61,23 @@ public class Setup {
 		return grid;
 	}
 	
+	private ArrayList<Card> setupCardDeck(){
+		ArrayList<Card> cardDeck = new ArrayList<Card>();
+		for (Suspect sus : Suspect.values())
+		{
+			cardDeck.add(new SuspectCard(sus));
+		}
+		for (Room ro : Room.values())
+		{
+			cardDeck.add(new RoomCard(ro));
+		}
+		for (Weapon wep : Weapon.values())
+		{
+			cardDeck.add(new WeaponCard(wep));
+		}
+
+		return cardDeck;	
+	}
 	
 	public ArrayList<Card> dealCards(ArrayList<Player> playerCollection) {
 		ArrayList<Card> cardDeck = this.setupCardDeck();
@@ -69,9 +86,9 @@ public class Setup {
 		 
 		// first pick the murderer, murder weapon and murder room
 		Random rand = new Random();
-		murdererCards.add(cardDeck.remove(rand.nextInt(Suspect.values().length))); // remove random suspect card
-		murdererCards.add(cardDeck.remove(Suspect.values().length+rand.nextInt(Room.values().length))); // remove random room card
-		murdererCards.add(cardDeck.remove(Suspect.values().length+Room.values().length+rand.nextInt(Weapon.values().length))); // remove random weapon card
+		murdererCards.add(cardDeck.remove(rand.nextInt(Suspect.values().length-1))); // remove random suspect card
+		murdererCards.add(cardDeck.remove(Suspect.values().length+rand.nextInt(Room.values().length-1))); // remove random room card
+		murdererCards.add(cardDeck.remove(Suspect.values().length+Room.values().length+rand.nextInt(Weapon.values().length-1))); // remove random weapon card
 		
 		// deal remaining cards randomly to players
 		Collections.shuffle(cardDeck);
@@ -158,22 +175,5 @@ public class Setup {
 		return suspectCollection;
 	}
 	
-	private ArrayList<Card> setupCardDeck(){
-		ArrayList<Card> cardDeck = new ArrayList<Card>();
-		for (Suspect sus : Suspect.values())
-		{
-			cardDeck.add(new SuspectCard(sus));
-		}
-		for (Room ro : Room.values())
-		{
-			cardDeck.add(new RoomCard(ro));
-		}
-		for (Weapon wep : Weapon.values())
-		{
-			cardDeck.add(new WeaponCard(wep));
-		}
-
-		return cardDeck;	
-	}
 	
 }
