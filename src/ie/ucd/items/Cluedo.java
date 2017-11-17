@@ -21,16 +21,14 @@ public class Cluedo {
 	    
 	    // Scanner instance for reading user input
 	    Scanner sc = new Scanner(System.in);
-	    
-	    // Stores card instances
-		ArrayList<Card> cardDeck = setup.setupCardDeck();
 		
 		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
 		
 		// Stores player instances
 		ArrayList<Player> playerCollection = setup.setupPlayers(gameBoard, sc);
 
-		
+	    // deals cards to players and selects murderer cards
+		ArrayList<Card> murdererCards = setup.dealCards(playerCollection);
 		
 		
 		

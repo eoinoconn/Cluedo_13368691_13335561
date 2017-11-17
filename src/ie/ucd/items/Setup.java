@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Random;
 
 
 public class Setup {
@@ -59,22 +61,24 @@ public class Setup {
 		return grid;
 	}
 	
-	public ArrayList<Card> setupCardDeck(){
-		ArrayList<Card> cardDeck = new ArrayList<Card>();
-		for (Suspect per : Suspect.values())
-		{
-			cardDeck.add(new SuspectCard(per));
+	
+	public ArrayList<Card> dealCards(ArrayList<Player> playerCollection) {
+		ArrayList<Card> cardDeck = this.setupCardDeck();
+		int numPlayers = playerCollection.size();
+		ArrayList<Card> murdererCards = new ArrayList<Card>();
+		 
+		// first pick the murderer, murder weapon and murder room
+		Random rand = new Random();
+		murdererCards.add(cardDeck.remove(rand.nextInt(Suspect.values().length))); // remove random suspect card
+		murdererCards.add(cardDeck.remove(Suspect.values().length+rand.nextInt(Room.values().length))); // remove random room card
+		murdererCards.add(cardDeck.remove(Suspect.values().length+Room.values().length+rand.nextInt(Weapon.values().length))); // remove random weapon card
+		
+		// deal remaining cards randomly to players
+		Collections.shuffle(cardDeck);
+		for(int numCards = cardDeck.size(), i=1; numCards>0; numCards--) { // remove a card and give it to next player until all out
+			playerCollection.get(i%numPlayers).giveCard(cardDeck.remove(0));
 		}
-		for (Room ro : Room.values())
-		{
-			cardDeck.add(new RoomCard(ro));
-		}
-		for (Weapon wep : Weapon.values())
-		{
-			cardDeck.add(new WeaponCard(wep));
-		}
-
-		return cardDeck;	
+		return murdererCards;
 	}
 	
 	public ArrayList<Player> setupPlayers(GameBoard gameBoard, Scanner sc){
@@ -153,4 +157,23 @@ public class Setup {
 		}
 		return suspectCollection;
 	}
+	
+	private ArrayList<Card> setupCardDeck(){
+		ArrayList<Card> cardDeck = new ArrayList<Card>();
+		for (Suspect sus : Suspect.values())
+		{
+			cardDeck.add(new SuspectCard(sus));
+		}
+		for (Room ro : Room.values())
+		{
+			cardDeck.add(new RoomCard(ro));
+		}
+		for (Weapon wep : Weapon.values())
+		{
+			cardDeck.add(new WeaponCard(wep));
+		}
+
+		return cardDeck;	
+	}
+	
 }
