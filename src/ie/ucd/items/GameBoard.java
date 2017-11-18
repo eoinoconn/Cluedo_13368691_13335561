@@ -1,5 +1,6 @@
 package ie.ucd.items;
 
+import java.util.ArrayList;
 
 public class GameBoard {
 
@@ -75,23 +76,38 @@ public class GameBoard {
 		return location; // will return first grid square if no door found
 	}
 	
-	public void printBoard(SuspectPawn suspectPawn) {
+	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	if(i==suspectPawn.getLocation()[1] && j==suspectPawn.getLocation()[0]) {
-	        		System.out.print("@ "); // '@' = pawn location
+	        	
+	        	int id = 1;
+	        	for(Player p: playerCollection) {
+	        		SuspectPawn sp = p.getSuspectPawn();
+	        		// if a player is at this grid square, print their id or @ symbol
+	        		if(i==sp.getLocation()[1] && j==sp.getLocation()[0]) {
+	        			if(id==currentPlayerId+1) {
+	        				System.out.print("@ "); // '@' = current player's pawn
+	        			}
+	        			else {
+	        				System.out.print(id + " "); // id number = this player's pawn
+	        			}
+	        			break;
+	        		}
+	        		id++;
+	        	}
+	        	if(id<=playerCollection.size()) {
 	        	}
 	        	else if(grid[i][j].getType()==1) {
-	        		System.out.printf("' "); // '' ' = corridor
+	        		System.out.printf("# "); // corridor
 	        	}
 	        	else if(grid[i][j].getType()==2) {
-					System.out.printf("* "); // '* ' = doorway
+					System.out.printf("* "); // doorway
 	        	}
 	        	else if(grid[i][j].getType()==3) {
-	        		System.out.printf("# "); // '#' = room
+	        		System.out.printf("' "); // room
 	        	}
 				else {
-					System.out.printf("X "); // 'X' = out of bounds
+					System.out.printf("X "); // out of bounds
 				}
 	        }
 	        System.out.print('\n');

@@ -81,7 +81,7 @@ public class Cluedo {
 						while((numMovesRemaining > 0) & (inMoveMode)) {
 							
 							// Print gameboard
-							gameBoard.printBoard(currentPlayer.getSuspectPawn());
+							gameBoard.printBoard(whoseGo, playerCollection);
 							
 							// Tell the user how many moves they have left
 							System.out.println("You have " + numMovesRemaining + " moves remaining");
