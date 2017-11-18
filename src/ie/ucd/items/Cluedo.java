@@ -52,7 +52,7 @@ public class Cluedo {
 				// enable the player to make a hypothesis
 				boolean hypMade = false;
 
-				// Inform players whos turn it is
+				// Inform players who's turn it is
 				System.out.println("Okay player " + (whoseGo + 1) + ". It's your turn!");
 				System.out.println("Press return to roll the dice");
 				sc.nextLine();
@@ -76,6 +76,7 @@ public class Cluedo {
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
+						
 						// Enter move-mode contained in while loop
 						inMoveMode = true;
 						while((numMovesRemaining > 0) & (inMoveMode)) {
@@ -148,7 +149,7 @@ public class Cluedo {
 							System.out.println("You cannot make another hypothesis until your next turn!");
 						}
 						else {
-							System.out.println("Who do think is the murder?");
+							System.out.println("Who do suspect is the murder?");
 							
 							//print out all the remaining suspects and get take the players choices
 							int i = 1;
@@ -187,6 +188,39 @@ public class Cluedo {
 						
 					case('A'):
 						
+						System.out.println("Who do suspect is the murder?");
+						
+						//print out all the remaining suspects and get take the players choices
+						int i = 1;
+						for(Suspect sus: Suspect.values()) {
+							System.out.println(i + " " + sus.toString());
+							i++;
+						}
+						int suspectIndex = sc.nextInt() - 1;
+						System.out.println("With which weapon?");
+						i = 1;
+						for(Weapon weap: Weapon.values()) {
+							System.out.println(i + " " + weap.toString());
+							i++;
+						}
+						int weaponIndex = sc.nextInt() - 1;
+						System.out.println("In which room?");
+						i = 1;
+						for(Room ro: Room.values()) {
+							System.out.println(i + " " + ro.toString());
+							i++;
+						}
+						int roomIndex = sc.nextInt() - 1;
+						
+						// make the accusation with the chosen suspects
+						Suspect murderer = Suspect.values()[suspectIndex];
+						Weapon murderWeapon = Weapon.values()[weaponIndex];
+						Room murderRoom = Room.values()[roomIndex];
+						String h = turn.makeAccusation(whoseGo, murderRoom, murderer, murderWeapon, playerCollection, murdererCards);
+						System.out.println(h);
+						sc.nextLine();
+						
+						// Remove Player from the game
 						break;
 						
 					case('E'):
