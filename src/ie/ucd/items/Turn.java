@@ -98,6 +98,20 @@ public class Turn {
 		}
 
 	}
-	
-	
+
+	public String makeAccusation(int id, Room room, Suspect suspect, Weapon weapon,
+			ArrayList<Player> playerCollection, ArrayList<Card> murdererCards) {
+		
+		//Create the string to add to the notebooks of all players
+		String str_1 = "Player " + (id+1) + " is sure that " + suspect.toString() + " committed the murder with the " + weapon.toString() + " in the " + room.toString() + '!';
+		if(room == murdererCards.get(0).getName() || suspect == murdererCards.get(1).getName() || weapon == murdererCards.get(2).getName()) {
+			
+		}
+		
+		
+		
+		return "da";
+		
+	}
 }
+
