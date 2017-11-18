@@ -95,9 +95,16 @@ public class Setup {
 		
 		// deal remaining cards randomly to players
 		Collections.shuffle(cardDeck);
-		for(int numCards = cardDeck.size(), i=1; numCards>0; numCards--) { // remove a card and give it to next player until all out
-			playerCollection.get(i%numPlayers).giveCard(cardDeck.remove(0));
+		// remove a card and give it to next player until all out
+		for(int numCards = cardDeck.size(), i=1; numCards>0; numCards--, i++) { 
+			Player currentPlayer = playerCollection.get(i%(numPlayers));
+			// remove a card from the deck
+			Card dealtCard = cardDeck.remove(0);
+			// give the card to the current player and add it to their notebook
+			currentPlayer.giveCard(dealtCard);
+			currentPlayer.getNotebook().addEvent("You have card: " + dealtCard.getName().toString());
 		}
+		// return the cards that were removed from the deck at the beginning
 		return murdererCards;
 	}
 	
@@ -116,7 +123,7 @@ public class Setup {
 		do {
 			
 			// Input player name and initialise player object
-			System.out.println("Hello player " + (++numPlayers) + '.');
+			System.out.println("Hello player " + (numPlayers+1) + '.');
 			System.out.println("Welcome to the game!");
 			
 			// See who they'd like to be
@@ -131,23 +138,33 @@ public class Setup {
 			// Take their choice of suspect
 			System.out.println("Enter a number between 1 & " + numSuspects + ":");
 			suspectIndex = sc.nextInt() - 1;
-			System.out.println("You are suspect " + suspectCollection.get(suspectIndex));
-			
-			// Get location of room they're starting in
-			location = gameBoard.getRoomLocation(roomCollection.get(numPlayers - 1));
-			
-			// Create player with starting location and suspect type
-			playerCollection.add(new Player(location[0], location[1], suspectCollection.get(suspectIndex)));
-			
-			// Now that that suspect is in the game we remove it from consideration for other players
-			suspectCollection.remove(suspectIndex);
-			
+			// ensure that the number chosen is valid for number of remaining suspects
+			if(suspectIndex < suspectCollection.size()) {
+				System.out.println("You are suspect " + suspectCollection.get(suspectIndex));
+				
+				// Get location of room they're starting in
+				location = gameBoard.getRoomLocation(roomCollection.get(numPlayers));
+				
+				// Create player with starting location and suspect type
+				playerCollection.add(new Player(location[0], location[1], suspectCollection.get(suspectIndex)));
+				
+				// Now that that suspect is in the game we remove it from consideration for other players
+				suspectCollection.remove(suspectIndex);
+				
+				// Increment the number of players in the game now
+				numPlayers++;
+				
+			} else System.out.println("Invalid selection");
 			// Check if other players are present
 			sc.nextLine();
 			System.out.println("Would you like to add another player? (Y/N)");
 			String str = sc.nextLine();
 			if (Character.toUpperCase(str.charAt(0)) == 'Y') {
 				anotherPlayer = true;
+			}
+			else if (numPlayers<2) {
+				anotherPlayer = true;
+				System.out.println("You must have a minimum of 2 players!");
 			} else anotherPlayer = false;
 			
 		} while (anotherPlayer);

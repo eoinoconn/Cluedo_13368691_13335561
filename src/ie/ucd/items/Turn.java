@@ -27,11 +27,11 @@ public class Turn {
 				}
 				
 				// create the string to add to the refuting players notebook
-				str_2 = str_1 + "\nYou refuted Player " + id +"s hypothesis with " + refute.toString();
+				str_2 = str_1 + "\nYou refuted Player " + id +"s hypothesis with " + refute.getName().toString();
 				playerCollection.get(i).getNotebook().addEvent(str_2);
 
 				// create the relevant string to add to the current players notebook
-				str_2 = "\nPlayer " + i + " refuted your hypothesis with " + refute.toString();
+				str_2 = "\nPlayer " + i+1 + " refuted your hypothesis with " + refute.getName().toString();
 				playerCollection.get(id).getNotebook().addEvent(str_1 + str_2);
 
 				// Exit the loop

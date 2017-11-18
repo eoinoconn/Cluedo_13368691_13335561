@@ -32,4 +32,8 @@ public class Notebook {
 		return "Too many entries! There are " + Integer.toString(size) + " entries in this notebook\n";
 	}
 	
+	public int getSize() {
+		return size;
+	}
+	
 }

@@ -68,8 +68,6 @@ public class Cluedo {
 				playerTurnOver = false;
 				while(!playerTurnOver) {
 					
-					// Print gameboard
-					gameBoard.printBoard(currentPlayer.getSuspectPawn());
 					// Ask user which action they would like to perform
 					System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
 					String str = sc.nextLine();
@@ -129,10 +127,12 @@ public class Cluedo {
 						}
 						break;
 					case('N'):
+						Notebook nb = currentPlayer.getNotebook();
 						// Get number of entries to print from user
 						System.out.println("How many notebook entries would you like to view?");
+						System.out.println("(Total " + nb.getSize() + " entries)");
 						str = sc.nextLine();
-						String entries = currentPlayer.getNotebook().lastNEntries(Integer.parseInt(str));
+						String entries = nb.lastNEntries(Integer.parseInt(str));
 						System.out.println(entries);
 					
 						break;
