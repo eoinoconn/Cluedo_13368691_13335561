@@ -144,12 +144,24 @@ public class Cluedo {
 					
 						break;
 					case('H'):
-						if(hypMade) {
+						SuspectPawn sp = currentPlayer.getSuspectPawn();
+						Slot currentSlot = gameBoard.getSlot(sp.getLocation());
+						
+						// check that player has not yet made a hypothesis and that they are in a room
+						if(currentSlot.getType()!=3) {
+							System.out.println("You must be in a room to make a hypothesis!");
+						}
+						else if(hypMade) {
 							System.out.println("You cannot make another hypothesis until your next turn!");
 						}
+						
 						else {
-							System.out.println("Who do think is the murder?");
+							// get the current room and print it to the screen
+							int roomIndex = currentSlot.getNumber();
+							Room murderRoom = Room.values()[roomIndex];
+							System.out.println("You are currently in the " + murderRoom.toString());
 							
+							System.out.println("Who do think is the murderer?");
 							//print out all the remaining suspects and get take the players choices
 							int i = 1;
 							for(Suspect sus: Suspect.values()) {
@@ -164,18 +176,11 @@ public class Cluedo {
 								i++;
 							}
 							int weaponIndex = sc.nextInt() - 1;
-							System.out.println("In which room?");
-							i = 1;
-							for(Room ro: Room.values()) {
-								System.out.println(i + " " + ro.toString());
-								i++;
-							}
-							int roomIndex = sc.nextInt() - 1;
 							
 							// make the hypothesis with the chosen suspects
 							Suspect murderer = Suspect.values()[suspectIndex];
 							Weapon murderWeapon = Weapon.values()[weaponIndex];
-							Room murderRoom = Room.values()[roomIndex];
+							
 							String h = turn.makeHypothesis(whoseGo, murderRoom, murderer, murderWeapon, playerCollection);
 							System.out.println(h);
 							sc.nextLine();

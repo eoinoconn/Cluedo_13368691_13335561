@@ -76,6 +76,10 @@ public class GameBoard {
 		return location; // will return first grid square if no door found
 	}
 	
+	public Slot getSlot(int[] location) {
+		return grid[location[1]][location[0]];
+	}
+	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
