@@ -7,18 +7,20 @@ public class Turn {
 	public String makeHypothesis(int id, Room room, Suspect suspect, Weapon weapon, ArrayList<Player> playerCollection) {
 
 		//Create the string to add to the notebooks of all players
-		String str_1 = "Player " + id + " suspects that " + suspect.toString() + " committed the murder with the " + weapon.toString() + " in the " + room.toString();
+		String str_1 = "Player " + (id+1) + " suspects that " + suspect.toString() + " committed the murder with the " + weapon.toString() + " in the " + room.toString();
 		
 		// Loop to iterate through every Player
 		for (int i = 0; i < playerCollection.size(); i++) {
 			
 			// Check each players hand for the mentioned hypothesis
 			// Take in the first card that refutes the hypothesis
+			// Do not check own hand
+			if(i==id) continue;
 			Card refute = playerCollection.get(i).checkCards(room, suspect, weapon);
 			if (refute != null) {
 				
 				// Create the string to add to the notebooks of the un-involved players
-				String str_2 = str_1 + "\nPlayer " + i + " refuted Player " + id + "s hypothesis";
+				String str_2 = str_1 + "\nPlayer " + (i+1) + " refuted Player " + (id+1) + "'s hypothesis";
 				
 				// Then add that string to the notebook of the un-involved players
 				for(int j = 0; j < playerCollection.size(); j++) {
@@ -27,11 +29,11 @@ public class Turn {
 				}
 				
 				// create the string to add to the refuting players notebook
-				str_2 = str_1 + "\nYou refuted Player " + id +"s hypothesis with " + refute.getName().toString();
+				str_2 = str_1 + "\nYou refuted Player " + (id+1) +"'s hypothesis with " + refute.getName().toString();
 				playerCollection.get(i).getNotebook().addEvent(str_2);
 
 				// create the relevant string to add to the current players notebook
-				str_2 = "\nPlayer " + i+1 + " refuted your hypothesis with " + refute.getName().toString();
+				str_2 = "\nPlayer " + (i+1) + " refuted your hypothesis with " + refute.getName().toString();
 				playerCollection.get(id).getNotebook().addEvent(str_1 + str_2);
 
 				// Exit the loop
@@ -41,7 +43,8 @@ public class Turn {
 		}
 		
 		// In the event the hypothesis is not refuted, tell all the players 
-		str_1 = str_1 + "\nPlayer " + id + "s hypothesis was not refuted";
+		str_1 = str_1 + "\nPlayer " + (id+1) + "'s hypothesis was not refuted";
+		
 		for(Player player: playerCollection) {
 			player.getNotebook().addEvent(str_1);
 		}

@@ -48,6 +48,9 @@ public class Cluedo {
 				
 				// Select current turns player
 				Player currentPlayer = playerCollection.get(whoseGo);
+				
+				// enable the player to make a hypothesis
+				boolean hypMade = false;
 
 				// Inform players whos turn it is
 				System.out.println("Okay player " + (whoseGo + 1) + ". It's your turn!");
@@ -127,44 +130,59 @@ public class Cluedo {
 						}
 						break;
 					case('N'):
+						// get this player's notebook
 						Notebook nb = currentPlayer.getNotebook();
+					
 						// Get number of entries to print from user
 						System.out.println("How many notebook entries would you like to view?");
 						System.out.println("(Total " + nb.getSize() + " entries)");
 						str = sc.nextLine();
+						
+						// print each of these entries
 						String entries = nb.lastNEntries(Integer.parseInt(str));
 						System.out.println(entries);
 					
 						break;
 					case('H'):
-						System.out.println("Who do think is the murder?");
-						//print out all the remaining suspects
-						int i = 1;
-						for(Suspect sus: Suspect.values()) {
-							System.out.println(i + " " + sus.toString());
-							i++;
+						if(hypMade) {
+							System.out.println("You cannot make another hypothesis until your next turn!");
 						}
-						int suspectIndex = sc.nextInt() - 1;
-						System.out.println("With which weapon?");
-						i = 1;
-						for(Weapon weap: Weapon.values()) {
-							System.out.println(i + " " + weap.toString());
-							i++;
+						else {
+							System.out.println("Who do think is the murder?");
+							
+							//print out all the remaining suspects and get take the players choices
+							int i = 1;
+							for(Suspect sus: Suspect.values()) {
+								System.out.println(i + " " + sus.toString());
+								i++;
+							}
+							int suspectIndex = sc.nextInt() - 1;
+							System.out.println("With which weapon?");
+							i = 1;
+							for(Weapon weap: Weapon.values()) {
+								System.out.println(i + " " + weap.toString());
+								i++;
+							}
+							int weaponIndex = sc.nextInt() - 1;
+							System.out.println("In which room?");
+							i = 1;
+							for(Room ro: Room.values()) {
+								System.out.println(i + " " + ro.toString());
+								i++;
+							}
+							int roomIndex = sc.nextInt() - 1;
+							
+							// make the hypothesis with the chosen suspects
+							Suspect murderer = Suspect.values()[suspectIndex];
+							Weapon murderWeapon = Weapon.values()[weaponIndex];
+							Room murderRoom = Room.values()[roomIndex];
+							String h = turn.makeHypothesis(whoseGo, murderRoom, murderer, murderWeapon, playerCollection);
+							System.out.println(h);
+							sc.nextLine();
+							
+							// stop player from making another hypothesis on this turn
+							hypMade = true;
 						}
-						int weaponIndex = sc.nextInt() - 1;
-						System.out.println("In which room?");
-						i = 1;
-						for(Room ro: Room.values()) {
-							System.out.println(i + " " + ro.toString());
-							i++;
-						}
-						int roomIndex = sc.nextInt() - 1;
-						Suspect murderer = Suspect.values()[suspectIndex];
-						Weapon murderWeapon = Weapon.values()[weaponIndex];
-						Room murderRoom = Room.values()[roomIndex];
-						String h = turn.makeHypothesis(whoseGo, murderRoom, murderer, murderWeapon, playerCollection);
-						System.out.println(h);
-						
 						break;
 						
 					case('A'):
