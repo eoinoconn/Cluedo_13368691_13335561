@@ -98,6 +98,33 @@ public class Turn {
 		}
 
 	}
-	
-	
+
+	public boolean makeAccusation(int whoseGo, Room murderRoom, Suspect murderer, Weapon murderWeapon,
+			ArrayList<Player> playerCollection, ArrayList<Card> murdererCards) {
+		
+		if(murderer == murdererCards.get(0).getName() && murderRoom == murdererCards.get(1).getName() 
+				&& murderWeapon == murdererCards.get(2).getName()) {
+			return true;
+		}
+		else {
+			
+			//Create the string to add to the notebooks of all players
+			String str_1 = "Player " + (whoseGo+1) + " believes that " + murderer.toString() + " committed the murder with the " 
+					+ murderWeapon.toString() + " in the " + murderRoom.toString();
+			
+			// Create the string to add to the notebooks of the un-involved players
+			String str_2 = str_1 + "\nPlayer " + (whoseGo+1) + " is wrong and has been removed from the game!";
+			
+			// Then add that string to the notebook of the uninvolved players
+			for(int i = 0; i < playerCollection.size(); i++) {
+				if (i == whoseGo) continue;
+				playerCollection.get(i).getNotebook().addEvent(str_2);
+			}
+			
+			// Remove Player from the game
+			return false;
+		}
+		
+	}
 }
+
