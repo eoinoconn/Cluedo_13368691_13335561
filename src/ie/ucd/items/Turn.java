@@ -55,15 +55,27 @@ public class Turn {
 	
 	public int makeMove(char direction, SuspectPawn suspectPawn, GameBoard board) {
 		int[] options = board.getOptions(suspectPawn);
+		int dim = board.getDimensions();
 		
 		switch(direction) {
 		case 'u':
+			
 			if(options[1]>0 && !((options[0]==1 && options[1]==3)||(options[0]==3 && options[1]==1))) { // not at moving off board or into wall
 				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);
 				if(options[1]<3||options[0]==2) {
 					return 1; 		// return 1 if used up a move
 				}
 				return 0;			// return 0 if did not use up a move
+			}
+			else if(options[1]==0) { // on top row
+				if(options[3]==0) { // in top left corner
+					suspectPawn.setLocation(dim-1, dim-1);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(options[4]==0) { // in top right corner
+					suspectPawn.setLocation(0, dim-1);
+					return 0; // do not use up a move to move in secret passage
+				}
 			}
 			return -1;				// return -1 if could not move
 		case 'd':
@@ -74,6 +86,16 @@ public class Turn {
 				}
 				return 0;			// return 0 if did not use up a move
 			}
+			else if(options[2]==0) { // on bottom row
+				if(options[3]==0) { // in bottom left corner
+					suspectPawn.setLocation(dim-1, 0);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(options[4]==0) { // in bottom right corner
+					suspectPawn.setLocation(0, 0);
+					return 0; // do not use up a move to move in secret passage
+				}
+			}
 			return -1;				// return -1 if could not move
 		case 'l':
 			if(options[3]>0 && !((options[0]==1 && options[3]==3)||(options[0]==3 && options[3]==1))) {
@@ -83,6 +105,16 @@ public class Turn {
 				}
 				return 0;			// return 0 if did not use up a move
 			}
+			else if(options[3]==0) { // on left wall
+				if(options[1]==0) { // in top left corner
+					suspectPawn.setLocation(dim-1, dim-1);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(options[2]==0) { // in bottom left corner
+					suspectPawn.setLocation(dim-1, 0);
+					return 0; // do not use up a move to move in secret passage
+				}
+			}
 			return -1;				// return -1 if could not move
 		case 'r':
 			if(options[4]>0 && !((options[0]==1 && options[4]==3)||(options[0]==3 && options[4]==1))) {
@@ -91,6 +123,16 @@ public class Turn {
 					return 1; 		// return 1 if used up a move
 				}
 				return 0;			// return 0 if did not use up a move
+			}
+			else if(options[4]==0) { // on right wall
+				if(options[1]==0) { // in top right corner
+					suspectPawn.setLocation(0, dim-1);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(options[2]==0) { // in bottom right corner
+					suspectPawn.setLocation(0, 0);
+					return 0; // do not use up a move to move in secret passage
+				}
 			}
 			return -1;				// return -1 if could not move
 		default:
