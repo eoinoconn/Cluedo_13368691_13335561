@@ -167,6 +167,10 @@ public class Setup {
 				System.out.println("You must have a minimum of 2 players!");
 			} else anotherPlayer = false;
 			
+			// Clear the command line
+			for(int i = 0; i < 999; i++) 
+				System.out.println("\n");
+			
 		} while (anotherPlayer);
 		return playerCollection;
 	}

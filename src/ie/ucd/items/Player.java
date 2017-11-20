@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 public class Player {
 	
+	private static int playerCounter = 0;
 	private SuspectPawn suspectPawn;
 	private Notebook notebook;
 	private ArrayList<Card> cardHand;
 	private int moves;
+	private int playerNumber;
 
 	
 	public Player(int xlocation, int ylocation, Suspect name) {
 		this.suspectPawn = new SuspectPawn(xlocation, ylocation, name); //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.cardHand = new ArrayList<Card>();
+		this.playerNumber = ++playerCounter;
 		moves = 0;
 	}
 	
@@ -23,6 +26,10 @@ public class Player {
 	
 	public Notebook getNotebook() {
 		return notebook;
+	}
+	
+	public int playerNumber() {
+		return this.playerNumber;
 	}
 	
 	public int getMoves() {

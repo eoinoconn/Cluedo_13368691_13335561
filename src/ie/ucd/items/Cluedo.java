@@ -9,7 +9,10 @@ public class Cluedo {
 		
 		String fileName = "GameBoard1.csv";	
 
-	
+		// push text to bottom of command line
+		for(int i = 0; i < 999; i++) 
+			System.out.println("\n");
+		
 	    // Initialise Setup instance
 		Setup setup = Setup.getInstance();
 		
@@ -44,10 +47,11 @@ public class Cluedo {
 		for(turnsPlayed = 0; turnsPlayed < 100; turnsPlayed++) {
 			
 			// Player loop, iterates through each player, each turn
-			for(whoseGo = 0; whoseGo < numPlayers; whoseGo++) {
+			for(int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
 				
 				// Select current turns player
-				Player currentPlayer = playerCollection.get(whoseGo);
+				Player currentPlayer = playerCollection.get(playerIndex);
+				whoseGo = currentPlayer.playerNumber();
 				
 				// enable the player to make a hypothesis
 				boolean hypMade = false;
@@ -57,7 +61,7 @@ public class Cluedo {
 					System.out.println("\n");
 				
 				// Inform players who's turn it is
-				System.out.println("Okay player " + (whoseGo + 1) + ". It's your turn!");
+				System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
 				System.out.println("Press return to roll the dice");
 				sc.nextLine();
 				
@@ -75,22 +79,26 @@ public class Cluedo {
 				playerTurnOver = false;
 				while(!playerTurnOver) {
 					
+					// Print the gameboard for users convenience
+					gameBoard.printBoard(playerIndex, playerCollection);
+					
 					// Ask user which action they would like to perform
 					System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
 					String str = sc.nextLine();
 					switch(Character.toUpperCase(str.charAt(0))) {
 					case('M'):
 						
+						// Clear the command line
+						for(int i = 0; i < 999; i++) 
+							System.out.println("\n");
+						
 						// Enter move-mode contained in while loop
 						inMoveMode = true;
 						while((numMovesRemaining > 0) & (inMoveMode)) {
 							
-							// Clear the command line
-							for(int i = 0; i < 999; i++) 
-								System.out.println("\n");
 							
 							// Print gameboard
-							gameBoard.printBoard(whoseGo, playerCollection);
+							gameBoard.printBoard(playerIndex, playerCollection);
 							
 							// Tell the user how many moves they have left
 							System.out.println("You have " + numMovesRemaining + " moves remaining");
@@ -102,11 +110,20 @@ public class Cluedo {
 							// If user enters F, exit move mode
 							if(Character.toUpperCase(str.charAt(0)) == 'F') {
 								inMoveMode = false;
+								
+								// Clear the command line
+								for(int i = 0; i < 999; i++) 
+									System.out.println("\n");
 							}
 							// Else perform move and check move occurred
 							else{
+
 								e = turn.makeMove(str.charAt(0), currentPlayer.getSuspectPawn(), gameBoard);
 							
+								// Clear the command line
+								for(int i = 0; i < 999; i++) 
+									System.out.println("\n");
+								
 								switch(e) {
 								
 								case(0):		// Player moves in a room, do not decrement moves
@@ -114,7 +131,7 @@ public class Cluedo {
 									break;
 								
 								case(1):		// Player moves in a corridor, decrement moves
-									
+								
 									numMovesRemaining--;
 									break;
 									
@@ -125,6 +142,7 @@ public class Cluedo {
 									
 								case(-2):		// Player enters unexpected input
 									
+
 									System.out.println("Input not recognised");
 									break;
 									
@@ -132,6 +150,8 @@ public class Cluedo {
 									System.exit(1);		//Error with Turn.makeMove();
 									
 								}
+								
+
 							}
 							
 							
@@ -169,12 +189,14 @@ public class Cluedo {
 						}
 						
 						else {
+							
 							// get the current room and print it to the screen
 							int roomIndex = currentSlot.getNumber();
 							Room murderRoom = Room.values()[roomIndex];
 							System.out.println("You are currently in the " + murderRoom.toString());
 							
 							System.out.println("Who do think is the murderer?");
+							
 							//print out all the remaining suspects and get take the players choices
 							int i = 1;
 							for(Suspect sus: Suspect.values()) {
@@ -190,11 +212,15 @@ public class Cluedo {
 							}
 							int weaponIndex = sc.nextInt() - 1;
 							
+							// Clear the command line
+							for(int j = 0; j < 999; j++) 
+								System.out.println("\n");
+							
 							// make the hypothesis with the chosen suspects
 							Suspect murderer = Suspect.values()[suspectIndex];
 							Weapon murderWeapon = Weapon.values()[weaponIndex];
 							
-							String h = turn.makeHypothesis(whoseGo, murderRoom, murderer, murderWeapon, playerCollection);
+							String h = turn.makeHypothesis(playerIndex, murderRoom, murderer, murderWeapon, playerCollection);
 							System.out.println(h);
 							sc.nextLine();
 							
@@ -235,7 +261,7 @@ public class Cluedo {
 						Room murderRoom = Room.values()[roomIndex];
 						
 						// Make accusation prints messages to notebooks depending on accusation success
-						if(turn.makeAccusation(whoseGo, murderRoom, murderer, murderWeapon, playerCollection, murdererCards)) {
+						if(turn.makeAccusation(playerIndex, murderRoom, murderer, murderWeapon, playerCollection, murdererCards)) {
 							
 							// Accusation is correct
 							
@@ -257,8 +283,15 @@ public class Cluedo {
 						else {
 							
 							//incorrect guess
+							// print message to let player know the game is over
+							System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed fromt he game\n"
+									+ "Press enter to continue");
+							sc.nextLine();
+							sc.nextLine();
+							
+							
 							// Remove Player from the game
-							playerCollection.remove(whoseGo);
+							playerCollection.remove(playerIndex);
 							playerTurnOver = true;
 							numPlayers--;
 							break;
