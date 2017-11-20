@@ -17,11 +17,16 @@ public class GameBoard {
 	private GameBoard(int[][] grid) {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	if(grid[i][j] % 10 > 0) {
+	        	if((i==0&&j==0)||(i==0&&j==DIMENSIONS-1)||(i==DIMENSIONS-1&&j==0)||(i==DIMENSIONS-1&&j==DIMENSIONS-1)) {
+	        		this.grid[i][j] = new Slot();
+	        		this.grid[i][j].setType(4); // 4 if at secret passage
+        			this.grid[i][j].setNumber(grid[i][j] % 10);
+	        	}
+	        	else if(grid[i][j] % 10 > 0) {
 	        		if(grid[i][j]<10) {
 	        			this.grid[i][j] = new Slot();
 	        			this.grid[i][j].setType(2); // 2 if at doorway
-	        			this.grid[i][j].setNumber(grid[i][j] % 10);
+	        			this.grid[i][j].setNumber(grid[i][j]);
 	        		}else {
 	        			this.grid[i][j] = new Slot();
 	        			this.grid[i][j].setType(3); // 3 if in room
@@ -104,8 +109,8 @@ public class GameBoard {
 	        	else if(grid[i][j].getType()==1) {
 	        		System.out.printf("# "); // corridor
 	        	}
-	        	else if(grid[i][j].getType()==2) {
-					System.out.printf("* "); // doorway
+	        	else if(grid[i][j].getType()==2||grid[i][j].getType()==4) {
+					System.out.printf("* "); // doorway or secret passage
 	        	}
 	        	else if(grid[i][j].getType()==3) {
 	        		System.out.printf("' "); // room
@@ -117,5 +122,9 @@ public class GameBoard {
 	        System.out.print('\n');
 		}
 		System.out.println("'@' = pawn location, ' ' = corridor, '#' = room, '*' = doorway");
+	}
+	
+	public int getDimensions() {
+		return DIMENSIONS;
 	}
 }
