@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 public class Turn {
 
+	private static Turn uniqueInstance = null;
+	
+	public static Turn getInstance() {
+		if(uniqueInstance == null)
+			uniqueInstance = new Turn();
+		return uniqueInstance;
+	}
+	
+	
 	public String makeHypothesis(int id, Room room, Suspect suspect, Weapon weapon, ArrayList<Player> playerCollection) {
 
 		//Create the string to add to the notebooks of all players
