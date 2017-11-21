@@ -111,12 +111,13 @@ public class Setup {
 	public ArrayList<Player> setupPlayers(GameBoard gameBoard, Scanner sc){
 		ArrayList<Suspect> suspectCollection = this.setupSuspectCollection();
 		ArrayList<Room>roomCollection = this.setupRoomCollection();
-		
+		Collections.shuffle(roomCollection);
 		boolean anotherPlayer = false;
 		ArrayList<Player> playerCollection = new ArrayList<Player>();
 		int numPlayers = 0;
 		int numSuspects = 0;
 		int suspectIndex = 0;
+		int roomIndex = 0;
 		int[] location = new int[2];
 		
 		// Loop to repeatedly ask for new players
@@ -173,7 +174,7 @@ public class Setup {
 			} else anotherPlayer = false;
 			
 			
-		} while (anotherPlayer);
+		} while (anotherPlayer && numPlayers<Suspect.values().length);
 		return playerCollection;
 	}
 

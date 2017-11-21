@@ -118,12 +118,13 @@ public class GameBoard {
 					System.out.printf(" X  "); // out of bounds
 				}
 	        }
-	        if(i<8) {
+	        // print a legend of room names
+	        if(i<Room.values().length) {
 	        	System.out.print("\t" + (i+1) + " = " + Room.values()[i]);
 	        }
 	        System.out.print("\n\n");
 		}
-		System.out.println("[] = pawn location, # = corridor, room number = room, * = doorway");
+		System.out.println("[] = pawn location, ' = corridor, room number = room, # = doorway\n");
 	}
 	
 	public int getDimensions() {
