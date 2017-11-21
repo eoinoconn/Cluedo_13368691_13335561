@@ -173,7 +173,9 @@ public class Cluedo {
 						
 						// print each of these entries
 						String entries = nb.lastNEntries(Integer.parseInt(str));
-						System.out.println(entries);
+						System.out.println(entries + "\nPress enter to continue");
+						sc.nextLine();
+						sc.nextLine();
 					
 						break;
 					case('H'):

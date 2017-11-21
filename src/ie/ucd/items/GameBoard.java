@@ -88,17 +88,16 @@ public class GameBoard {
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	
 	        	int id = 1;
 	        	for(Player p: playerCollection) {
 	        		SuspectPawn sp = p.getSuspectPawn();
 	        		// if a player is at this grid square, print their id or @ symbol
 	        		if(i==sp.getLocation()[1] && j==sp.getLocation()[0]) {
 	        			if(id==currentPlayerId+1) {
-	        				System.out.print("@ "); // '@' = current player's pawn
+	        				System.out.print("[@] "); // '@' = current player's pawn
 	        			}
 	        			else {
-	        				System.out.print(id + " "); // id number = this player's pawn
+	        				System.out.print("[" + id + "] "); // id number = this player's pawn
 	        			}
 	        			break;
 	        		}
@@ -107,21 +106,24 @@ public class GameBoard {
 	        	if(id<=playerCollection.size()) {
 	        	}
 	        	else if(grid[i][j].getType()==1) {
-	        		System.out.printf("# "); // corridor
+	        		System.out.printf(" '  "); // corridor
 	        	}
 	        	else if(grid[i][j].getType()==2||grid[i][j].getType()==4) {
-					System.out.printf("* "); // doorway or secret passage
+					System.out.printf(" #  "); // doorway or secret passage
 	        	}
 	        	else if(grid[i][j].getType()==3) {
-	        		System.out.printf("' "); // room
+	        		System.out.printf(" " + grid[i][j].getNumber() + "  "); // room
 	        	}
 				else {
-					System.out.printf("X "); // out of bounds
+					System.out.printf(" X  "); // out of bounds
 				}
 	        }
-	        System.out.print('\n');
+	        if(i<8) {
+	        	System.out.print("\t" + (i+1) + " = " + Room.values()[i]);
+	        }
+	        System.out.print("\n\n");
 		}
-		System.out.println("'@' = pawn location, ' ' = corridor, '#' = room, '*' = doorway");
+		System.out.println("[] = pawn location, # = corridor, room number = room, * = doorway");
 	}
 	
 	public int getDimensions() {
