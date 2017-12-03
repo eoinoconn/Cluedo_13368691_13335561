@@ -21,8 +21,21 @@ public class Setup {
 	}
 
 	
-	public Object setup() {
-		return null;
+	public Turn startGame(String fileName, Scanner sc) {
+		// Call setupGrid to create grid
+		int[][] grid = this.setupGrid(fileName);
+		
+		// Create gameBoard instance.
+	    GameBoard gameBoard = GameBoard.getInstance(grid);
+	    
+		// Stores player instances
+		ArrayList<Player> playerCollection = this.setupPlayers(gameBoard, sc);
+
+	    // deals cards to players and selects murderer cards
+		ArrayList<Card> murdererCards = this.dealCards(playerCollection);
+		
+		return  Turn.getInstance(playerCollection, gameBoard, murdererCards);
+		
 	}
 	
 	public int[][] setupGrid(String fileName){
