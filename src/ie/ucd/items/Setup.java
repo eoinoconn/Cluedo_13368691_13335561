@@ -21,7 +21,7 @@ public class Setup {
 	}
 
 	
-	public Turn startGame(String fileName, Scanner sc) {
+	public Turn setupGame(String fileName, Scanner sc) {
 		// Call setupGrid to create grid
 		int[][] grid = this.setupGrid(fileName);
 		

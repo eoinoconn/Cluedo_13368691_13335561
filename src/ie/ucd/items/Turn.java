@@ -10,6 +10,7 @@ public class Turn {
 	ArrayList<Player> playerCollection;
 	GameBoard gameBoard;
 	ArrayList<Card> murdererCards;
+	Random rand = new Random();
 	
 	
 	public static Turn getInstance(ArrayList<Player> playerCollection, GameBoard gameBoard, ArrayList<Card> murdererCards) {
@@ -24,10 +25,34 @@ public class Turn {
 		this.murdererCards = murdererCards;
 	}
 	
-	public void startTurn(int playerIndex, Scanner sc) {
+	public void playGame(Scanner sc) {
+		
+		// push text to bottom of command line
+		for(int i = 0; i < 999; i++) 
+			System.out.println("\n");
+		
+		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
 		
 		
-		Random rand = new Random();
+		int numPlayers = playerCollection.size();
+		int turnsPlayed;
+		
+		// Turns loop, keeps play moving in circle
+		for(turnsPlayed = 0; turnsPlayed < 100; turnsPlayed++) {
+			
+			// Player loop, iterates through each player, each turn
+			for(int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
+				
+				// start player turn
+				this.startTurn(playerIndex, sc);
+				
+			
+			}
+		}
+	}
+	
+	private void startTurn(int playerIndex, Scanner sc) {
+		
 		
 		// Select current turns player
 		Player currentPlayer = playerCollection.get(playerIndex);
@@ -388,6 +413,7 @@ public class Turn {
 			// make the accusation with the chosen suspects
 			if(murderer == murdererCards.get(0).getName() && murderRoom == murdererCards.get(1).getName() 
 					&& murderWeapon == murdererCards.get(2).getName()) {
+				
 				// Accusation is correct
 				
 				// Clear command line
@@ -407,8 +433,8 @@ public class Turn {
 			}
 			else {
 				
-				//incorrect Accusation
-				//Create the string to add to the notebooks of all players
+				// incorrect Accusation
+				// Create the string to add to the notebooks of all players
 				String str_1 = "Player " + (playerCollection.get(whoseGo).playerNumber()) + " believes that " + murderer.toString() + " committed the murder with the " 
 						+ murderWeapon.toString() + " in the " + murderRoom.toString();
 				
