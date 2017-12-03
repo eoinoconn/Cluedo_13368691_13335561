@@ -10,7 +10,7 @@ public class Player {
 	private ArrayList<Card> cardHand;
 	private int moves;
 	private int playerNumber;
-
+	private boolean hypMade;
 	
 	public Player(int xlocation, int ylocation, Suspect name) {
 		this.suspectPawn = new SuspectPawn(xlocation, ylocation, name); //place pawn with specified name in start location
@@ -40,6 +40,14 @@ public class Player {
 		this.moves = moves;
 	}
 
+	public boolean hypMade() {
+		return hypMade;
+	}
+	
+	public void hypMade(boolean hypMade) {
+		this.hypMade = hypMade;
+	}
+	
 	public Card checkCards(Room room, Suspect suspect, Weapon weapon) {
 		
 		// iterate through each card in hand
