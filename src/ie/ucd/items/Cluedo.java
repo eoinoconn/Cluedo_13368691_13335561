@@ -41,6 +41,8 @@ public class Cluedo {
 		int turnsPlayed, numMovesRemaining, whoseGo, e;
 		boolean playerTurnOver = false;
 		boolean inMoveMode = true;
+		SuspectPawn sp;
+		Slot currentSlot;
 		
 		
 		// Turns loop, keeps play moving in circle
@@ -179,8 +181,8 @@ public class Cluedo {
 					
 						break;
 					case('H'):
-						SuspectPawn sp = currentPlayer.getSuspectPawn();
-						Slot currentSlot = gameBoard.getSlot(sp.getLocation());
+						sp = currentPlayer.getSuspectPawn();
+						currentSlot = gameBoard.getSlot(sp.getLocation());
 						
 						// check that player has not yet made a hypothesis and that they are in a room
 						if(currentSlot.getType()!=3) {
@@ -232,74 +234,83 @@ public class Cluedo {
 						break;
 						
 					case('A'):
+						sp = currentPlayer.getSuspectPawn();
+						currentSlot = gameBoard.getSlot(sp.getLocation());
 						
-						System.out.println("Who do believe is the murderer?");
+						// check that player has not yet made a hypothesis and that they are in a room
+						if(currentSlot.getType()!=3) {
+							System.out.println("You must be in a room to make a hypothesis!");
+						}
+						else if(hypMade) {
+							System.out.println("You cannot make another hypothesis until your next turn!");
+						}
 						
-						//print out all the remaining suspects and get the players choices
-						int i = 1;
-						for(Suspect sus: Suspect.values()) {
-							System.out.println(i + " " + sus.toString());
-							i++;
-						}
-						int suspectIndex = sc.nextInt() - 1;
-						System.out.println("With which weapon?");
-						i = 1;
-						for(Weapon weap: Weapon.values()) {
-							System.out.println(i + " " + weap.toString());
-							i++;
-						}
-						int weaponIndex = sc.nextInt() - 1;
-						System.out.println("In which room?");
-						i = 1;
-						for(Room ro: Room.values()) {
-							System.out.println(i + " " + ro.toString());
-							i++;
-						}
-						int roomIndex = sc.nextInt() - 1;
-						
-						// make the accusation with the chosen suspects
-						Suspect murderer = Suspect.values()[suspectIndex];
-						Weapon murderWeapon = Weapon.values()[weaponIndex];
-						Room murderRoom = Room.values()[roomIndex];
-						
-						// Make accusation prints messages to notebooks depending on accusation success
-						if(turn.makeAccusation(playerIndex, murderRoom, murderer, murderWeapon, playerCollection, murdererCards)) {
-							
-							// Accusation is correct
-							
-							// Clear command line
-							for(i = 0; i < 999; i++) 
-								System.out.println("\n");
-							
-							// Print success message to screen
-							System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-							System.out.println("Congratualtions!! Youve caught the murderer!");
-							System.out.println(murderer.toString() + " committed the murder, with the " + murderWeapon.toString() + " in the "
-									+ murderRoom.toString() + '.');
-							System.out.println("GAME OVER");
-							System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-							
-							// close application
-							System.exit(0);
-						}
 						else {
+							// get the current room and print it to the screen
+							int roomIndex = currentSlot.getNumber();
+							Room murderRoom = Room.values()[roomIndex];
+							System.out.println("You are currently in the " + murderRoom.toString());
 							
-							//incorrect guess
-							// print message to let player know the game is over
-							System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed fromt he game\n"
-									+ "Press enter to continue");
-							sc.nextLine();
-							sc.nextLine();
+							System.out.println("Who do believe is the murderer?");
 							
+							//print out all the remaining suspects and get the players choices
+							int i = 1;
+							for(Suspect sus: Suspect.values()) {
+								System.out.println(i + " " + sus.toString());
+								i++;
+							}
+							int suspectIndex = sc.nextInt() - 1;
+							System.out.println("With which weapon?");
+							i = 1;
+							for(Weapon weap: Weapon.values()) {
+								System.out.println(i + " " + weap.toString());
+								i++;
+							}
+							int weaponIndex = sc.nextInt() - 1;
+	
 							
-							// Remove Player from the game
-							playerCollection.remove(playerIndex);
-							playerTurnOver = true;
-							numPlayers--;
-							break;
+							// make the accusation with the chosen suspects
+							Suspect murderer = Suspect.values()[suspectIndex];
+							Weapon murderWeapon = Weapon.values()[weaponIndex];
+							
+							// Make accusation prints messages to notebooks depending on accusation success
+							if(turn.makeAccusation(playerIndex, murderRoom, murderer, murderWeapon, playerCollection, murdererCards)) {
+								
+								// Accusation is correct
+								
+								// Clear command line
+								for(i = 0; i < 999; i++) 
+									System.out.println("\n");
+								
+								// Print success message to screen
+								System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+								System.out.println("Congratualtions!! Youve caught the murderer!");
+								System.out.println(murderer.toString() + " committed the murder, with the " + murderWeapon.toString() + " in the "
+										+ murderRoom.toString() + '.');
+								System.out.println("GAME OVER");
+								System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+								
+								// close application
+								System.exit(0);
+							}
+							else {
+								
+								//incorrect guess
+								// print message to let player know the game is over
+								System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed fromt he game\n"
+										+ "Press enter to continue");
+								sc.nextLine();
+								sc.nextLine();
+								
+								
+								// Remove Player from the game
+								playerCollection.remove(playerIndex);
+								playerTurnOver = true;
+								numPlayers--;
+								break;
+							}
+							
 						}
-							
-						
 						break;
 						
 					case('E'):
