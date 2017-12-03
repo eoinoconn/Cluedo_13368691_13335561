@@ -14,66 +14,97 @@ public class GameBoard {
 		return uniqueInstance;
 	}
 	
-	private GameBoard(int[][] grid) {
+	private GameBoard(int[][] intGrid) {
+		
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	if((i==0&&j==0)||(i==0&&j==DIMENSIONS-1)||(i==DIMENSIONS-1&&j==0)||(i==DIMENSIONS-1&&j==DIMENSIONS-1)) {
-	        		this.grid[i][j] = new Slot();
-	        		this.grid[i][j].setType(4); // 4 if at secret passage
-        			this.grid[i][j].setNumber(grid[i][j] % 10);
+	        	int[] options = new int[5];
+	        	int slotNumber = intGrid[i][j] % 10;
+	        	for (int option = 0; option < 5 ; option++) {
+	        		int r, c;
+	        		if(option==0) {							// current slot
+		        		r = i;
+		        		c = j;
+		        	}
+	        		else if(option==1 && i>0) {				// up
+		        		r = i-1;
+		        		c = j;
+		        	}
+	        		else if(option==2 && i<DIMENSIONS-1) {	// down
+		        		r = i+1;
+		        		c = j;
+		        	}
+	        		else if(option==3 && j>0) {				// left
+		        		r = i;
+		        		c = j-1;
+		        	}
+	        		else if(option==4 && j<DIMENSIONS-1){	// right
+		        		r = i;
+		        		c = j+1;
+		        	}
+	        		// leave this option as 0 if not within limits
+	        		else continue;
+	        		
+		        	if((r==0&&c==0)||(r==0&&c==DIMENSIONS-1)||(r==DIMENSIONS-1&&c==0)||(r==DIMENSIONS-1&&c==DIMENSIONS-1)) {
+		        		// type 4 if at a secret passage
+		        		options[option] = 4;
+		        	}
+		        	else if(intGrid[i][j] % 10 > 0) {
+		        		if(intGrid[r][c]<10) {
+		        			// type 2 if at doorway
+		        			options[option] = 2;
+		        		}
+		        		else {
+		        			// type 3 if in a room
+		        			options[option] = 3;
+		        		}
+		        	}
+		        	else if(intGrid[r][c]==10){
+		        		// type 1 if in a corridor
+		        		options[option] = 1;
+		        	}
+		        	else {
+		        		// type 0 if out of bounds
+		        		options[option] = 0;
+		        	}
 	        	}
-	        	else if(grid[i][j] % 10 > 0) {
-	        		if(grid[i][j]<10) {
-	        			this.grid[i][j] = new Slot();
-	        			this.grid[i][j].setType(2); // 2 if at doorway
-	        			this.grid[i][j].setNumber(grid[i][j]);
-	        		}else {
-	        			this.grid[i][j] = new Slot();
-	        			this.grid[i][j].setType(3); // 3 if in room
-	        			this.grid[i][j].setNumber(grid[i][j] % 10);
-	        		}
-	        	}
-	        	else if(grid[i][j]==10){
-	        		this.grid[i][j] = new Slot();
-	        		this.grid[i][j].setType(1); // 1 if in corridor
-	        		this.grid[i][j].setNumber(grid[i][j] % 10);
-	        	}
-	        	else {
-	        		this.grid[i][j] = new Slot();
-	        	}
+	        	this.grid[i][j] = new Slot(options, slotNumber);
 	        }
 		}
+		
 	}
 	
-	// Method to return the current grid square and the numbers corresponding to the 
-	public int[] getOptions(SuspectPawn pawn) {
-		int[] location = pawn.getLocation();
-		int[] options = new int[5]; // some array of numbers representing options
-		options[0] = grid[location[1]][location[0]].getType(); //current position
-		if((location[1]-1)>=0) { // ensure space above is not out of bounds
-			options[1] = grid[location[1]-1][location[0]].getType();
-		}
-		if((location[1]+1)<DIMENSIONS) { // ensure space below is not out of bounds
-			options[2] = grid[location[1]+1][location[0]].getType();
-		}
-		if((location[0]-1)>=0) { // ensure space to the left is not out of bounds
-			options[3] = grid[location[1]][location[0]-1].getType();
-		}
-		if((location[0]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
-			options[4] = grid[location[1]][location[0]+1].getType();
-		}
-		return options;
-	}
-	
+//  	// Method to return the current grid square and the numbers corresponding to the 
+//	public int[] getOptions(SuspectPawn pawn) {
+//		int[] location = pawn.getLocation();
+//		int[] options = new int[5]; // some array of numbers representing options
+//		options[0] = grid[location[1]][location[0]].getType(); //current position
+//		if((location[1]-1)>=0) { // ensure space above is not out of bounds
+//			options[1] = grid[location[1]-1][location[0]].getType();
+//		}
+//		if((location[1]+1)<DIMENSIONS) { // ensure space below is not out of bounds
+//			options[2] = grid[location[1]+1][location[0]].getType();
+//		}
+//		if((location[0]-1)>=0) { // ensure space to the left is not out of bounds
+//			options[3] = grid[location[1]][location[0]-1].getType();
+//		}
+//		if((location[0]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
+//			options[4] = grid[location[1]][location[0]+1].getType();
+//		}
+//		return options;
+//	}
+//	
 	public int[] getRoomLocation(Room room) {
 		int[] location = new int[2];
 		// check only the space not adjacent to the edge of the board as there are never doors
-		for (int i = 1; i < DIMENSIONS-1; i++) {
-	        for (int j = 1; j < DIMENSIONS-1; j++) {
-	        	if (grid[i][j].getNumber()==room.ordinal()+1 && (grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2)) {
+		for (int i = 0; i < DIMENSIONS; i++) {
+	        for (int j = 0; j < DIMENSIONS; j++) {
+	        	int[] options = grid[i][j].getOptions();
+	        	int roomNum = grid[i][j].getNumber();
+	        	if (roomNum==room.ordinal()+1 && (options[1]==2 || options[2]==2 || options[3]==2 || options[4]==2)) {
 	                // if in room adjacent to doorway
-	            	location[0] = j;
-	                location[1] = i;
+	            	location[0] = i;
+	                location[1] = j;
 	            	return location;
 	            }
 	        }
@@ -82,7 +113,7 @@ public class GameBoard {
 	}
 	
 	public Slot getSlot(int[] location) {
-		return grid[location[1]][location[0]];
+		return grid[location[0]][location[1]];
 	}
 	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
@@ -92,7 +123,7 @@ public class GameBoard {
 	        	for(Player p: playerCollection) {
 	        		SuspectPawn sp = p.getSuspectPawn();
 	        		// if a player is at this grid square, print their id or @ symbol
-	        		if(i==sp.getLocation()[1] && j==sp.getLocation()[0]) {
+	        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
 	        			if(id==currentPlayerId+1) {
 	        				System.out.print("[@] "); // '@' = current player's pawn
 	        			}

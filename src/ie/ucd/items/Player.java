@@ -12,8 +12,8 @@ public class Player {
 	private int playerNumber;
 
 	
-	public Player(int xlocation, int ylocation, Suspect name) {
-		this.suspectPawn = new SuspectPawn(xlocation, ylocation, name); //place pawn with specified name in start location
+	public Player(int row, int col, Suspect name) {
+		this.suspectPawn = new SuspectPawn(row, col, name); //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.cardHand = new ArrayList<Card>();
 		this.playerNumber = ++playerCounter;

@@ -8,9 +8,9 @@ public abstract class Pawn {
 		return location;
 	}
 	
-	public void setLocation(int xlocation, int ylocation) {
-		location[0] = xlocation;
-		location[1] = ylocation;
+	public void setLocation(int row, int col) {
+		location[0] = row;
+		location[1] = col;
 	}
 	
 }
