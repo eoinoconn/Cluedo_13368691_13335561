@@ -27,13 +27,6 @@ public class Turn {
 	
 	public void playGame(Scanner sc) {
 		
-		// push text to bottom of command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
-		
-		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
-		
-		
 		int numPlayers = playerCollection.size();
 		int turnsPlayed;
 		
@@ -74,7 +67,7 @@ public class Turn {
 		 * values of roles the random integer is called twice
 		 * to simulate this real life instance. 
 		 */
-		int numMovesRemaining = rand.nextInt(5) + rand.nextInt(5) + 2;
+		int numMovesRemaining = currentPlayer.rollDice();
 		
 		// Inform player of his moves and location
 		System.out.println("You have " + numMovesRemaining + " moves.");
@@ -91,7 +84,7 @@ public class Turn {
 			String str = sc.nextLine();
 			switch(Character.toUpperCase(str.charAt(0))) {
 			case('M'):
-				this.moveMode(numMovesRemaining, playerIndex, sc);
+				this.moveMode(playerIndex, sc);
 				break;
 			case('N'):
 				this.openNotebook(playerIndex, sc);
@@ -211,7 +204,7 @@ public class Turn {
 		}
 	}
 	
-	public void moveMode(int numMovesRemaining, int playerIndex, Scanner sc) {
+	public void moveMode(int playerIndex, Scanner sc) {
 		
 		Player currentPlayer = playerCollection.get(playerIndex);
 		
@@ -221,14 +214,14 @@ public class Turn {
 		
 		// Enter move-mode contained in while loop
 		boolean inMoveMode = true;
-		while((numMovesRemaining > 0) & (inMoveMode)) {
+		while((currentPlayer.getMoves() > 0) & (inMoveMode)) {
 			
 			
 			// Print gameboard
 			gameBoard.printBoard(playerIndex, playerCollection);
 			
 			// Tell the user how many moves they have left
-			System.out.println("You have " + numMovesRemaining + " moves remaining");
+			System.out.println("You have " + currentPlayer.getMoves() + " moves remaining");
 			
 			// Check where the player wants to move
 			System.out.println("Where would you like to move? (Up/Down/Left/Right/Finish)");
@@ -259,7 +252,7 @@ public class Turn {
 				
 				case(1):		// Player moves in a corridor, decrement moves
 				
-					numMovesRemaining--;
+					currentPlayer.moveMade();
 					break;
 					
 				case(-1):		// Player attempt to make illegal move

@@ -22,6 +22,13 @@ public class Setup {
 
 	
 	public Turn setupGame(String fileName, Scanner sc) {
+		
+		// push text to bottom of command line
+		for(int i = 0; i < 999; i++) 
+			System.out.println("\n");
+				
+		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
+		
 		// Call setupGrid to create grid
 		int[][] grid = this.setupGrid(fileName);
 		

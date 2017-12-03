@@ -1,6 +1,7 @@
 package ie.ucd.items;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
 	
@@ -8,16 +9,17 @@ public class Player {
 	private SuspectPawn suspectPawn;
 	private Notebook notebook;
 	private ArrayList<Card> cardHand;
-	private int moves;
 	private int playerNumber;
 	private boolean hypMade;
+	Random rand = new Random();
+	private int numMoves;
 	
 	public Player(int xlocation, int ylocation, Suspect name) {
 		this.suspectPawn = new SuspectPawn(xlocation, ylocation, name); //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.cardHand = new ArrayList<Card>();
 		this.playerNumber = ++playerCounter;
-		moves = 0;
+		numMoves = 0;
 	}
 	
 	public SuspectPawn getSuspectPawn() {
@@ -33,15 +35,19 @@ public class Player {
 	}
 	
 	public int getMoves() {
-		return moves;
+		return numMoves;
 	}
 	
-	public void setMoves(int moves) {
-		this.moves = moves;
+	public int moveMade() {
+		return --this.numMoves;
 	}
 
 	public boolean hypMade() {
 		return hypMade;
+	}
+	
+	public void setMoves(int moves) {
+		numMoves = moves;
 	}
 	
 	public void hypMade(boolean hypMade) {
@@ -66,6 +72,11 @@ public class Player {
 	
 	public void giveCard(Card card) {
 		cardHand.add(card);
+	}
+	
+	public int rollDice() {
+		numMoves = rand.nextInt(5) + rand.nextInt(5) + 2;
+		return numMoves;
 	}
 	
 }
