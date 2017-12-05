@@ -128,7 +128,7 @@ public class Turn {
 			
 			// get the current room and print it to the screen
 			int roomIndex = currentSlot.getNumber();
-			Room murderRoom = Room.values()[roomIndex];
+			Room murderRoom = Room.values()[roomIndex-1];
 			System.out.println("You are currently in the " + murderRoom.toString());
 			
 			System.out.println("Who do you think is the murderer?");
@@ -391,7 +391,7 @@ public class Turn {
 			
 			// get the current room and print it to the screen
 			int roomIndex = currentSlot.getNumber();
-			Room murderRoom = Room.values()[roomIndex];
+			Room murderRoom = Room.values()[roomIndex-1];
 			System.out.println("You are currently in the " + murderRoom.toString());
 			
 			// Take suspect input
