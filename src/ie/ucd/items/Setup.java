@@ -202,7 +202,7 @@ public class Setup {
 		// Next create inactive players for each of the remaining suspects
 		for(Suspect sus: suspectCollection) {
 			// Get location of room to start this pawn in
-			location = gameBoard.getRoomLocation(roomCollection.get(numPlayers));
+			location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
 			
 			// create an inactive player for each remaining suspect
 			playerCollection.add(new Player(location, sus, false));
