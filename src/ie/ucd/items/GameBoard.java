@@ -49,18 +49,18 @@ public class GameBoard {
 	public int[] getOptions(SuspectPawn pawn) {
 		int[] location = pawn.getLocation();
 		int[] options = new int[5]; // some array of numbers representing options
-		options[0] = grid[location[1]][location[0]].getType(); //current position
-		if((location[1]-1)>=0) { // ensure space above is not out of bounds
-			options[1] = grid[location[1]-1][location[0]].getType();
+		options[0] = grid[location[0]][location[1]].getType(); //current position
+		if((location[0]-1)>=0) { // ensure space above is not out of bounds
+			options[1] = grid[location[0]-1][location[1]].getType();
 		}
-		if((location[1]+1)<DIMENSIONS) { // ensure space below is not out of bounds
-			options[2] = grid[location[1]+1][location[0]].getType();
+		if((location[0]+1)<DIMENSIONS) { // ensure space below is not out of bounds
+			options[2] = grid[location[0]+1][location[1]].getType();
 		}
-		if((location[0]-1)>=0) { // ensure space to the left is not out of bounds
-			options[3] = grid[location[1]][location[0]-1].getType();
+		if((location[1]-1)>=0) { // ensure space to the left is not out of bounds
+			options[3] = grid[location[0]][location[1]-1].getType();
 		}
-		if((location[0]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
-			options[4] = grid[location[1]][location[0]+1].getType();
+		if((location[1]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
+			options[4] = grid[location[0]][location[1]+1].getType();
 		}
 		return options;
 	}
@@ -72,8 +72,8 @@ public class GameBoard {
 	        for (int j = 1; j < DIMENSIONS-1; j++) {
 	        	if (grid[i][j].getNumber()==room.ordinal()+1 && (grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2)) {
 	                // if in room adjacent to doorway
-	            	location[0] = j;
-	                location[1] = i;
+	            	location[0] = i;
+	                location[1] = j;
 	            	return location;
 	            }
 	        }
@@ -82,7 +82,7 @@ public class GameBoard {
 	}
 	
 	public Slot getSlot(int[] location) {
-		return grid[location[1]][location[0]];
+		return grid[location[0]][location[1]];
 	}
 	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
@@ -92,7 +92,7 @@ public class GameBoard {
 	        	for(Player p: playerCollection) {
 	        		SuspectPawn sp = p.getSuspectPawn();
 	        		// if a player is at this grid square, print their id or @ symbol
-	        		if(i==sp.getLocation()[1] && j==sp.getLocation()[0]) {
+	        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
 	        			if(id==currentPlayerId+1) {
 	        				System.out.print("[@] "); // '@' = current player's pawn
 	        			}

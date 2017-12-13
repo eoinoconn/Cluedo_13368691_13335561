@@ -167,7 +167,7 @@ public class Setup {
 				location = gameBoard.getRoomLocation(roomCollection.get(numPlayers));
 				
 				// Create player with starting location and suspect type
-				playerCollection.add(new Player(location[0], location[1], suspectCollection.get(suspectIndex)));
+				playerCollection.add(new Player(location, suspectCollection.get(suspectIndex)));
 				
 				// Now that that suspect is in the game we remove it from consideration for other players
 				suspectCollection.remove(suspectIndex);

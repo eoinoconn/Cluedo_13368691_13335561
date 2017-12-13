@@ -4,8 +4,8 @@ public class SuspectPawn extends Pawn {
 
 	private Suspect name;
 	
-	public SuspectPawn(int xlocation, int ylocation, Suspect name) {
-		this.setLocation(xlocation, ylocation);
+	public SuspectPawn(int[] location, Suspect name) {
+		this.setLocation(location[0], location[1]);
 		this.name = name;
 	}
 	
