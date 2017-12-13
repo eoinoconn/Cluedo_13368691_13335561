@@ -58,19 +58,45 @@ public class GameBoard {
 		// Now link slots
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	// Associate Slots with surrounding slots
-	        	if(i>0) {
+	        	
+	        	above = new Slot();
+	        	below = new Slot();
+	        	left = new Slot();
+	        	right = new Slot();
+	        	// link corner slots for secret passages
+	        	if(i==0) {
+	        		if(j==0) {
+	        			above = this.grid[DIMENSIONS-1][DIMENSIONS-1];
+	        			left = this.grid[DIMENSIONS-1][DIMENSIONS-1];
+	        		}
+	        		else if(j==DIMENSIONS-1) {
+	        			above = this.grid[DIMENSIONS-1][0];
+	        			right = this.grid[DIMENSIONS-1][0];
+	        		}
+	        	}
+	        	else if(i==DIMENSIONS-1) {
+	        		if(j==0) {
+	        			below = this.grid[0][DIMENSIONS-1];
+	        			left = this.grid[0][DIMENSIONS-1];
+	        		}
+	        		else if(j==DIMENSIONS-1) {
+	        			below = this.grid[0][0];
+	        			right = this.grid[0][0];
+	        		}
+	        	}
+	        	
+	        	// link all regularly connected slots
+	        	if(i>0)
 	        		above = this.grid[i-1][j];
-	        	} else above = new Slot();
-	        	if(i<DIMENSIONS-1) {
+	        	
+	        	if(i<DIMENSIONS-1)
 	        		below = this.grid[i+1][j];
-	        	} else below = new Slot();
-	        	if(j>0) {
+
+	        	if(j>0)
 	        		left = this.grid[i][j-1];
-	        	} else left = new Slot();
-	        	if(j<DIMENSIONS-1) {
+
+	        	if(j<DIMENSIONS-1)
 	        		right = this.grid[i][j+1];
-	        	} else right = new Slot();
 	        	
 	        	this.grid[i][j].setOptions(above, below, left, right);
 	        }

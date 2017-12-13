@@ -165,6 +165,8 @@ public class Setup {
 				
 				// Get location of room they're starting in
 				location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
+				// set this slot on the gameboard as occupied
+				gameBoard.getSlot(location).setHasPawn(true);
 				
 				// Create player with starting location and suspect type
 				playerCollection.add(new Player(location, suspectCollection.get(suspectIndex), true));
@@ -203,6 +205,8 @@ public class Setup {
 		for(Suspect sus: suspectCollection) {
 			// Get location of room to start this pawn in
 			location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
+			// set this slot on the gameboard as occupied
+			gameBoard.getSlot(location).setHasPawn(true);
 			
 			// create an inactive player for each remaining suspect
 			playerCollection.add(new Player(location, sus, false));

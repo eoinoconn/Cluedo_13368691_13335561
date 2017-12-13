@@ -291,89 +291,117 @@ public class Turn {
 		int[] location = suspectPawn.getLocation();
 		Slot thisSlot = gameBoard.getSlot(location);
 		Slot[] options = thisSlot.getOptions();
+		int opt;
 		int dim = gameBoard.getDimensions();
+		boolean atRoomWall, inCorridor, byPawn;
+		boolean[] atOuterWall = new boolean[4];
+		boolean[] inCorner = new boolean[4];
 		
-		switch(direction) {
+		for(int i=0; i<4; i++) {
+			inCorner[i] = (thisSlot.getType()==4 && options[i].getType()==4 && thisSlot.getNumber()!=options[i].getNumber());
+		}
+		
+switch(direction) {
 		case 'u':
+			opt = 0;
 			
-			if(options[0].getType()>0 && !((thisSlot.getType()==1 && options[0].getType()==3)||(thisSlot.getType()==3 && options[0].getType()==1))) { // not at moving off board or into wall
-				suspectPawn.setLocation(suspectPawn.getLocation()[0]-1, suspectPawn.getLocation()[1]);
-				if(options[0].getType()<3||thisSlot.getType()==2) {
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[0].getType()==0) { // on top row
-				if(options[2].getType()==0) { // in top left corner
+			if(inCorner[0]) { // on top row
+				if(inCorner[2]) { // in top left corner
 					suspectPawn.setLocation(dim-1, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[3].getType()==0) { // in top right corner
+				else if(inCorner[3]) { // in top right corner
 					suspectPawn.setLocation(dim-1, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
 		case 'd':
-			if(options[1].getType()>0 && !((thisSlot.getType()==1 && options[1].getType()==3)||(thisSlot.getType()==3 && options[1].getType()==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0]+1, suspectPawn.getLocation()[1]);
-				if(options[1].getType()<3||thisSlot.getType()==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[1].getType()==0) { // on bottom row
-				if(options[2].getType()==0) { // in bottom left corner
+			opt = 1;
+			
+			if(inCorner[1]) { // on bottom row
+				if(inCorner[2]) { // in bottom left corner
 					suspectPawn.setLocation(0, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[3].getType()==0) { // in bottom right corner
+				else if(inCorner[3]) { // in bottom right corner
 					suspectPawn.setLocation(0, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
 		case 'l':
-			if(options[2].getType()>0 && !((thisSlot.getType()==1 && options[2].getType()==3)||(thisSlot.getType()==3 && options[2].getType()==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);
-				if(options[2].getType()<3||thisSlot.getType()==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[2].getType()==0) { // on left wall
-				if(options[0].getType()==0) { // in top left corner
+			opt = 2;
+			
+			if(inCorner[2]) { // on left wall
+				if(inCorner[0]) { // in top left corner
 					suspectPawn.setLocation(dim-1, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[1].getType()==0) { // in bottom left corner
+				else if(inCorner[1]) { // in bottom left corner
 					suspectPawn.setLocation(0, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
 		case 'r':
-			if(options[3].getType()>0 && !((thisSlot.getType()==1 && options[3].getType()==3)||(thisSlot.getType()==3 && options[3].getType()==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]+1);
-				if(options[3].getType()<3||thisSlot.getType()==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[3].getType()==0) { // on right wall
-				if(options[0].getType()==0) { // in top right corner
+			opt = 3;
+			
+			if(inCorner[3]) { // on right wall
+				if(inCorner[0]) { // in top right corner
 					suspectPawn.setLocation(dim-1, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[1].getType()==0) { // in bottom right corner
+				else if(inCorner[1]) { // in bottom right corner
 					suspectPawn.setLocation(0, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
 		default:
 			return -2;				// return -2 if invalid option entered
 		}
+		
+		atRoomWall = (thisSlot.getType()==1 && options[opt].getType()==3)||(thisSlot.getType()==3 && options[opt].getType()==1);
+		inCorridor = options[opt].getType()<3||thisSlot.getType()==2;
+		byPawn = options[opt].getHasPawn();
+		for(int i=0; i<4; i++) {
+			atOuterWall[i] = options[i].getType()==0;
+		}
+		
+		if(!atOuterWall[opt] && !atRoomWall && !byPawn) { // not moving off board or into wall or into other pawn 
+			if(direction=='u')
+				suspectPawn.setLocation(location[0]-1, location[1]);
+			else if(direction=='d')
+				suspectPawn.setLocation(location[0]+1, location[1]);
+			else if(direction=='l')
+				suspectPawn.setLocation(location[0], location[1]-1);
+			else
+				suspectPawn.setLocation(location[0], location[1]+1);
+			thisSlot.setHasPawn(false);
+			options[opt].setHasPawn(true);
+			if(inCorridor) {
+				return 1; 		// return 1 if used up a move
+			}
+			return 0;			// return 0 if did not use up a move
+		}
+		return -1;				// return -1 if could not move
 
 	}
 
