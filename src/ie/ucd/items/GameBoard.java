@@ -137,11 +137,12 @@ public class GameBoard {
 	        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
 	        			if(id==currentPlayerId+1) {
 	        				System.out.print("[@] "); // '@' = current player's pawn
-	        				break; // break to ensure current player is always shown over other players in same grid square
+	        				// break to ensure current player is always shown over other players in same grid square
 	        			}
 	        			else {
 	        				System.out.print("[" + id + "] "); // id number = this player's pawn
 	        			}
+	        			break;
 	        		}
 	        		id++;
 	        	}
