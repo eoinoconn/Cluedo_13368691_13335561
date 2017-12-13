@@ -13,13 +13,15 @@ public class Player {
 	private boolean hypMade;
 	Random rand = new Random();
 	private int numMoves;
+	private boolean active;
 	
-	public Player(int[] location, Suspect name) {
+	public Player(int[] location, Suspect name, boolean active) {
 		this.suspectPawn = new SuspectPawn(location, name); //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.cardHand = new ArrayList<Card>();
 		this.playerNumber = ++playerCounter;
 		numMoves = 0;
+		this.active = active;
 	}
 	
 	public SuspectPawn getSuspectPawn() {
@@ -77,6 +79,14 @@ public class Player {
 	public int rollDice() {
 		numMoves = rand.nextInt(5) + rand.nextInt(5) + 2;
 		return numMoves;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void removeFromGame() {
+		active = false;
 	}
 	
 }

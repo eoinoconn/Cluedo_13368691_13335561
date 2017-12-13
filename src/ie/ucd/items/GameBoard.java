@@ -67,10 +67,15 @@ public class GameBoard {
 	
 	public int[] getRoomLocation(Room room) {
 		int[] location = new int[2];
+		boolean byDoor;
+		boolean inRoom;
+		
 		// check only the space not adjacent to the edge of the board as there are never doors
 		for (int i = 1; i < DIMENSIONS-1; i++) {
 	        for (int j = 1; j < DIMENSIONS-1; j++) {
-	        	if (grid[i][j].getNumber()==room.ordinal()+1 && (grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2)) {
+	        	inRoom = grid[i][j].getType()==3;
+	        	byDoor = grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2;
+	        	if (grid[i][j].getNumber()==room.ordinal()+1 && inRoom && byDoor) {
 	                // if in room adjacent to doorway
 	            	location[0] = i;
 	                location[1] = j;
@@ -86,11 +91,15 @@ public class GameBoard {
 	}
 	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
+		SuspectPawn sp;
+		int playerIndex;
+		Suspect suspectName;
+		
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
 	        	int id = 1;
 	        	for(Player p: playerCollection) {
-	        		SuspectPawn sp = p.getSuspectPawn();
+	        		sp = p.getSuspectPawn();
 	        		// if a player is at this grid square, print their id or @ symbol
 	        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
 	        			if(id==currentPlayerId+1) {
@@ -121,6 +130,12 @@ public class GameBoard {
 	        // print a legend of room names
 	        if(i<Room.values().length) {
 	        	System.out.print("\t" + (i+1) + " = " + Room.values()[i]);
+	        }
+	        
+	        if(i>Room.values().length && i<=(Room.values().length+Suspect.values().length)) {
+	        	playerIndex = i-Room.values().length-1;
+	        	suspectName = playerCollection.get(playerIndex).getSuspectPawn().getName();
+	        	System.out.print("\t[" + (playerIndex+1) + "] = " + suspectName);
 	        }
 	        System.out.print("\n\n");
 		}

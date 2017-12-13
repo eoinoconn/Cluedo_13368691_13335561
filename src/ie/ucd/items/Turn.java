@@ -49,63 +49,65 @@ public class Turn {
 		
 		// Select current turns player
 		Player currentPlayer = playerCollection.get(playerIndex);
-		currentPlayer.hypMade(false);
-		int whoseGo = currentPlayer.playerNumber();
 		
-		
-		// Clear the command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
-		
-		// Inform players who's turn it is
-		System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
-		System.out.println("Press return to roll the dice");
-		sc.nextLine();
-		
-		// Randomly assign number of moves
-		/* As a normal set of playing die is skewed for certain 
-		 * values of roles the random integer is called twice
-		 * to simulate this real life instance. 
-		 */
-		int numMovesRemaining = currentPlayer.rollDice();
-		
-		// Inform player of his moves and location
-		System.out.println("You have " + numMovesRemaining + " moves.");
-		
-		// Begin action loop where the player makes his decisions for their turn
-		boolean playerTurnOver = false;
-		while(!playerTurnOver) {
+		if(currentPlayer.isActive()) {
+			currentPlayer.hypMade(false);
+			int whoseGo = currentPlayer.playerNumber();
 			
-			// Print the gameboard for users convenience
-			gameBoard.printBoard(playerIndex, playerCollection);
 			
-			// Ask user which action they would like to perform
-			System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
-			String str = sc.nextLine();
-			switch(Character.toUpperCase(str.charAt(0))) {
-			case('M'):
-				this.moveMode(playerIndex, sc);
-				break;
-			case('N'):
-				this.openNotebook(playerIndex, sc);
-				break;
-			case('H'):
-				this.makeHypothesis(playerIndex, sc);
-				break;
+			// Clear the command line
+			for(int i = 0; i < 999; i++) 
+				System.out.println("\n");
+			
+			// Inform players who's turn it is
+			System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
+			System.out.println("Press return to roll the dice");
+			sc.nextLine();
+			
+			// Randomly assign number of moves
+			/* As a normal set of playing die is skewed for certain 
+			 * values of roles the random integer is called twice
+			 * to simulate this real life instance. 
+			 */
+			int numMovesRemaining = currentPlayer.rollDice();
+			
+			// Inform player of his moves and location
+			System.out.println("You have " + numMovesRemaining + " moves.");
+			
+			// Begin action loop where the player makes his decisions for their turn
+			boolean playerTurnOver = false;
+			while(!playerTurnOver && currentPlayer.isActive()) {
 				
-			case('A'):
-				if(this.makeAccusation(playerIndex, sc));
-					playerTurnOver = true;	
-				break;
+				// Print the gameboard for users convenience
+				gameBoard.printBoard(playerIndex, playerCollection);
 				
-			case('E'):
-				
-				playerTurnOver = true;
-				break;
-				
-			default:
-				System.out.println("Unexpected input, try again");
-				break;
+				// Ask user which action they would like to perform
+				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
+				String str = sc.nextLine();
+				switch(Character.toUpperCase(str.charAt(0))) {
+				case('M'):
+					this.moveMode(playerIndex, sc);
+					break;
+				case('N'):
+					this.openNotebook(playerIndex, sc);
+					break;
+				case('H'):
+					this.makeHypothesis(playerIndex, sc);
+					break;
+					
+				case('A'):
+					this.makeAccusation(playerIndex, sc);
+					break;
+					
+				case('E'):
+					
+					playerTurnOver = true;
+					break;
+					
+				default:
+					System.out.println("Unexpected input, try again");
+					break;
+				}
 			}
 		}
 	}
@@ -118,9 +120,15 @@ public class Turn {
 		
 		// check that player has not yet made a hypothesis and that they are in a room
 		if(currentSlot.getType()!=3) {
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
 			System.out.println("You must be in a room to make a hypothesis!");
 		}
 		else if(currentPlayer.hypMade()) {
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
 			System.out.println("You cannot make another hypothesis until your next turn!");
 		}
 		
@@ -377,13 +385,12 @@ public class Turn {
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
 		Slot currentSlot = this.gameBoard.getSlot(sp.getLocation());
 		
-		// check that player has not yet made a hypothesis and that they are in a room
+		// check that player is in a room
 		if(currentSlot.getType()!=3) {
-			System.out.println("You must be in a room to make a hypothesis!");
-			return false;
-		}
-		else if(currentPlayer.hypMade()) {
-			System.out.println("You cannot make another hypothesis until your next turn!");
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
+			System.out.println("You must be in a room to make an accusation!");
 			return false;
 		}
 		
@@ -442,13 +449,13 @@ public class Turn {
 								
 				
 				// print message to let player know the game is over
-				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed fromt he game\n"
+				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed from the game\n"
 						+ "Press enter to continue");
 				sc.nextLine();
 				
 				
-				// Remove Player from the game
-				playerCollection.remove(playerIndex);
+				// Remove Player from the game by making active false
+				playerCollection.get(playerIndex).removeFromGame();
 			}
 
 		}
