@@ -49,63 +49,65 @@ public class Turn {
 		
 		// Select current turns player
 		Player currentPlayer = playerCollection.get(playerIndex);
-		currentPlayer.hypMade(false);
-		int whoseGo = currentPlayer.playerNumber();
 		
-		
-		// Clear the command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
-		
-		// Inform players who's turn it is
-		System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
-		System.out.println("Press return to roll the dice");
-		sc.nextLine();
-		
-		// Randomly assign number of moves
-		/* As a normal set of playing die is skewed for certain 
-		 * values of roles the random integer is called twice
-		 * to simulate this real life instance. 
-		 */
-		int numMovesRemaining = currentPlayer.rollDice();
-		
-		// Inform player of his moves and location
-		System.out.println("You have " + numMovesRemaining + " moves.");
-		
-		// Begin action loop where the player makes his decisions for their turn
-		boolean playerTurnOver = false;
-		while(!playerTurnOver) {
+		if(currentPlayer.isActive()) {
+			currentPlayer.hypMade(false);
+			int whoseGo = currentPlayer.playerNumber();
 			
-			// Print the gameboard for users convenience
-			gameBoard.printBoard(playerIndex, playerCollection);
 			
-			// Ask user which action they would like to perform
-			System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
-			String str = sc.nextLine();
-			switch(Character.toUpperCase(str.charAt(0))) {
-			case('M'):
-				this.moveMode(playerIndex, sc);
-				break;
-			case('N'):
-				this.openNotebook(playerIndex, sc);
-				break;
-			case('H'):
-				this.makeHypothesis(playerIndex, sc);
-				break;
+			// Clear the command line
+			for(int i = 0; i < 999; i++) 
+				System.out.println("\n");
+			
+			// Inform players who's turn it is
+			System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
+			System.out.println("Press return to roll the dice");
+			sc.nextLine();
+			
+			// Randomly assign number of moves
+			/* As a normal set of playing die is skewed for certain 
+			 * values of roles the random integer is called twice
+			 * to simulate this real life instance. 
+			 */
+			int numMovesRemaining = currentPlayer.rollDice();
+			
+			// Inform player of his moves and location
+			System.out.println("You have " + numMovesRemaining + " moves.");
+			
+			// Begin action loop where the player makes his decisions for their turn
+			boolean playerTurnOver = false;
+			while(!playerTurnOver && currentPlayer.isActive()) {
 				
-			case('A'):
-				if(this.makeAccusation(playerIndex, sc));
-					playerTurnOver = true;	
-				break;
+				// Print the gameboard for users convenience
+				gameBoard.printBoard(playerIndex, playerCollection);
 				
-			case('E'):
-				
-				playerTurnOver = true;
-				break;
-				
-			default:
-				System.out.println("Unexpected input, try again");
-				break;
+				// Ask user which action they would like to perform
+				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
+				String str = sc.nextLine();
+				switch(Character.toUpperCase(str.charAt(0))) {
+				case('M'):
+					this.moveMode(playerIndex, sc);
+					break;
+				case('N'):
+					this.openNotebook(playerIndex, sc);
+					break;
+				case('H'):
+					this.makeHypothesis(playerIndex, sc);
+					break;
+					
+				case('A'):
+					this.makeAccusation(playerIndex, sc);
+					break;
+					
+				case('E'):
+					
+					playerTurnOver = true;
+					break;
+					
+				default:
+					System.out.println("Unexpected input, try again");
+					break;
+				}
 			}
 		}
 	}
@@ -118,9 +120,15 @@ public class Turn {
 		
 		// check that player has not yet made a hypothesis and that they are in a room
 		if(currentSlot.getType()!=3) {
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
 			System.out.println("You must be in a room to make a hypothesis!");
 		}
 		else if(currentPlayer.hypMade()) {
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
 			System.out.println("You cannot make another hypothesis until your next turn!");
 		}
 		
@@ -280,90 +288,120 @@ public class Turn {
 	}
 	
 	private int makeMove(char direction, SuspectPawn suspectPawn) {
-		int[] options = gameBoard.getOptions(suspectPawn);
+		int[] location = suspectPawn.getLocation();
+		Slot thisSlot = gameBoard.getSlot(location);
+		Slot[] options = thisSlot.getOptions();
+		int opt;
 		int dim = gameBoard.getDimensions();
+		boolean atRoomWall, inCorridor, byPawn;
+		boolean[] atOuterWall = new boolean[4];
+		boolean[] inCorner = new boolean[4];
 		
-		switch(direction) {
+		for(int i=0; i<4; i++) {
+			inCorner[i] = (thisSlot.getType()==4 && options[i].getType()==4 && thisSlot.getNumber()!=options[i].getNumber());
+		}
+		
+switch(direction) {
 		case 'u':
+			opt = 0;
 			
-			if(options[1]>0 && !((options[0]==1 && options[1]==3)||(options[0]==3 && options[1]==1))) { // not at moving off board or into wall
-				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]-1);
-				if(options[1]<3||options[0]==2) {
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[1]==0) { // on top row
-				if(options[3]==0) { // in top left corner
+			if(inCorner[0]) { // on top row
+				if(inCorner[2]) { // in top left corner
 					suspectPawn.setLocation(dim-1, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[4]==0) { // in top right corner
-					suspectPawn.setLocation(0, dim-1);
+				else if(inCorner[3]) { // in top right corner
+					suspectPawn.setLocation(dim-1, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
 		case 'd':
-			if(options[2]>0 && !((options[0]==1 && options[2]==3)||(options[0]==3 && options[2]==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0], suspectPawn.getLocation()[1]+1);
-				if(options[2]<3||options[0]==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[2]==0) { // on bottom row
-				if(options[3]==0) { // in bottom left corner
-					suspectPawn.setLocation(dim-1, 0);
-					return 0; // do not use up a move to move in secret passage
-				}
-				else if(options[4]==0) { // in bottom right corner
-					suspectPawn.setLocation(0, 0);
-					return 0; // do not use up a move to move in secret passage
-				}
-			}
-			return -1;				// return -1 if could not move
-		case 'l':
-			if(options[3]>0 && !((options[0]==1 && options[3]==3)||(options[0]==3 && options[3]==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0]-1, suspectPawn.getLocation()[1]);
-				if(options[3]<3||options[0]==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[3]==0) { // on left wall
-				if(options[1]==0) { // in top left corner
-					suspectPawn.setLocation(dim-1, dim-1);
-					return 0; // do not use up a move to move in secret passage
-				}
-				else if(options[2]==0) { // in bottom left corner
-					suspectPawn.setLocation(dim-1, 0);
-					return 0; // do not use up a move to move in secret passage
-				}
-			}
-			return -1;				// return -1 if could not move
-		case 'r':
-			if(options[4]>0 && !((options[0]==1 && options[4]==3)||(options[0]==3 && options[4]==1))) {
-				suspectPawn.setLocation(suspectPawn.getLocation()[0]+1, suspectPawn.getLocation()[1]);
-				if(options[4]<3||options[0]==2) { 
-					return 1; 		// return 1 if used up a move
-				}
-				return 0;			// return 0 if did not use up a move
-			}
-			else if(options[4]==0) { // on right wall
-				if(options[1]==0) { // in top right corner
+			opt = 1;
+			
+			if(inCorner[1]) { // on bottom row
+				if(inCorner[2]) { // in bottom left corner
 					suspectPawn.setLocation(0, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
-				else if(options[2]==0) { // in bottom right corner
+				else if(inCorner[3]) { // in bottom right corner
 					suspectPawn.setLocation(0, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
-			return -1;				// return -1 if could not move
+			break;
+		case 'l':
+			opt = 2;
+			
+			if(inCorner[2]) { // on left wall
+				if(inCorner[0]) { // in top left corner
+					suspectPawn.setLocation(dim-1, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(inCorner[1]) { // in bottom left corner
+					suspectPawn.setLocation(0, dim-1);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
+					return 0; // do not use up a move to move in secret passage
+				}
+			}
+			break;
+		case 'r':
+			opt = 3;
+			
+			if(inCorner[3]) { // on right wall
+				if(inCorner[0]) { // in top right corner
+					suspectPawn.setLocation(dim-1, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
+					return 0; // do not use up a move to move in secret passage
+				}
+				else if(inCorner[1]) { // in bottom right corner
+					suspectPawn.setLocation(0, 0);
+					thisSlot.setHasPawn(false);
+					options[opt].setHasPawn(true);
+					return 0; // do not use up a move to move in secret passage
+				}
+			}
+			break;
 		default:
 			return -2;				// return -2 if invalid option entered
 		}
+		
+		atRoomWall = (thisSlot.getType()==1 && options[opt].getType()==3)||(thisSlot.getType()==3 && options[opt].getType()==1);
+		inCorridor = options[opt].getType()<3||thisSlot.getType()==2;
+		byPawn = options[opt].getHasPawn();
+		for(int i=0; i<4; i++) {
+			atOuterWall[i] = options[i].getType()==0;
+		}
+		
+		if(!atOuterWall[opt] && !atRoomWall && !byPawn) { // not moving off board or into wall or into other pawn 
+			if(direction=='u')
+				suspectPawn.setLocation(location[0]-1, location[1]);
+			else if(direction=='d')
+				suspectPawn.setLocation(location[0]+1, location[1]);
+			else if(direction=='l')
+				suspectPawn.setLocation(location[0], location[1]-1);
+			else
+				suspectPawn.setLocation(location[0], location[1]+1);
+			thisSlot.setHasPawn(false);
+			options[opt].setHasPawn(true);
+			if(inCorridor) {
+				return 1; 		// return 1 if used up a move
+			}
+			return 0;			// return 0 if did not use up a move
+		}
+		return -1;				// return -1 if could not move
 
 	}
 
@@ -377,13 +415,12 @@ public class Turn {
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
 		Slot currentSlot = this.gameBoard.getSlot(sp.getLocation());
 		
-		// check that player has not yet made a hypothesis and that they are in a room
+		// check that player is in a room
 		if(currentSlot.getType()!=3) {
-			System.out.println("You must be in a room to make a hypothesis!");
-			return false;
-		}
-		else if(currentPlayer.hypMade()) {
-			System.out.println("You cannot make another hypothesis until your next turn!");
+			// Clear the command line
+			for(int j = 0; j < 999; j++) 
+				System.out.println("\n");
+			System.out.println("You must be in a room to make an accusation!");
 			return false;
 		}
 		
@@ -442,13 +479,13 @@ public class Turn {
 								
 				
 				// print message to let player know the game is over
-				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed fromt he game\n"
+				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed from the game\n"
 						+ "Press enter to continue");
 				sc.nextLine();
 				
 				
-				// Remove Player from the game
-				playerCollection.remove(playerIndex);
+				// Remove Player from the game by making active false
+				playerCollection.get(playerIndex).removeFromGame();
 			}
 
 		}

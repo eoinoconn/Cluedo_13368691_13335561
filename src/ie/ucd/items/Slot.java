@@ -2,12 +2,15 @@ package ie.ucd.items;
 
 public class Slot {
 
-	private int type; // 0 if not set, 1 if in corridor, 2 if in doorway, 3 if in room
-	private int number; // 0 if in corridor/doorway, room number if in room
+	private int type;
+	private int number;
+	private boolean hasPawn;
+	private Slot[] options = new Slot[4];
 	
 	public Slot() {
 		type = 0;
 		number = 0;
+		hasPawn = false;
 	}
 	
 	public void setType(int type) {
@@ -24,6 +27,25 @@ public class Slot {
 	
 	public int getNumber() {
 		return number;
+	}
+	
+	public void setOptions(Slot above, Slot below, Slot left, Slot right) {
+		options[0] = above;
+		options[1] = below;
+		options[2] = left;
+		options[3] = right;
+	}
+	
+	public Slot[] getOptions() {
+		return options;
+	}
+	
+	public boolean getHasPawn(){
+		return hasPawn;
+	}
+	
+	public void setHasPawn(boolean hasPawn) {
+		this.hasPawn = hasPawn;
 	}
 	
 }
