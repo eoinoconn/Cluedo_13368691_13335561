@@ -190,17 +190,19 @@ public class Setup {
 			sc.nextLine();
 			
 			// Check if other players are present
-			if(numPlayers<Suspect.values().length) {
+			if(numPlayers<2) {
+				anotherPlayer = true;
+				System.out.println("Press return to continue");
+				sc.nextLine();
+			}
+			else if(numPlayers<Suspect.values().length) {
 				System.out.println("Would you like to add another player? (Y/N)");
 				String str = sc.nextLine();
 				
 				if (Character.toUpperCase(str.charAt(0)) == 'Y') {
 					anotherPlayer = true;
 				}
-				else if (numPlayers<2) {
-					anotherPlayer = true;
-					System.out.println("You must have a minimum of 2 players!");
-				} else anotherPlayer = false;
+				else anotherPlayer = false;
 			}
 			
 			// Clear the command line

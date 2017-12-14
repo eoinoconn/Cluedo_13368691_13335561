@@ -56,11 +56,7 @@ public class Turn {
 			currentPlayer.setHypMade(false);
 			int whoseGo = currentPlayer.playerNumber();
 			
-			
-			// Clear the command line
-			for(int i = 0; i < 999; i++) 
-				System.out.println("\n");
-			
+
 			// Inform players who's turn it is
 			System.out.println("Okay player " + (whoseGo) + ". It's your turn!");
 			System.out.println("Press return to roll the dice");
@@ -124,15 +120,11 @@ public class Turn {
 		
 		// check that player has not yet made a hypothesis and that they are in a room
 		if(currentSlot.getType()!=3) {
-			// Clear the command line
-			for(int j = 0; j < 999; j++) 
-				System.out.println("\n");
+
 			System.out.println("You must be in a room to make a hypothesis!");
 		}
 		else if(currentPlayer.getHypMade()) {
-			// Clear the command line
-			for(int j = 0; j < 999; j++) 
-				System.out.println("\n");
+
 			System.out.println("You cannot make another hypothesis until your next turn!");
 		}
 		
@@ -148,10 +140,6 @@ public class Turn {
 
 			System.out.println("With which weapon?");
 			Weapon murderWeapon = this.getMurderWeapon(sc);
-			
-			// Clear the command line
-			for(int j = 0; j < 999; j++) 
-				System.out.println("\n");
 			
 			// move pawns of hypothesised suspect and weapon to hypothesised room
 			
@@ -234,10 +222,6 @@ public class Turn {
 		
 		Player currentPlayer = playerCollection.get(playerIndex);
 		
-		// Clear the command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
-		
 		// Enter move-mode contained in while loop
 		boolean inMoveMode = true;
 		while((currentPlayer.getMoves() > 0) & (inMoveMode)) {
@@ -256,19 +240,12 @@ public class Turn {
 			// If user enters F, exit move mode
 			if(Character.toUpperCase(str.charAt(0)) == 'F') {
 				inMoveMode = false;
-				
-				// Clear the command line
-				for(int i = 0; i < 999; i++) 
-					System.out.println("\n");
+
 			}
 			// Else perform move and check move occurred
 			else{
 
 				int e = this.makeMove(str.charAt(0), currentPlayer.getSuspectPawn());
-			
-				// Clear the command line
-				for(int i = 0; i < 999; i++) 
-					System.out.println("\n");
 				
 				switch(e) {
 				
@@ -418,9 +395,7 @@ switch(direction) {
 		
 		// check that player is in a room
 		if(currentSlot.getType()!=3) {
-			// Clear the command line
-			for(int j = 0; j < 999; j++) 
-				System.out.println("\n");
+
 			System.out.println("You must be in a room to make an accusation!");
 			return false;
 		}
@@ -519,10 +494,6 @@ switch(direction) {
 		
 		// get this player's notebook
 		Notebook nb = currentPlayer.getNotebook();
-	
-		// Clear the command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
 	
 		// Get number of entries to print from user
 		System.out.println("How many notebook entries would you like to view?");
