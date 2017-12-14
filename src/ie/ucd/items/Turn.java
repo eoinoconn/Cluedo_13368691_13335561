@@ -524,7 +524,7 @@ switch(direction) {
 			i++;
 		}
 		int suspectIndex = sc.nextInt() - 1;
-		return Suspect.values()[suspectIndex];
+		return playerCollection.get(suspectIndex).getSuspectPawn().getName();
 	}
 	
 	private Weapon getMurderWeapon(Scanner sc) {
