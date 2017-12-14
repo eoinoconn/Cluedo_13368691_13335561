@@ -53,7 +53,7 @@ public class Turn {
 		Player currentPlayer = playerCollection.get(playerIndex);
 		
 		if(currentPlayer.isActive()) {
-			currentPlayer.hypMade(false);
+			currentPlayer.setHypMade(false);
 			int whoseGo = currentPlayer.playerNumber();
 			
 			
@@ -94,6 +94,7 @@ public class Turn {
 					this.openNotebook(playerIndex, sc);
 					break;
 				case('H'):
+
 					this.makeHypothesis(playerIndex, sc);
 					break;
 					
@@ -119,6 +120,7 @@ public class Turn {
 		Player currentPlayer = playerCollection.get(playerIndex);
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
 		Slot currentSlot = gameBoard.getSlot(sp.getLocation());
+		int[] location;
 		
 		// check that player has not yet made a hypothesis and that they are in a room
 		if(currentSlot.getType()!=3) {
@@ -127,7 +129,7 @@ public class Turn {
 				System.out.println("\n");
 			System.out.println("You must be in a room to make a hypothesis!");
 		}
-		else if(currentPlayer.hypMade()) {
+		else if(currentPlayer.getHypMade()) {
 			// Clear the command line
 			for(int j = 0; j < 999; j++) 
 				System.out.println("\n");
@@ -151,9 +153,26 @@ public class Turn {
 			for(int j = 0; j < 999; j++) 
 				System.out.println("\n");
 			
-			// make the hypothesis with the chosen suspects
+			// move pawns of hypothesised suspect and weapon to hypothesised room
 			
+			// get an available slot in the murder room
+			location = gameBoard.getRoomLocation(murderRoom);
+			// find the player and move their pawn to the murder room
+			for(Player p : playerCollection) {
+				sp = p.getSuspectPawn();
+				if(sp.getName()==murderer) {
+					sp.setLocation(gameBoard, location[0], location[1]);
+				}
+			}
 			
+			// get an available slot in the murder room
+			location = gameBoard.getRoomLocation(murderRoom);
+			// find the weapon pawn and move it to the murder room
+			for(WeaponPawn wp : weaponPawns) {
+				if(wp.getName()==murderWeapon) {
+					wp.setLocation(gameBoard, location[0], location[1]);
+				}
+			}
 			
 			//Create the string to add to the notebooks of all players
 			String str_1 = "Player " + (playerCollection.get(playerIndex).playerNumber()) + " suspects that " + murderer.toString() + " committed the murder with the " + murderWeapon.toString() + " in the " + murderRoom.toString();
@@ -198,18 +217,15 @@ public class Turn {
 			if(refuted == false) {
 				// In the event the hypothesis is not refuted, tell all the players 
 				str_1 = str_1 + "\nPlayer " + (playerCollection.get(playerIndex).playerNumber()) + "'s hypothesis was not refuted";
-				
 				for(Player player: playerCollection) {
 					player.getNotebook().addEvent(str_1);
 				}
 				
 				// return printable string for current player
 				System.out.println("Your Hypothesis was not refuted");
-				
-				
-				// stop player from making another hypothesis on this turn
-				currentPlayer.hypMade(true);
 			}
+			// stop player from making another hypothesis on this turn
+			currentPlayer.setHypMade(true);
 			sc.nextLine();
 		}
 	}
@@ -501,7 +517,9 @@ switch(direction) {
 	private Suspect getSuspectChoice(Scanner sc) {
 		//print out all the remaining suspects and get take the players choices
 		int i = 1;
-		for(Suspect sus: Suspect.values()) {
+		Suspect sus;
+		for(Player p: playerCollection) {
+			sus = p.getSuspectPawn().getName();
 			System.out.println(i + " " + sus.toString());
 			i++;
 		}

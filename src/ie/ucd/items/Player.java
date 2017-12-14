@@ -44,7 +44,7 @@ public class Player {
 		return --this.numMoves;
 	}
 
-	public boolean hypMade() {
+	public boolean getHypMade() {
 		return hypMade;
 	}
 	
@@ -52,7 +52,7 @@ public class Player {
 		numMoves = moves;
 	}
 	
-	public void hypMade(boolean hypMade) {
+	public void setHypMade(boolean hypMade) {
 		this.hypMade = hypMade;
 	}
 	
