@@ -77,7 +77,7 @@ public class Player {
 	}
 	
 	public int rollDice() {
-		numMoves = rand.nextInt(5) + rand.nextInt(5) + 2;
+		numMoves = rand.nextInt(6) + rand.nextInt(6) + 2;
 		return numMoves;
 	}
 	
