@@ -410,7 +410,8 @@ switch(direction) {
 		
 		Player currentPlayer = this.playerCollection.get(playerIndex);
 		int whoseGo = currentPlayer.playerNumber();
-		
+		int winner = 0;
+		int numPlayers;
 		
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
 		Slot currentSlot = this.gameBoard.getSlot(sp.getLocation());
@@ -445,6 +446,7 @@ switch(direction) {
 					&& murderWeapon == murdererCards.get(2).getName()) {
 				
 				// Accusation is correct
+				winner = whoseGo;
 				
 				// Clear command line
 				for(int i = 0; i < 999; i++) 
@@ -455,7 +457,7 @@ switch(direction) {
 				System.out.println("Congratualtions!! Youve caught the murderer!");
 				System.out.println(murderer.toString() + " committed the murder, with the " + murderWeapon.toString() + " in the "
 						+ murderRoom.toString() + '.');
-				System.out.println("GAME OVER");
+				System.out.println("GAME OVER - Player " + winner + " Wins!!!");
 				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				
 				// close application
@@ -479,13 +481,33 @@ switch(direction) {
 								
 				
 				// print message to let player know the game is over
-				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed from the game\n"
-						+ "Press enter to continue");
-				sc.nextLine();
+				System.out.println("Sorry player " + whoseGo + ", you are wrong and must be removed from the game\n");
 				
 				
 				// Remove Player from the game by making active false
 				playerCollection.get(playerIndex).removeFromGame();
+				
+				// find out the number of active players
+				numPlayers = 0;
+				for(Player p : playerCollection) {
+					if(p.isActive()) {
+						winner = p.playerNumber();
+						numPlayers++;
+					}
+				}
+				
+				if(numPlayers==1) {
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					System.out.println("GAME OVER - Player " + winner + " Wins By Default!");
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					
+					// close application
+					System.exit(0);
+				}
+				else {
+					System.out.println("Press return to continue\n");
+					sc.nextLine();
+				}
 			}
 
 		}

@@ -104,7 +104,7 @@ public class Setup {
 	
 	public ArrayList<Card> dealCards(ArrayList<Player> playerCollection) {
 		ArrayList<Card> cardDeck = this.setupCardDeck();
-		int numPlayers = playerCollection.size();
+		int numPlayers;
 		ArrayList<Card> murdererCards = new ArrayList<Card>();
 		 
 		// first pick the murderer, murder weapon and murder room
@@ -118,6 +118,13 @@ public class Setup {
 		
 		// deal remaining cards randomly to players
 		Collections.shuffle(cardDeck);
+		
+		// find out the number of active players
+		numPlayers = 0;
+		for(Player p : playerCollection) {
+			if(p.isActive())
+				numPlayers++;
+		}
 		// remove a card and give it to next player until all out
 		for(int numCards = cardDeck.size(), i=1; numCards>0; numCards--, i++) { 
 			Player currentPlayer = playerCollection.get(i%(numPlayers));
