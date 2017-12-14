@@ -4,8 +4,9 @@ public class SuspectPawn extends Pawn {
 
 	private Suspect name;
 	
-	public SuspectPawn(int[] location, Suspect name) {
+	public SuspectPawn(GameBoard gameBoard, int[] location, Suspect name) {
 		this.setLocation(location[0], location[1]);
+		gameBoard.getSlot(location).setHasPawn(true);
 		this.name = name;
 	}
 	

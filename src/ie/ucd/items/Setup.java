@@ -37,11 +37,14 @@ public class Setup {
 	    
 		// Stores player instances
 		ArrayList<Player> playerCollection = this.setupPlayers(gameBoard, sc);
+		
+		// Stores Weapon Pawns
+		ArrayList<WeaponPawn> weaponPawns = this.setupWeaponPawns(gameBoard);
 
 	    // deals cards to players and selects murderer cards
 		ArrayList<Card> murdererCards = this.dealCards(playerCollection);
 		
-		return  Turn.getInstance(playerCollection, gameBoard, murdererCards);
+		return  Turn.getInstance(playerCollection, weaponPawns, gameBoard, murdererCards);
 		
 	}
 	
@@ -130,7 +133,7 @@ public class Setup {
 	
 	public ArrayList<Player> setupPlayers(GameBoard gameBoard, Scanner sc){
 		ArrayList<Suspect> suspectCollection = this.setupSuspectCollection();
-		ArrayList<Room>roomCollection = this.setupRoomCollection();
+		ArrayList<Room> roomCollection = this.setupRoomCollection();
 		Collections.shuffle(roomCollection);
 		boolean anotherPlayer = true;
 		ArrayList<Player> playerCollection = new ArrayList<Player>();
@@ -165,11 +168,9 @@ public class Setup {
 				
 				// Get location of room they're starting in
 				location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
-				// set this slot on the gameboard as occupied
-				gameBoard.getSlot(location).setHasPawn(true);
 				
 				// Create player with starting location and suspect type
-				playerCollection.add(new Player(location, suspectCollection.get(suspectIndex), true));
+				playerCollection.add(new Player(gameBoard, location, suspectCollection.get(suspectIndex), true));
 				
 				// Now that that suspect is in the game we remove it from consideration for other players
 				suspectCollection.remove(suspectIndex);
@@ -205,17 +206,39 @@ public class Setup {
 		for(Suspect sus: suspectCollection) {
 			// Get location of room to start this pawn in
 			location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
-			// set this slot on the gameboard as occupied
-			gameBoard.getSlot(location).setHasPawn(true);
 			
 			// create an inactive player for each remaining suspect
-			playerCollection.add(new Player(location, sus, false));
+			playerCollection.add(new Player(gameBoard, location, sus, false));
 			
 			// switch to next room to place in
 			roomIndex++;
 		}
 		
 		return playerCollection;
+	}
+	
+	/**
+	 * @param gameBoard
+	 * @return
+	 * Collection of all Weapon pawns placed in random rooms on the gameboard
+	 */
+	public ArrayList<WeaponPawn> setupWeaponPawns(GameBoard gameBoard) {
+		
+		ArrayList<WeaponPawn> pawnCollection = new ArrayList<WeaponPawn>();
+		ArrayList<Room> rooms = setupRoomCollection();
+		Collections.shuffle(rooms);
+		int roomIndex=0;
+		int[] location = new int[2];
+		WeaponPawn weaponPawn;
+		
+		for(Weapon wp : Weapon.values()) 
+		{
+			location = gameBoard.getRoomLocation(rooms.get(roomIndex));
+			weaponPawn = new WeaponPawn(gameBoard, location, wp);
+			pawnCollection.add(weaponPawn);
+			roomIndex++;
+		}
+		return pawnCollection;
 	}
 
 

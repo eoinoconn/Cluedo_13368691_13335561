@@ -8,19 +8,21 @@ public class Turn {
 
 	private static Turn uniqueInstance = null;
 	ArrayList<Player> playerCollection;
+	ArrayList<WeaponPawn> weaponPawns;
 	GameBoard gameBoard;
 	ArrayList<Card> murdererCards;
 	Random rand = new Random();
 	
 	
-	public static Turn getInstance(ArrayList<Player> playerCollection, GameBoard gameBoard, ArrayList<Card> murdererCards) {
+	public static Turn getInstance(ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns, GameBoard gameBoard, ArrayList<Card> murdererCards) {
 		if(uniqueInstance == null)
-			uniqueInstance = new Turn(playerCollection, gameBoard, murdererCards);
+			uniqueInstance = new Turn(playerCollection, weaponPawns, gameBoard, murdererCards);
 		return uniqueInstance;
 	}
 	
-	private Turn(ArrayList<Player> playerCollection, GameBoard gameBoard, ArrayList<Card> murdererCards) {
+	private Turn(ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns, GameBoard gameBoard, ArrayList<Card> murdererCards) {
 		this.playerCollection = playerCollection;
+		this.weaponPawns = weaponPawns;
 		this.gameBoard = gameBoard;
 		this.murdererCards = murdererCards;
 	}
@@ -79,7 +81,7 @@ public class Turn {
 			while(!playerTurnOver && currentPlayer.isActive()) {
 				
 				// Print the gameboard for users convenience
-				gameBoard.printBoard(playerIndex, playerCollection);
+				gameBoard.printBoard(playerIndex, playerCollection, weaponPawns);
 				
 				// Ask user which action they would like to perform
 				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
@@ -226,7 +228,7 @@ public class Turn {
 			
 			
 			// Print gameboard
-			gameBoard.printBoard(playerIndex, playerCollection);
+			gameBoard.printBoard(playerIndex, playerCollection, weaponPawns);
 			
 			// Tell the user how many moves they have left
 			System.out.println("You have " + currentPlayer.getMoves() + " moves remaining");

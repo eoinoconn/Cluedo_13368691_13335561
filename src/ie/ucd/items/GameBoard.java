@@ -103,26 +103,6 @@ public class GameBoard {
 		}
 	}
 	
-//	// Method to return the current grid square and the numbers corresponding to the 
-//	public int[] getOptions(SuspectPawn pawn) {
-//		int[] location = pawn.getLocation();
-//		int[] options = new int[5]; // some array of numbers representing options
-//		options[0] = grid[location[0]][location[1]].getType(); //current position
-//		if((location[0]-1)>=0) { // ensure space above is not out of bounds
-//			options[1] = grid[location[0]-1][location[1]].getType();
-//		}
-//		if((location[0]+1)<DIMENSIONS) { // ensure space below is not out of bounds
-//			options[2] = grid[location[0]+1][location[1]].getType();
-//		}
-//		if((location[1]-1)>=0) { // ensure space to the left is not out of bounds
-//			options[3] = grid[location[0]][location[1]-1].getType();
-//		}
-//		if((location[1]+1)<DIMENSIONS) { // ensure space to the right is not out of bounds
-//			options[4] = grid[location[0]][location[1]+1].getType();
-//		}
-//		return options;
-//	}
-	
 	public int[] getRoomLocation(Room room) {
 		int[] location = new int[2];
 		boolean byDoor, inRoom, taken;
@@ -134,7 +114,7 @@ public class GameBoard {
 	        	byDoor = grid[i+1][j].getType()==2 || grid[i-1][j].getType()==2 || grid[i][j+1].getType()==2 || grid[i][j-1].getType()==2;
 	        	taken = grid[i][j].getHasPawn();
 	        	
-	        	if (grid[i][j].getNumber()==room.ordinal()+1 && inRoom && byDoor && !taken) {
+	        	if (grid[i][j].getNumber()==room.ordinal()+1 && inRoom && !byDoor && !taken) {
 	                // if in room adjacent to doorway
 	            	location[0] = i;
 	                location[1] = j;
@@ -142,38 +122,49 @@ public class GameBoard {
 	            }
 	        }
 		}
-		return location; // will return first grid square if no door found
+		return location; // will return first grid square room slot found
 	}
 	
 	public Slot getSlot(int[] location) {
 		return grid[location[0]][location[1]];
 	}
 	
-	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection) {
+	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns) {
 		SuspectPawn sp;
-		int playerIndex;
+		int pawnId;
+		int legendLength;
 		Suspect suspectName;
+		Weapon weaponName;
 		
 		for (int i = 0; i < DIMENSIONS; i++) {
 	        for (int j = 0; j < DIMENSIONS; j++) {
-	        	int id = 1;
-	        	for(Player p: playerCollection) {
-	        		sp = p.getSuspectPawn();
-	        		// if a player is at this grid square, print their id or @ symbol
-	        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
-	        			if(id==currentPlayerId+1) {
-	        				System.out.print("[@] "); // '@' = current player's pawn
-	        				// break to ensure current player is always shown over other players in same grid square
-	        			}
-	        			else {
-	        				System.out.print("[" + id + "] "); // id number = this player's pawn
-	        			}
-	        			break;
-	        		}
-	        		id++;
+	        	if(grid[i][j].getHasPawn()) {
+		        	pawnId = 1;
+		        	for(Player p: playerCollection) {
+		        		sp = p.getSuspectPawn();
+		        		// if a player is at this grid square, print their id or @ symbol
+		        		if(i==sp.getLocation()[0] && j==sp.getLocation()[1]) {
+		        			if(pawnId==currentPlayerId+1) {
+		        				System.out.print("[@] "); // '@' = current player's pawn
+		        			}
+		        			else {
+		        				System.out.print("[" + pawnId + "] "); // pawnId number = this player's pawn
+		        			}
+		        			break;
+		        		}
+		        		pawnId++;
+		        	}
+		        	
+		        	pawnId = 1;
+		        	for(WeaponPawn wp : weaponPawns) {
+		        		if(i==wp.getLocation()[0] && j==wp.getLocation()[1]) {
+		        			System.out.print("(" + pawnId + ") "); // pawnId number = this weaponPawn
+		        			break;
+		        		}
+		        		pawnId++;
+		        	}
 	        	}
-	        	if(id<=playerCollection.size()) {
-	        	}
+	        	
 	        	else if(grid[i][j].getType()==1) {
 	        		System.out.printf(" '  "); // corridor
 	        	}
@@ -187,19 +178,29 @@ public class GameBoard {
 					System.out.printf(" X  "); // out of bounds
 				}
 	        }
+	        
 	        // print a legend of room names
 	        if(i<Room.values().length) {
 	        	System.out.print("\t" + (i+1) + " = " + Room.values()[i]);
 	        }
-	        
-	        if(i>Room.values().length && i<=(Room.values().length+Suspect.values().length)) {
-	        	playerIndex = i-Room.values().length-1;
-	        	suspectName = playerCollection.get(playerIndex).getSuspectPawn().getName();
-	        	System.out.print("\t[" + (playerIndex+1) + "] = " + suspectName);
+	        // then add suspect pawns
+	        legendLength = Room.values().length+1;
+	        if(i>=legendLength && i<legendLength+Suspect.values().length) {
+	        	pawnId = i-legendLength;
+	        	suspectName = playerCollection.get(pawnId).getSuspectPawn().getName();
+	        	System.out.print("\t[" + (pawnId+1) + "] = " + suspectName);
 	        }
+	        // then add weapon pawns
+	        legendLength = Room.values().length+Suspect.values().length+2;
+	        if(i>=legendLength && i<legendLength+Weapon.values().length) {
+	        	pawnId = i-legendLength;
+	        	weaponName = weaponPawns.get(pawnId).getName();
+	        	System.out.print("\t(" + (pawnId+1) + ") = " + weaponName);
+	        }
+	        
 	        System.out.print("\n\n");
 		}
-		System.out.println("[] = pawn location, ' = corridor, room number = room, # = doorway\n");
+		System.out.println("[] = suspect pawn, () = weapon pawn, ' = corridor, # = doorway\n");
 	}
 	
 	public int getDimensions() {
