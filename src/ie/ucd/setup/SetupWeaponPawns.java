@@ -10,12 +10,9 @@ import ie.ucd.items.WeaponPawn;
 
 public class SetupWeaponPawns extends Setup{
 
-	public SetupWeaponPawns() {
-		// TODO Auto-generated constructor stub
-	}
 	
-	/**
-	 * @param gameBoard
+	/**Sets up Gameboard with given .csv file
+	 * @param
 	 * @return
 	 * Collection of all Weapon pawns placed in random rooms on the gameboard
 	 */

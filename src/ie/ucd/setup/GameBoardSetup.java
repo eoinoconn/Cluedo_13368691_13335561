@@ -9,18 +9,20 @@ import java.util.Scanner;
 
 import ie.ucd.items.GameBoard;
 
-public class GameBoardSetup {
+public class GameBoardSetup extends Setup {
 
+	private List<List<String>> lines;
+	private int[][] grid;
+	Scanner inputStream;
+	
 	public GameBoardSetup() {
-		// TODO Auto-generated constructor stub
+	    lines = new ArrayList<>();
+	    grid = new int[25][25];
 	}
 
-	public GameBoard gameBoardSetup(String fileName){
+	public void gameBoardSetup(String fileName){
 		File file = new File(fileName);
-	    List<List<String>> lines = new ArrayList<>();
-	    Scanner inputStream;
-	    int[][] grid = new int[25][25];
-		
+
 		// Open file, scan grid into lines list
 	    try{
 	        inputStream = new Scanner(file);
@@ -48,7 +50,7 @@ public class GameBoardSetup {
 	        lineNo++;
 	    }
 		
-		return GameBoard.getInstance(grid);
+		gameBoard = GameBoard.getInstance(grid);
 	}
 	
 }

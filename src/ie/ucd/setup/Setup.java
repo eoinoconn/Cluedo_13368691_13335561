@@ -9,9 +9,9 @@ import ie.ucd.items.*;
 public abstract class Setup {
 
 	protected static Scanner sc;
-	protected static String fileName;
 	protected static ArrayList<Player> playerCollection;
-
+	protected static int numPlayers;
+	protected static GameBoard gameBoard;
 
 
 

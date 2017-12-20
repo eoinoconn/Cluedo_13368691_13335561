@@ -2,18 +2,17 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import ie.ucd.items.Card;
-import ie.ucd.items.GameBoard;
 import ie.ucd.items.Turn;
 import ie.ucd.items.WeaponPawn;
 
 public class GameSetup extends Setup{
 
+	private String fileName;
 	
 	public GameSetup(String fileName, Scanner sc) {
 		Setup.sc = sc;
-		Setup.fileName = fileName;
+		this.fileName = fileName;
 	}
 	
 	public Turn getTurn() {
@@ -25,11 +24,11 @@ public class GameSetup extends Setup{
 		
 		// Create gameBoard instance.
 		GameBoardSetup setupGameBoard = new GameBoardSetup();
-	    GameBoard gameBoard = setupGameBoard.gameBoardSetup(fileName);
+	    setupGameBoard.gameBoardSetup(fileName);
 	    
 		// Stores player instances
 	    PlayerSetup setupPlayers = new PlayerSetup();
-		playerCollection = setupPlayers.setupPlayers(gameBoard);
+		setupPlayers.setupPlayers(gameBoard);
 		
 		// Stores Weapon Pawns
 		SetupWeaponPawns pawnSetup = new SetupWeaponPawns();
@@ -37,7 +36,7 @@ public class GameSetup extends Setup{
 
 	    // deals cards to players and selects murderer cards
 		CardsSetup setupCards = new CardsSetup();
-		ArrayList<Card> murdererCards = setupCards.dealCards();
+		ArrayList<Card> murdererCards = setupCards.setupCards();
 		
 		return Turn.getInstance(playerCollection, weaponPawns, gameBoard, murdererCards);
 	}
