@@ -1,8 +1,19 @@
-package ie.ucd.items;
+package ie.ucd.gameRules;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import ie.ucd.items.Card;
+import ie.ucd.items.GameBoard;
+import ie.ucd.items.Notebook;
+import ie.ucd.items.Player;
+import ie.ucd.items.Room;
+import ie.ucd.items.Slot;
+import ie.ucd.items.Suspect;
+import ie.ucd.items.SuspectPawn;
+import ie.ucd.items.Weapon;
+import ie.ucd.items.WeaponPawn;
 
 public class Turn {
 

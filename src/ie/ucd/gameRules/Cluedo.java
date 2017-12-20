@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameRules;
 
 import java.util.Scanner;
 
@@ -7,6 +7,11 @@ import ie.ucd.setup.GameSetup;
 public class Cluedo {
 	public static void main(String [] args) throws Exception {
 		
+		new Cluedo();
+		
+	}
+	
+	public Cluedo() {
 		String fileName = "GameBoard1.csv";	
 
 		// Scanner instance for reading user input
@@ -23,6 +28,5 @@ public class Cluedo {
 		
 		// close Scanner
 		sc.close();
-		
 	}
 }

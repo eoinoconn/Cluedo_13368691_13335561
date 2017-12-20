@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="ie.ucd.setup.GameBoardSetup" project="Cluedo" 
     file="/Cluedo/src/ie/ucd/setup/GameBoardSetup.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="925" y="239"/>    
+    <position height="-1" width="-1" x="297" y="490"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="ie.ucd.setup.GameSetup" project="Cluedo" 
     file="/Cluedo/src/ie/ucd/setup/GameSetup.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="216" y="443"/>    
+    <position height="-1" width="-1" x="147" y="275"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="ie.ucd.setup.PlayerSetup" project="Cluedo" 
     file="/Cluedo/src/ie/ucd/setup/PlayerSetup.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="494" y="441"/>    
+    <position height="-1" width="-1" x="609" y="569"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="ie.ucd.setup.SetupWeaponPawns" project="Cluedo" 
     file="/Cluedo/src/ie/ucd/setup/SetupWeaponPawns.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="302" y="653"/>    
+    <position height="-1" width="-1" x="364" y="663"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -56,7 +56,7 @@
     </display>  
   </class>  
   <generalization id="7">    
-    <end type="SOURCE" refId="1"/>    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
   <generalization id="8">    
@@ -64,15 +64,15 @@
     <end type="TARGET" refId="4"/>  
   </generalization>  
   <generalization id="9">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <generalization id="10">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
   <generalization id="11">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

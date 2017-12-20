@@ -2,8 +2,9 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import ie.ucd.gameRules.Turn;
 import ie.ucd.items.Card;
-import ie.ucd.items.Turn;
 
 public class GameSetup extends Setup{
 
