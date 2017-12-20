@@ -2,8 +2,6 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
-
 import ie.ucd.items.GameBoard;
 import ie.ucd.items.Player;
 import ie.ucd.items.Room;
@@ -13,7 +11,7 @@ public class PlayerSetup extends Setup{
 
 
 
-	public ArrayList<Player> setupPlayers(GameBoard gameBoard, Scanner sc){
+	public ArrayList<Player> setupPlayers(GameBoard gameBoard){
 		
 		ArrayList<Suspect> suspectCollection = this.setupSuspectCollection();
 		ArrayList<Room> roomCollection = this.setupRoomCollection();
