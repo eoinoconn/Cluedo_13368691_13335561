@@ -1,24 +1,10 @@
 package ie.ucd.setup;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
-import ie.ucd.items.Card;
-import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
-import ie.ucd.items.Room;
-import ie.ucd.items.RoomCard;
-import ie.ucd.items.Suspect;
-import ie.ucd.items.SuspectCard;
-import ie.ucd.items.Turn;
-import ie.ucd.items.Weapon;
-import ie.ucd.items.WeaponCard;
-import ie.ucd.items.WeaponPawn;
+import ie.ucd.items.*;
 
 import java.util.Random;
 
@@ -45,11 +31,9 @@ public class Setup {
 				
 		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
 		
-		// Call setupGrid to create grid
-		int[][] grid = this.setupGrid(fileName);
-		
 		// Create gameBoard instance.
-	    GameBoard gameBoard = GameBoard.getInstance(grid);
+		GameBoardSetup setupGameBoard = new GameBoardSetup();
+	    GameBoard gameBoard = setupGameBoard.gameBoardSetup(fileName);
 	    
 		// Stores player instances
 	    PlayerSetup setupPlayers = new PlayerSetup();
@@ -66,41 +50,7 @@ public class Setup {
 		
 	}
 	
-	public int[][] setupGrid(String fileName){
-		File file = new File(fileName);
-	    List<List<String>> lines = new ArrayList<>();
-	    Scanner inputStream;
-	    int[][] grid = new int[25][25];
-		
-		// Open file, scan grid into lines list
-	    try{
-	        inputStream = new Scanner(file);
-	        while(inputStream.hasNext()){
-	        
-	        	String line = inputStream.next();
-	            String[] values = line.split(",");
-	            // this adds the currently parsed line to the 2-dimensional string array
-	            lines.add(Arrays.asList(values));
-	        }
-	        inputStream.close();
-	    }catch (FileNotFoundException e) {
-	            e.printStackTrace();
-	    }
 	
-	    // convert our grid of strings representing location values into 
-	    // grid of integers 
-	    int lineNo = 0;
-	    for(List<String> line: lines) {
-	        int columnNo = 0;
-	        for (String value: line) {
-	        	grid[lineNo][columnNo] = Integer.parseInt(value);
-	            columnNo++;
-	        }
-	        lineNo++;
-	    }
-		
-		return grid;
-	}
 	
 	private ArrayList<Card> setupCardDeck(){
 		ArrayList<Card> cardDeck = new ArrayList<Card>();
