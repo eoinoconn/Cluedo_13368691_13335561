@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import ie.ucd.items.Card;
 import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
 import ie.ucd.items.Turn;
 import ie.ucd.items.WeaponPawn;
 
@@ -30,14 +29,15 @@ public class GameSetup extends Setup{
 	    
 		// Stores player instances
 	    PlayerSetup setupPlayers = new PlayerSetup();
-		ArrayList<Player> playerCollection = setupPlayers.setupPlayers(gameBoard);
+		playerCollection = setupPlayers.setupPlayers(gameBoard);
 		
 		// Stores Weapon Pawns
 		SetupWeaponPawns pawnSetup = new SetupWeaponPawns();
 		ArrayList<WeaponPawn> weaponPawns = pawnSetup.setupWeaponPawns(gameBoard);
 
 	    // deals cards to players and selects murderer cards
-		ArrayList<Card> murdererCards = this.dealCards(playerCollection);
+		CardsSetup setupCards = new CardsSetup();
+		ArrayList<Card> murdererCards = setupCards.dealCards();
 		
 		return Turn.getInstance(playerCollection, weaponPawns, gameBoard, murdererCards);
 	}
