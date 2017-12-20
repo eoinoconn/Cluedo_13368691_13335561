@@ -12,6 +12,7 @@ public abstract class Setup {
 	protected static ArrayList<Player> playerCollection;
 	protected static int numPlayers;
 	protected static GameBoard gameBoard;
+	protected static ArrayList<WeaponPawn> weaponPawns;
 
 
 

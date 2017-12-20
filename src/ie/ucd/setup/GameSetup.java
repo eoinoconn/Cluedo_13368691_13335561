@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import ie.ucd.items.Card;
 import ie.ucd.items.Turn;
-import ie.ucd.items.WeaponPawn;
 
 public class GameSetup extends Setup{
 
@@ -28,11 +27,11 @@ public class GameSetup extends Setup{
 	    
 		// Stores player instances
 	    PlayerSetup setupPlayers = new PlayerSetup();
-		setupPlayers.setupPlayers(gameBoard);
+		setupPlayers.setupPlayers();
 		
 		// Stores Weapon Pawns
 		SetupWeaponPawns pawnSetup = new SetupWeaponPawns();
-		ArrayList<WeaponPawn> weaponPawns = pawnSetup.setupWeaponPawns(gameBoard);
+		pawnSetup.setupWeaponPawns();
 
 	    // deals cards to players and selects murderer cards
 		CardsSetup setupCards = new CardsSetup();

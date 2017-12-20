@@ -30,7 +30,7 @@ public class CardsSetup extends Setup{
 		return murdererCards;
 	}
 	
-	public void dealCards() {
+	private void dealCards() {
 		
 		// shuffle cards
 		Collections.shuffle(cardDeck);

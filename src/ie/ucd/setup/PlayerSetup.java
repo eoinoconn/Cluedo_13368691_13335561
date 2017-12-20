@@ -2,7 +2,6 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import ie.ucd.items.GameBoard;
 import ie.ucd.items.Player;
 import ie.ucd.items.Room;
 import ie.ucd.items.Suspect;
@@ -23,7 +22,7 @@ public class PlayerSetup extends Setup{
 	}
 	
 	
-	public ArrayList<Player> setupPlayers(GameBoard gameBoard){
+	public void setupPlayers(){
 		
 
 		Collections.shuffle(roomCollection);
@@ -60,7 +59,6 @@ public class PlayerSetup extends Setup{
 		// Fill the rest of the collection with inactive players
 		inactivePlayers();
 		
-		return playerCollection;
 	}
 	
 	private void asWho() {

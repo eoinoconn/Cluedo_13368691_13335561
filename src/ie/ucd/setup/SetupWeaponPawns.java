@@ -2,8 +2,6 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import ie.ucd.items.GameBoard;
 import ie.ucd.items.Room;
 import ie.ucd.items.Weapon;
 import ie.ucd.items.WeaponPawn;
@@ -16,7 +14,7 @@ public class SetupWeaponPawns extends Setup{
 	 * @return
 	 * Collection of all Weapon pawns placed in random rooms on the gameboard
 	 */
-	public ArrayList<WeaponPawn> setupWeaponPawns(GameBoard gameBoard) {
+	public void setupWeaponPawns() {
 		
 		ArrayList<WeaponPawn> pawnCollection = new ArrayList<WeaponPawn>();
 		ArrayList<Room> rooms = setupRoomCollection();
@@ -32,7 +30,7 @@ public class SetupWeaponPawns extends Setup{
 			pawnCollection.add(weaponPawn);
 			roomIndex++;
 		}
-		return pawnCollection;
+		weaponPawns = pawnCollection;
 	}
 	
 	
