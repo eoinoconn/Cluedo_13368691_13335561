@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.setup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +7,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
+import ie.ucd.items.Card;
+import ie.ucd.items.GameBoard;
+import ie.ucd.items.Player;
+import ie.ucd.items.Room;
+import ie.ucd.items.RoomCard;
+import ie.ucd.items.Suspect;
+import ie.ucd.items.SuspectCard;
+import ie.ucd.items.Turn;
+import ie.ucd.items.Weapon;
+import ie.ucd.items.WeaponCard;
+import ie.ucd.items.WeaponPawn;
+
 import java.util.Random;
 
 
@@ -251,7 +264,7 @@ public class Setup {
 	}
 
 
-	private ArrayList<Room> setupRoomCollection() {
+	protected ArrayList<Room> setupRoomCollection() {
 
 		ArrayList<Room> roomCollection = new ArrayList<Room>();
 
@@ -263,7 +276,7 @@ public class Setup {
 	}
 
 
-	private ArrayList<Suspect> setupSuspectCollection() {
+	protected ArrayList<Suspect> setupSuspectCollection() {
 		
 		ArrayList<Suspect> suspectCollection = new ArrayList<Suspect>();
 		

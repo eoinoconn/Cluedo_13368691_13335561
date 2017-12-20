@@ -2,6 +2,8 @@ package ie.ucd.items;
 
 import java.util.Scanner;
 
+import ie.ucd.setup.Setup;
+
 public class Cluedo {
 	public static void main(String [] args) throws Exception {
 		
