@@ -2,7 +2,7 @@ package ie.ucd.items;
 
 import java.util.Scanner;
 
-import ie.ucd.setup.Setup;
+import ie.ucd.setup.GameSetup;
 
 public class Cluedo {
 	public static void main(String [] args) throws Exception {
@@ -13,10 +13,10 @@ public class Cluedo {
 	    Scanner sc = new Scanner(System.in);
 		
 		// Initialise Setup instance
-		Setup setup = Setup.getInstance();
+		GameSetup setup = new GameSetup(fileName, sc);
 		
 		// setup.startGame returns Turn object
-		Turn turn = setup.setupGame(fileName, sc);
+		Turn turn = setup.getTurn();
 		
 		// Begin 
 		turn.playGame(sc);

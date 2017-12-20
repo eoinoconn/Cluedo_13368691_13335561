@@ -12,42 +12,13 @@ import java.util.Random;
 public class Setup {
 
 	protected static Scanner sc;
+	protected static String fileName;
 	private static Setup uniqueInstance = null;
 	
 	public static Setup getInstance() {
 		if(uniqueInstance == null)
 			uniqueInstance = new Setup();
 		return uniqueInstance;
-	}
-
-	
-	public Turn setupGame(String fileName, Scanner scanner) {
-		
-		Setup.sc = scanner;
-		
-		// push text to bottom of command line
-		for(int i = 0; i < 999; i++) 
-			System.out.println("\n");
-				
-		System.out.println("Welcome to Cluedo!! By Eoin and Andy.");
-		
-		// Create gameBoard instance.
-		GameBoardSetup setupGameBoard = new GameBoardSetup();
-	    GameBoard gameBoard = setupGameBoard.gameBoardSetup(fileName);
-	    
-		// Stores player instances
-	    PlayerSetup setupPlayers = new PlayerSetup();
-		ArrayList<Player> playerCollection = setupPlayers.setupPlayers(gameBoard);
-		
-		// Stores Weapon Pawns
-		SetupWeaponPawns pawnSetup = new SetupWeaponPawns();
-		ArrayList<WeaponPawn> weaponPawns = pawnSetup.setupWeaponPawns(gameBoard);
-
-	    // deals cards to players and selects murderer cards
-		ArrayList<Card> murdererCards = this.dealCards(playerCollection);
-		
-		return  Turn.getInstance(playerCollection, weaponPawns, gameBoard, murdererCards);
-		
 	}
 	
 	
