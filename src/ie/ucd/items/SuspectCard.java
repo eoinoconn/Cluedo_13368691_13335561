@@ -11,4 +11,8 @@ public class SuspectCard extends Card {
 	public Suspect getName() {
 		return name;
 	}
+	
+	public String toString() {
+		return name.toString();
+	}
 }

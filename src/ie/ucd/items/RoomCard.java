@@ -12,5 +12,8 @@ public class RoomCard extends Card {
 		return name;
 	}
 	
+	public String toString() {
+		return name.toString();
+	}
 	
 }

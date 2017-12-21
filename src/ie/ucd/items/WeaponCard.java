@@ -11,4 +11,8 @@ public class WeaponCard extends Card {
 	public Weapon getName() {
 		return name;
 	}
+	
+	public String toString() {
+		return name.toString();
+	}
 }
