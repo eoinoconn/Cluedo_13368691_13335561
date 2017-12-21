@@ -14,12 +14,6 @@ public class Hand {
 		hand.add(card);
 	}
 	
-	public void lookAtHand() {
-		for(Card card: hand) {
-			System.out.print(card.toString() + "\n");
-		}
-	}
-
 	public Card checkCards(Room room, Suspect suspect, Weapon weapon) {
 		// iterate through each card in hand
 		for(int i = 0; i < hand.size(); i++) {
@@ -33,5 +27,13 @@ public class Hand {
 			}
 		}
 		return null;	// Did not find card, do not refute hypothesis
+	}
+	
+	public String toString() {
+		String str = "";
+		for(Card card : hand) {
+			str += card.toString() + "\n";
+		}
+		return str;
 	}
 }

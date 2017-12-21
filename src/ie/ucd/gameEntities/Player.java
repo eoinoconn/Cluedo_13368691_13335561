@@ -61,8 +61,8 @@ public class Player {
 		
 	}
 	
-	public void lookAtHand() {
-		hand.lookAtHand();
+	public String lookAtHand() {
+		return hand.toString();
 	}
 	
 	public void giveCard(Card card) {
