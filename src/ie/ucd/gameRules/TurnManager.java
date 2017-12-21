@@ -3,10 +3,10 @@ package ie.ucd.gameRules;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.items.Card;
-import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
-import ie.ucd.items.WeaponPawn;
+import ie.ucd.gameEntities.Card;
+import ie.ucd.gameEntities.GameBoard;
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class TurnManager {
 

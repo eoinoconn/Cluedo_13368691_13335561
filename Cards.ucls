@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
-  <enumeration id="1" language="java" name="ie.ucd.items.Room" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/Room.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="1" language="java" name="ie.ucd.gameEntities.Room" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/Room.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="191" y="298"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="2" language="java" name="ie.ucd.items.RoomCard" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/RoomCard.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="ie.ucd.gameEntities.RoomCard" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/RoomCard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="428" y="299"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="ie.ucd.items.Weapon" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="3" language="java" name="ie.ucd.gameEntities.Weapon" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="817" y="261"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="ie.ucd.items.WeaponCard" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/WeaponCard.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="ie.ucd.gameEntities.WeaponCard" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/WeaponCard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="609" y="261"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="ie.ucd.items.Card" project="Cluedo" file="/Cluedo/src/ie/ucd/items/Card.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="ie.ucd.gameEntities.Card" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/Card.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="540" y="88"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="6" language="java" name="ie.ucd.items.Suspect" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/Suspect.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="6" language="java" name="ie.ucd.gameEntities.Suspect" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/Suspect.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="665" y="452"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="7" language="java" name="ie.ucd.items.SuspectCard" project="Cluedo" 
-    file="/Cluedo/src/ie/ucd/items/SuspectCard.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="ie.ucd.gameEntities.SuspectCard" project="Cluedo" 
+    file="/Cluedo/src/ie/ucd/gameEntities/SuspectCard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="476" y="451"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -65,41 +65,53 @@
     </display>  
   </class>  
   <association id="8">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="9" name="name"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="11">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="12">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="13">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="14" name="name"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
+      <attribute id="9" name="name">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
+  <association id="11">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="17" name="name"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="12" name="name">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="19">    
+  <generalization id="14">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="name">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

@@ -2,9 +2,10 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import ie.ucd.items.Room;
-import ie.ucd.items.Weapon;
-import ie.ucd.items.WeaponPawn;
+
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.Weapon;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class SetupWeaponPawns extends Setup{
 

@@ -3,8 +3,8 @@ package ie.ucd.setup;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import ie.ucd.gameEntities.Card;
 import ie.ucd.gameRules.GameManager;
-import ie.ucd.items.Card;
 
 public class GameSetup extends Setup{
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import ie.ucd.items.GameBoard;
+import ie.ucd.gameEntities.GameBoard;
 
 public class GameBoardSetup extends Setup {
 

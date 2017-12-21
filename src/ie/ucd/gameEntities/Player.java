@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameEntities;
 
 import java.util.Random;
 

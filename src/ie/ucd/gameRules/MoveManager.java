@@ -3,11 +3,11 @@ package ie.ucd.gameRules;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
-import ie.ucd.items.Slot;
-import ie.ucd.items.SuspectPawn;
-import ie.ucd.items.WeaponPawn;
+import ie.ucd.gameEntities.GameBoard;
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.Slot;
+import ie.ucd.gameEntities.SuspectPawn;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class MoveManager{
 	

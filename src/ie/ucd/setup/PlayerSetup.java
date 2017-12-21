@@ -2,9 +2,10 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import ie.ucd.items.Player;
-import ie.ucd.items.Room;
-import ie.ucd.items.Suspect;
+
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.Suspect;
 
 public class PlayerSetup extends Setup{
 
