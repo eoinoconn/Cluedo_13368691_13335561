@@ -1,6 +1,5 @@
 package ie.ucd.items;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Player {
@@ -8,7 +7,7 @@ public class Player {
 	private static int playerCounter = 0;
 	private SuspectPawn suspectPawn;
 	private Notebook notebook;
-	private ArrayList<Card> cardHand;
+	private Hand hand;
 	private int playerNumber;
 	private boolean hypMade;
 	Random rand = new Random();
@@ -18,7 +17,7 @@ public class Player {
 	public Player(GameBoard gameBoard, int[] location, Suspect name, boolean active) {
 		this.suspectPawn = new SuspectPawn(gameBoard, location, name); //place pawn with specified name in start location
 		this.notebook = new Notebook();
-		this.cardHand = new ArrayList<Card>();
+		this.hand = new Hand();
 		this.playerNumber = ++playerCounter;
 		numMoves = 0;
 		this.active = active;
@@ -58,22 +57,16 @@ public class Player {
 	
 	public Card checkCards(Room room, Suspect suspect, Weapon weapon) {
 		
-		// iterate through each card in hand
-		for(int i = 0; i < cardHand.size(); i++) {
-			Card currentCard = cardHand.get(i);
-			
-			// Check if and of the hypothesis statement match players cards
-			if((currentCard instanceof RoomCard && ((RoomCard) currentCard).getName() == room) ||
-				(currentCard instanceof WeaponCard && ((WeaponCard) currentCard).getName() == weapon) ||
-				(currentCard instanceof SuspectCard && ((SuspectCard) currentCard).getName() == suspect)) {
-				return currentCard;	// Found card, refuting hypothesis
-			}
-		}
-		return null;	// Did not find card, do not refute hypothesis
+		return hand.checkCards(room, suspect, weapon);
+		
+	}
+	
+	public void lookAtHand() {
+		hand.lookAtHand();
 	}
 	
 	public void giveCard(Card card) {
-		cardHand.add(card);
+		hand.addCard(card);
 	}
 	
 	public int rollDice() {

@@ -31,6 +31,8 @@ public class AccusationManager {
 		this.sc = sc;
 		makeAccusation();
 	}
+	
+	
 	public void makeAccusation() {
 		
 		
