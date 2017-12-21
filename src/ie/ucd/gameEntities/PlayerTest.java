@@ -16,7 +16,7 @@ class PlayerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		player = new Player(new Suspect);
+		//player = new Player(new Suspect);
 	}
 
 	@Test

@@ -4,8 +4,8 @@ public class WeaponPawn extends Pawn {
 
 	private Weapon name;
 	
-	public WeaponPawn(GameBoard gameBoard, int[] location, Weapon name) {
-		this.setLocation(gameBoard, location[0], location[1]);
+	public WeaponPawn(int[] location, Weapon name) {
+		this.setLocation(location[0], location[1]);
 		this.name = name;
 	}
 	

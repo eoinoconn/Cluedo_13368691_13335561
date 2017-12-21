@@ -8,11 +8,9 @@ public abstract class Pawn {
 		return location;
 	}
 	
-	public void setLocation(GameBoard gameBoard, int rlocation, int clocation) {
-		gameBoard.getSlot(location).setHasPawn(false);
+	public void setLocation(int rlocation, int clocation) {
 		location[0] = rlocation;
 		location[1] = clocation;
-		gameBoard.getSlot(location).setHasPawn(true);
 	}
 	
 }

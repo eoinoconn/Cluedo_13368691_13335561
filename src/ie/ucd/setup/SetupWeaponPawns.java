@@ -27,7 +27,8 @@ public class SetupWeaponPawns extends Setup{
 		for(Weapon wp : Weapon.values()) 
 		{
 			location = gameBoard.getRoomLocation(rooms.get(roomIndex));
-			weaponPawn = new WeaponPawn(gameBoard, location, wp);
+			weaponPawn = new WeaponPawn(location, wp);
+			gameBoard.getSlot(location).setHasPawn(true);
 			pawnCollection.add(weaponPawn);
 			roomIndex++;
 		}

@@ -109,11 +109,11 @@ switch(direction) {
 			
 			if(inCorner[0]) { // on top row
 				if(inCorner[2]) { // in top left corner
-					suspectPawn.setLocation(gameBoard, dim-1, dim-1);
+					gameBoard.changePawnLocation(suspectPawn, dim-1, dim-1);
 					return 0; // do not use up a move to move in secret passage
 				}
 				else if(inCorner[3]) { // in top right corner
-					suspectPawn.setLocation(gameBoard, dim-1, 0);
+					gameBoard.changePawnLocation(suspectPawn, dim-1, 0);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
@@ -123,11 +123,11 @@ switch(direction) {
 			
 			if(inCorner[1]) { // on bottom row
 				if(inCorner[2]) { // in bottom left corner
-					suspectPawn.setLocation(gameBoard, 0, dim-1);
+					gameBoard.changePawnLocation(suspectPawn, 0, dim-1);
 					return 0; // do not use up a move to move in secret passage
 				}
 				else if(inCorner[3]) { // in bottom right corner
-					suspectPawn.setLocation(gameBoard, 0, 0);
+					gameBoard.changePawnLocation(suspectPawn, 0, 0);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
@@ -137,11 +137,11 @@ switch(direction) {
 			
 			if(inCorner[2]) { // on left wall
 				if(inCorner[0]) { // in top left corner
-					suspectPawn.setLocation(gameBoard, dim-1, dim-1);
+					gameBoard.changePawnLocation(suspectPawn, dim-1, dim-1);
 					return 0; // do not use up a move to move in secret passage
 				}
 				else if(inCorner[1]) { // in bottom left corner
-					suspectPawn.setLocation(gameBoard, 0, dim-1);
+					gameBoard.changePawnLocation(suspectPawn, 0, dim-1);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
@@ -151,11 +151,11 @@ switch(direction) {
 			
 			if(inCorner[3]) { // on right wall
 				if(inCorner[0]) { // in top right corner
-					suspectPawn.setLocation(gameBoard, dim-1, 0);
+					gameBoard.changePawnLocation(suspectPawn, 1, 0);
 					return 0; // do not use up a move to move in secret passage
 				}
 				else if(inCorner[1]) { // in bottom right corner
-					suspectPawn.setLocation(gameBoard, 0, 0);
+					gameBoard.changePawnLocation(suspectPawn, 0, 0);
 					return 0; // do not use up a move to move in secret passage
 				}
 			}
@@ -173,13 +173,13 @@ switch(direction) {
 		
 		if(!atOuterWall[opt] && !atRoomWall && !byPawn) { // not moving off board or into wall or into other pawn 
 			if(direction=='u')
-				suspectPawn.setLocation(gameBoard, location[0]-1, location[1]);
+				gameBoard.changePawnLocation(suspectPawn, location[0]-1, location[1]);
 			else if(direction=='d')
-				suspectPawn.setLocation(gameBoard, location[0]+1, location[1]);
+				gameBoard.changePawnLocation(suspectPawn, location[0]+1, location[1]);
 			else if(direction=='l')
-				suspectPawn.setLocation(gameBoard, location[0], location[1]-1);
+				gameBoard.changePawnLocation(suspectPawn, location[0], location[1]-1);
 			else
-				suspectPawn.setLocation(gameBoard, location[0], location[1]+1);
+				gameBoard.changePawnLocation(suspectPawn, location[0], location[1]+1);
 			if(inCorridor) {
 				return 1; 		// return 1 if used up a move
 			}
@@ -188,5 +188,7 @@ switch(direction) {
 		return -1;				// return -1 if could not move
 
 	}
+	
+
 
 }
