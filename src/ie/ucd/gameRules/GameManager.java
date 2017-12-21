@@ -1,16 +1,30 @@
 package ie.ucd.gameRules;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import ie.ucd.items.Card;
+import ie.ucd.items.GameBoard;
+import ie.ucd.items.Player;
+import ie.ucd.items.WeaponPawn;
 
 public class GameManager {
 
-
+	private GameBoard gameBoard; 
+	private ArrayList<Card> murdererCards;
+	private ArrayList<Player> playerCollection; 
+	private Scanner sc;
+	private ArrayList<WeaponPawn> weaponPawns;
 	
-	public GameManager() {
-		
+	public GameManager(ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns, GameBoard gameBoard, ArrayList<Card> murdererCards, Scanner sc) {
+		this.gameBoard = gameBoard; 
+		this.murdererCards = murdererCards;
+		this.playerCollection = playerCollection;
+		this.sc = sc;
+		this.weaponPawns = weaponPawns;
 	}
 	
-	public void playGame(Scanner sc) {
+	public void playGame() {
 		
 		int numPlayers = playerCollection.size();
 		int turnsPlayed;
@@ -22,7 +36,7 @@ public class GameManager {
 			for(int playerIndex = 0; playerIndex < numPlayers; playerIndex++) {
 				
 				// start player turn
-				new TurnManager
+				new TurnManager(playerIndex, gameBoard, playerCollection, weaponPawns, murdererCards, sc);
 				
 			
 			}

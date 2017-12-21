@@ -21,10 +21,10 @@ public class Cluedo {
 		GameSetup setup = new GameSetup(fileName, sc);
 		
 		// setup.startGame returns Turn object
-		Turn turn = setup.getTurn();
+		GameManager gameManager = setup.getGameManager();
 		
 		// Begin 
-		turn.playGame(sc);
+		gameManager.playGame();
 		
 		// close Scanner
 		sc.close();

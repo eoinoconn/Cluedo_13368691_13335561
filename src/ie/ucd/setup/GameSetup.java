@@ -3,7 +3,7 @@ package ie.ucd.setup;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.gameRules.Turn;
+import ie.ucd.gameRules.GameManager;
 import ie.ucd.items.Card;
 
 public class GameSetup extends Setup{
@@ -15,7 +15,7 @@ public class GameSetup extends Setup{
 		this.fileName = fileName;
 	}
 	
-	public Turn getTurn() {
+	public GameManager getGameManager() {
 		// push text to bottom of command line
 		for(int i = 0; i < 999; i++) 
 			System.out.println("\n");
@@ -38,7 +38,7 @@ public class GameSetup extends Setup{
 		CardsSetup setupCards = new CardsSetup();
 		ArrayList<Card> murdererCards = setupCards.setupCards();
 		
-		return Turn.getInstance(playerCollection, weaponPawns, gameBoard, murdererCards);
+		return new GameManager(playerCollection, weaponPawns, gameBoard, murdererCards, sc);
 	}
 
 }

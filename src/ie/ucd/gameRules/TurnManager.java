@@ -3,6 +3,7 @@ package ie.ucd.gameRules;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import ie.ucd.items.Card;
 import ie.ucd.items.GameBoard;
 import ie.ucd.items.Player;
 import ie.ucd.items.WeaponPawn;
@@ -11,16 +12,19 @@ public class TurnManager {
 
 	private int playerIndex;
 	private GameBoard gameBoard; 
+	private ArrayList<Card> murdererCards;
 	private ArrayList<Player> playerCollection; 
 	private Scanner sc;
-	 ArrayList<WeaponPawn> weaponPawns;
+	private ArrayList<WeaponPawn> weaponPawns;
 	
-	public TurnManager(int playerIndex, GameBoard gameBoard, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns,Scanner sc) {
+	public TurnManager(int playerIndex, GameBoard gameBoard, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns, ArrayList<Card> murdererCards, Scanner sc) {
 		this.playerIndex = playerIndex;
 		this.gameBoard = gameBoard; 
+		this.murdererCards = murdererCards;
 		this.playerCollection = playerCollection;
 		this.sc = sc;
 		this.weaponPawns = weaponPawns;
+		startTurn();
 	}
 
 	
@@ -73,7 +77,7 @@ private void startTurn() {
 					break;
 					
 				case('A'):
-					this.makeAccusation(playerIndex, sc);
+					new AccusationManager(gameBoard, playerCollection, playerIndex, murdererCards, sc);
 					break;
 					
 				case('E'):
