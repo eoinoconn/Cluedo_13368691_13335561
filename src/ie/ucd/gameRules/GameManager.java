@@ -26,6 +26,8 @@ public class GameManager {
 	
 	public void playGame() {
 		
+		System.out.print(murdererCards);
+		
 		int numPlayers = playerCollection.size();
 		int turnsPlayed;
 		

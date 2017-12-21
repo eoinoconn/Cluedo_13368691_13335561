@@ -11,6 +11,7 @@ public class PlayerSetup extends Setup{
 	
 	private ArrayList<Room> roomCollection;
 	private ArrayList<Suspect> suspectCollection;
+	private int roomIndex;
 	
 	public PlayerSetup() {
 		numPlayers = 0;
@@ -19,6 +20,7 @@ public class PlayerSetup extends Setup{
 		suspectCollection = this.setupSuspectCollection();
 		roomCollection = this.setupRoomCollection();
 		Collections.shuffle(roomCollection);
+		roomIndex = 0;
 	}
 	
 	
@@ -66,7 +68,7 @@ public class PlayerSetup extends Setup{
 		
 		int[] location = new int[2];
 		int suspectIndex = 0;
-		int roomIndex = 0;
+		
 		
 		// Input player name and initialise player object
 		System.out.println("Hello player " + (numPlayers+1) + '.');
@@ -99,7 +101,7 @@ public class PlayerSetup extends Setup{
 	
 	private void inactivePlayers() {
 		int[] location = new int[2];
-		int roomIndex = 0;
+	// int roomIndex = 0;
 		
 		// Next create inactive players for each of the remaining suspects
 		for(Suspect sus: suspectCollection) {

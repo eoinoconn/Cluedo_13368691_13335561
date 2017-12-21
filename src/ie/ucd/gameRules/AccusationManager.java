@@ -22,7 +22,8 @@ public class AccusationManager {
 	private int playerIndex;
 	private Scanner sc;
 	
-	public AccusationManager(GameBoard gameBoard, ArrayList<Player> playerCollection, int playerIndex, ArrayList<Card> murdererCards, Scanner sc) {
+	public AccusationManager(Player currentPlayer, GameBoard gameBoard, ArrayList<Player> playerCollection, int playerIndex, ArrayList<Card> murdererCards, Scanner sc) {
+		this.currentPlayer = currentPlayer;
 		this.gameBoard = gameBoard;
 		this.playerCollection = playerCollection;
 		this.playerIndex = playerIndex;
@@ -51,7 +52,7 @@ public class AccusationManager {
 			
 			// get the current room and print it to the screen
 			int roomIndex = currentSlot.getNumber();
-			Room murderRoom = Room.values()[roomIndex];
+			Room murderRoom = Room.values()[roomIndex-1];
 			System.out.println("You are currently in the " + murderRoom.toString());
 			
 			// Take suspect input

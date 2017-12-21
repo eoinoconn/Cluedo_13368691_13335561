@@ -77,7 +77,7 @@ private void startTurn() {
 					break;
 					
 				case('A'):
-					new AccusationManager(gameBoard, playerCollection, playerIndex, murdererCards, sc);
+					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc);
 					break;
 					
 				case('E'):
