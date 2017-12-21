@@ -6,23 +6,24 @@ public class Notebook {
 
 	
 	private ArrayList<String> events;
-	private int size;
+
 	
 	public Notebook() {
 		events = new ArrayList<String>();
-		size = 0;
 	}
 	
 	public void addEvent(String event) {
 		events.add(event);
-		size++;
 	}
 	
 	/*
+	 * Method to return string of the last N notebook entries
+	 * @return
 	 * 
 	 */
 	public String lastNEntries(int N) {
 		String str = "";
+		int size = this.getSize();
 		if(N<=size) {
 			for (int i = (size - N); i < size; i++) {
 				str += (events.get(i) + "\n");
@@ -33,7 +34,7 @@ public class Notebook {
 	}
 	
 	public int getSize() {
-		return size;
+		return events.size();
 	}
 	
 }

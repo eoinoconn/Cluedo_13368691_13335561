@@ -24,6 +24,7 @@ class TestHand {
 	
 	@Test
 	public void testCheckCards() {
+		
 		// Test with all overlapping inputs
 		Card card = this.hand.checkCards(Room.values()[0],  Suspect.values()[0], Weapon.values()[0]);
 		assertEquals(true, (card != null));
