@@ -14,8 +14,8 @@ public class Player {
 	private int numMoves;
 	private boolean active;
 	
-	public Player(GameBoard gameBoard, int[] location, Suspect name, boolean active) {
-		this.suspectPawn = new SuspectPawn(gameBoard, location, name); //place pawn with specified name in start location
+	public Player(SuspectPawn suspectPawn, boolean active) {
+		this.suspectPawn = suspectPawn; //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.hand = new Hand();
 		this.playerNumber = ++playerCounter;
