@@ -62,7 +62,7 @@ private void startTurn() {
 				gameBoard.printBoard(playerIndex, playerCollection, weaponPawns);
 				
 				// Ask user which action they would like to perform
-				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "End your turn (E)");
+				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "Check Cards(C)\n" + "End your turn (E)");
 				String str = sc.nextLine();
 				switch(Character.toUpperCase(str.charAt(0))) {
 				case('M'):
@@ -75,7 +75,9 @@ private void startTurn() {
 
 					new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc);
 					break;
-					
+				case('C'):
+					currentPlayer.lookAtHand();
+					break;
 				case('A'):
 					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc);
 					break;
