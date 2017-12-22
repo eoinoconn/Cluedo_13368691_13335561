@@ -129,6 +129,16 @@ public class GameBoard {
 		return grid[location[0]][location[1]];
 	}
 	
+	public Slot getSlot(int x, int y) {
+		return grid[x][y];
+	}
+	
+	public void changePawnLocation(Pawn pawn, int x, int y) {
+		getSlot(x, y).setHasPawn(true);
+		getSlot(pawn.getLocation()).setHasPawn(false);
+		pawn.setLocation(x, y);
+	}
+	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns) {
 		SuspectPawn sp;
 		int pawnId;

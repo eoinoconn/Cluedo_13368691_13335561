@@ -60,7 +60,7 @@ public void makeHypothesis() {
 			for(Player p : playerCollection) {
 				sp = p.getSuspectPawn();
 				if(sp.getName()==murderer) {
-					sp.setLocation(gameBoard, location[0], location[1]);
+					gameBoard.changePawnLocation(sp, location[0], location[1]);
 				}
 			}
 			
@@ -69,7 +69,7 @@ public void makeHypothesis() {
 			// find the weapon pawn and move it to the murder room
 			for(WeaponPawn wp : weaponPawns) {
 				if(wp.getName()==murderWeapon) {
-					wp.setLocation(gameBoard, location[0], location[1]);
+					gameBoard.changePawnLocation(sp, location[0], location[1]);
 				}
 			}
 			

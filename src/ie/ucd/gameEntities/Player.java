@@ -1,3 +1,8 @@
+/*
+ * Player class
+ * Models players in the game
+ */
+
 package ie.ucd.gameEntities;
 
 import java.util.Random;
@@ -15,7 +20,7 @@ public class Player {
 	private boolean active;
 	
 	public Player(SuspectPawn suspectPawn, boolean active) {
-		this.suspectPawn = suspectPawn; //place pawn with specified name in start location
+		this.suspectPawn = suspectPawn;
 		this.notebook = new Notebook();
 		this.hand = new Hand();
 		this.playerNumber = ++playerCounter;
