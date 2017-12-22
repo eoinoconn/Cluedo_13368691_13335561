@@ -78,13 +78,19 @@ public class TurnManager {
 					break;
 				case('H'):
 
-					new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc);
+					HypothesisManager HM = new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc);
+					if(HM.checkEligible()) {
+						HM.makeHypothesis();
+						HM.checkHypothesis();
+					}
 					break;
 				case('C'):
 					System.out.print(currentPlayer.lookAtHand());
 					break;
 				case('A'):
-					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc);
+					AccusationManager AM = new AccusationManager(currentPlayer, playerCollection, playerIndex, murdererCards, sc);
+					AM.makeAccusation();
+					AM.checkAccusation();
 					break;
 					
 				case('E'):

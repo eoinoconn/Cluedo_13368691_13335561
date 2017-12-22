@@ -10,10 +10,21 @@ public class Hand {
 		this.hand = new ArrayList<Card>();
 	}
 	
+	/**
+	 * Add a card to this hand
+	 * @param card
+	 */
 	public void addCard(Card card) {
 		hand.add(card);
 	}
 	
+	/**
+	 * Check the hand for any instances of cards for this room, suspect and weapon
+	 * @param room
+	 * @param suspect
+	 * @param weapon
+	 * @return any card in the hand corresponding to one of these
+	 */
 	public Card checkCards(Room room, Suspect suspect, Weapon weapon) {
 		// iterate through each card in hand
 		for(int i = 0; i < hand.size(); i++) {
@@ -29,6 +40,9 @@ public class Hand {
 		return null;	// Did not find card, do not refute hypothesis
 	}
 	
+	/**
+	 * Converts the collection of cards in the hand to a string listing them
+	 */
 	public String toString() {
 		String str = "";
 		for(Card card : hand) {
