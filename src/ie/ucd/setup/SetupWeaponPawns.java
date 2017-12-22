@@ -35,6 +35,4 @@ public class SetupWeaponPawns extends Setup{
 		weaponPawns = pawnCollection;
 	}
 	
-	
-	
 }

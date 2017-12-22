@@ -25,10 +25,13 @@ public class PlayerSetup extends Setup{
 		roomIndex = 0;
 	}
 	
-	
+	/**
+	 * Ask user to create new players
+	 * 
+	 */
 	public void setupPlayers(){
 		
-
+		// shuffle the rooms to assign a random room to each player
 		Collections.shuffle(roomCollection);
 		
 		boolean anotherPlayer = true;
@@ -65,6 +68,10 @@ public class PlayerSetup extends Setup{
 		
 	}
 	
+	/** 
+	 * Assign each player a room and place them there
+	 */
+
 	private void asWho() {
 		
 		
@@ -99,9 +106,12 @@ public class PlayerSetup extends Setup{
 			roomIndex++;
 			
 		} else System.out.println("Invalid selection");
-		sc.nextLine();
+
 	}
 	
+	/**
+	 * Assign inactive players pawns and place them on the board but make them inactive
+	 */
 	private void inactivePlayers() {
 		int[] location = new int[2];
 	// int roomIndex = 0;
@@ -120,9 +130,13 @@ public class PlayerSetup extends Setup{
 		}
 	}
 	
+	/**
+	 * Prints the options remaining to play as
+	 */
 	private int chooseSuspect() {
 		//print out all the remaining suspects
 		int numSuspects = 0;
+		
 		for(Suspect sus: suspectCollection) {
 			System.out.println((numSuspects+1) + " " + sus.toString());
 			numSuspects++;
@@ -130,7 +144,21 @@ public class PlayerSetup extends Setup{
 		
 		// Take their choice of suspect
 		System.out.println("Enter a number between 1 & " + numSuspects + ":");
-		return sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		return someInt - 1;
 	}
 	
 }

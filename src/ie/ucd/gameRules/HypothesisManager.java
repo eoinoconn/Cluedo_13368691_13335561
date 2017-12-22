@@ -39,9 +39,8 @@ public class HypothesisManager {
 	 */
 	public void makeHypothesis() {
 		
-		currentPlayer = playerCollection.get(playerIndex);
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
-		currentSlot = gameBoard.getSlot(sp.getLocation());
+
 		int[] location;
 			
 		// get the current room and print it to the screen
@@ -154,7 +153,21 @@ public class HypothesisManager {
 			System.out.println(i + " " + sus.toString());
 			i++;
 		}
-		int suspectIndex = sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		int suspectIndex = someInt - 1;
 		return playerCollection.get(suspectIndex).getSuspectPawn().getName();
 	}
 	
@@ -171,7 +184,21 @@ public class HypothesisManager {
 			System.out.println(i + " " + weap.toString());
 			i++;
 		}
-		int weaponIndex = sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		int weaponIndex = someInt - 1;
 		return Weapon.values()[weaponIndex];
 	}
 	
@@ -180,6 +207,11 @@ public class HypothesisManager {
 	 * @return true if the current player is in a room and has not already made a hypothesis, else false
 	 */
 	public boolean checkEligible() {
+		
+		currentPlayer = playerCollection.get(playerIndex);
+		SuspectPawn sp = currentPlayer.getSuspectPawn();
+		currentSlot = gameBoard.getSlot(sp.getLocation());
+		
 		if(currentSlot.getType()!=3) {
 
 			System.out.println("You must be in a room to make a hypothesis!");

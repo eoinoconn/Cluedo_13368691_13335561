@@ -84,7 +84,9 @@ public class TurnManager {
 					}
 					break;
 				case('C'):
-					System.out.print(currentPlayer.lookAtHand());
+					System.out.println(currentPlayer.lookAtHand());
+					System.out.println("Press return to continue");
+					sc.nextLine();
 					break;
 				case('A'):
 					AccusationManager AM = new AccusationManager(currentPlayer, playerCollection, playerIndex, murdererCards, sc);

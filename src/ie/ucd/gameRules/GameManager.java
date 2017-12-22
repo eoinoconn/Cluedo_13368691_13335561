@@ -37,7 +37,8 @@ public class GameManager {
 	 */
 	public void playGame() {
 		
-		System.out.print(murdererCards);
+//		// for checking if accusation is working
+//		System.out.print(murdererCards);
 		
 		int numPlayers = playerCollection.size();
 		

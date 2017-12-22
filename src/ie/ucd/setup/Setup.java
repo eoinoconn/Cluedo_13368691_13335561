@@ -15,7 +15,10 @@ public abstract class Setup {
 	protected static ArrayList<WeaponPawn> weaponPawns;
 
 
-
+	/**
+	 * 
+	 * @return The collection of all rooms on the board
+	 */
 	protected ArrayList<Room> setupRoomCollection() {
 
 		ArrayList<Room> roomCollection = new ArrayList<Room>();
@@ -27,7 +30,10 @@ public abstract class Setup {
 		return roomCollection;
 	}
 
-
+	/**
+	 * 
+	 * @return The collection of all suspects in the game
+	 */
 	protected ArrayList<Suspect> setupSuspectCollection() {
 		
 		ArrayList<Suspect> suspectCollection = new ArrayList<Suspect>();

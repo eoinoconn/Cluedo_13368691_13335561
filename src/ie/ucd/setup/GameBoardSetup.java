@@ -20,6 +20,10 @@ public class GameBoardSetup extends Setup {
 	    grid = new int[25][25];
 	}
 
+	/**
+	 * Calls the singleton gameboard constructor after getting the board details from the file specified by filename
+	 * @param fileName 
+	 */
 	public void gameBoardSetup(String fileName){
 		File file = new File(fileName);
 

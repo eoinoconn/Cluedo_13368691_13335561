@@ -132,6 +132,7 @@ public class AccusationManager {
 			}
 			else {
 				System.out.println("Press return to continue\n");
+				
 				sc.nextLine();
 			}
 		}
@@ -150,7 +151,21 @@ public class AccusationManager {
 			System.out.println(i + " " + rm.toString());
 			i++;
 		}
-		int weaponIndex = sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		int weaponIndex = someInt - 1;
 		return Room.values()[weaponIndex];
 	}
 	
@@ -170,7 +185,21 @@ public class AccusationManager {
 			System.out.println(i + " " + sus.toString());
 			i++;
 		}
-		int suspectIndex = sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		int suspectIndex = someInt - 1;
 		return playerCollection.get(suspectIndex).getSuspectPawn().getName();
 	}
 	
@@ -187,7 +216,21 @@ public class AccusationManager {
 			System.out.println(i + " " + weap.toString());
 			i++;
 		}
-		int weaponIndex = sc.nextInt() - 1;
+		
+		String str;
+		int someInt = 0;
+		boolean isInt = false;
+		while(!isInt) {
+			str = sc.nextLine();
+			try {
+			    someInt = Integer.parseInt(str);
+			    isInt = true;
+			  } catch (NumberFormatException e) {
+				  System.out.println("\nThis is not a valid entry, try again");
+				  isInt = false;
+			  }
+		}
+		int weaponIndex = someInt - 1;
 		return Weapon.values()[weaponIndex];
 	}
 }

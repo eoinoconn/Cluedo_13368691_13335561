@@ -24,6 +24,11 @@ public class MoveManager{
 		this.currentPlayer = currentPlayer;
 	}
 	
+	/**
+	 * Loop until moves used up or user finished move mode
+	 * @param playerIndex
+	 * @param sc
+	 */
 	public void moveMode(int playerIndex, Scanner sc) {
 		
 		// Enter move-mode contained in while loop
@@ -86,6 +91,12 @@ public class MoveManager{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param direction
+	 * @param suspectPawn
+	 * @return
+	 */
 	private int makeMove(char direction, SuspectPawn suspectPawn) {
 		int[] location = suspectPawn.getLocation();
 		Slot thisSlot = gameBoard.getSlot(location);

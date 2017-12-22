@@ -15,6 +15,10 @@ public class GameSetup extends Setup{
 		this.fileName = fileName;
 	}
 	
+	/**
+	 * Created instances of each of the setup classes and sets up the game entities
+	 * @return The game manager class instance
+	 */
 	public GameManager getGameManager() {
 		// push text to bottom of command line
 		for(int i = 0; i < 999; i++) 
