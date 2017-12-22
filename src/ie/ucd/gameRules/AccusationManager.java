@@ -161,7 +161,7 @@ public class AccusationManager {
 	}
 	
 	/**
-	 * A method called by makeAccusation() method
+	 * 
 	 * @param sc
 	 * scanner to read in the user's choice
 	 * @return
@@ -181,7 +181,7 @@ public class AccusationManager {
 	}
 	
 	/**
-	 * A method called by makeAccusation() method
+	 * 
 	 * @param sc
 	 * scanner to read in the user's choice
 	 * @return
