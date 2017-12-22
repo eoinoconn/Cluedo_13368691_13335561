@@ -129,6 +129,13 @@ public void makeHypothesis() {
 		}
 	}
 
+	/**
+	 * 
+	 * @param sc
+	 * scanner to read in the user's choice
+	 * @return
+	 * the suspect being hypothesised
+	 */
 	private Suspect getSuspectChoice(Scanner sc) {
 		//print out all the remaining suspects and get take the players choices
 		int i = 1;
@@ -142,6 +149,13 @@ public void makeHypothesis() {
 		return playerCollection.get(suspectIndex).getSuspectPawn().getName();
 	}
 	
+	/**
+	 * 
+	 * @param sc
+	 * scanner to read in the user's choice
+	 * @return
+	 * the murder weapon being hypothesised
+	 */
 	private Weapon getMurderWeapon(Scanner sc) {
 		int i = 1;
 		for(Weapon weap: Weapon.values()) {

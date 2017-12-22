@@ -12,6 +12,7 @@ public class Cluedo {
 	}
 	
 	public Cluedo() {
+		// csv containing a modifiable grid representing the gameboard
 		String fileName = "GameBoard1.csv";	
 
 		// Scanner instance for reading user input
@@ -20,7 +21,7 @@ public class Cluedo {
 		// Initialise Setup instance
 		GameSetup setup = new GameSetup(fileName, sc);
 		
-		// setup.startGame returns Turn object
+		// setup.getGameManager returns gameManager object
 		GameManager gameManager = setup.getGameManager();
 		
 		// Begin 
