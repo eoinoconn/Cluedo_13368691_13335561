@@ -2,9 +2,11 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import ie.ucd.items.Player;
-import ie.ucd.items.Room;
-import ie.ucd.items.Suspect;
+
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.Suspect;
+import ie.ucd.gameEntities.SuspectPawn;
 
 public class PlayerSetup extends Setup{
 
@@ -86,7 +88,8 @@ public class PlayerSetup extends Setup{
 			location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
 			
 			// Create player with starting location and suspect type
-			playerCollection.add(new Player(gameBoard, location, suspectCollection.get(suspectIndex), true));
+			playerCollection.add(new Player(new SuspectPawn(location, suspectCollection.get(suspectIndex)), true));
+			gameBoard.getSlot(location).setHasPawn(true);
 			
 			// Now that that suspect is in the game we remove it from consideration for other players
 			suspectCollection.remove(suspectIndex);
@@ -109,7 +112,8 @@ public class PlayerSetup extends Setup{
 			location = gameBoard.getRoomLocation(roomCollection.get(roomIndex));
 			
 			// create an inactive player for each remaining suspect
-			playerCollection.add(new Player(gameBoard, location, sus, false));
+			playerCollection.add(new Player(new SuspectPawn(location, sus), false));
+			gameBoard.getSlot(location).setHasPawn(true);
 			
 			// switch to next room to place in
 			roomIndex++;

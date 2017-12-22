@@ -3,7 +3,7 @@ package ie.ucd.setup;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.items.*;
+import ie.ucd.gameEntities.*;
 
 
 public abstract class Setup {

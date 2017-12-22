@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameEntities;
 
 import java.util.Random;
 
@@ -14,8 +14,8 @@ public class Player {
 	private int numMoves;
 	private boolean active;
 	
-	public Player(GameBoard gameBoard, int[] location, Suspect name, boolean active) {
-		this.suspectPawn = new SuspectPawn(gameBoard, location, name); //place pawn with specified name in start location
+	public Player(SuspectPawn suspectPawn, boolean active) {
+		this.suspectPawn = suspectPawn; //place pawn with specified name in start location
 		this.notebook = new Notebook();
 		this.hand = new Hand();
 		this.playerNumber = ++playerCounter;
@@ -98,12 +98,12 @@ public class Player {
 		return hand.checkCards(room, suspect, weapon);
 		
 	}
-	
+
 	/**
 	 * print out what cards this player has to console
 	 */
-	public void lookAtHand() {
-		hand.lookAtHand();
+	public String lookAtHand() {
+		return hand.toString();
 	}
 	
 	/**

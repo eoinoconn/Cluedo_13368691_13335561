@@ -2,7 +2,7 @@ package ie.ucd.gameRules;
 
 import java.util.Scanner;
 
-import ie.ucd.items.Notebook;
+import ie.ucd.gameEntities.Notebook;
 
 public class NotebookManager {
 

@@ -3,15 +3,15 @@ package ie.ucd.gameRules;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.items.Card;
-import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
-import ie.ucd.items.Room;
-import ie.ucd.items.Slot;
-import ie.ucd.items.Suspect;
-import ie.ucd.items.SuspectPawn;
-import ie.ucd.items.Weapon;
-import ie.ucd.items.WeaponPawn;
+import ie.ucd.gameEntities.Card;
+import ie.ucd.gameEntities.GameBoard;
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.Slot;
+import ie.ucd.gameEntities.Suspect;
+import ie.ucd.gameEntities.SuspectPawn;
+import ie.ucd.gameEntities.Weapon;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class HypothesisManager {
 
@@ -60,7 +60,7 @@ public void makeHypothesis() {
 			for(Player p : playerCollection) {
 				sp = p.getSuspectPawn();
 				if(sp.getName()==murderer) {
-					sp.setLocation(gameBoard, location[0], location[1]);
+					gameBoard.changePawnLocation(sp, location[0], location[1]);
 				}
 			}
 			
@@ -69,7 +69,7 @@ public void makeHypothesis() {
 			// find the weapon pawn and move it to the murder room
 			for(WeaponPawn wp : weaponPawns) {
 				if(wp.getName()==murderWeapon) {
-					wp.setLocation(gameBoard, location[0], location[1]);
+					gameBoard.changePawnLocation(sp, location[0], location[1]);
 				}
 			}
 			

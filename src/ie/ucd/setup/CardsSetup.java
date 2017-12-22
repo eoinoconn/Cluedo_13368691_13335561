@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import ie.ucd.items.Card;
-import ie.ucd.items.Player;
-import ie.ucd.items.Room;
-import ie.ucd.items.RoomCard;
-import ie.ucd.items.Suspect;
-import ie.ucd.items.SuspectCard;
-import ie.ucd.items.Weapon;
-import ie.ucd.items.WeaponCard;
+import ie.ucd.gameEntities.Card;
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.RoomCard;
+import ie.ucd.gameEntities.Suspect;
+import ie.ucd.gameEntities.SuspectCard;
+import ie.ucd.gameEntities.Weapon;
+import ie.ucd.gameEntities.WeaponCard;
 
 public class CardsSetup extends Setup{
 

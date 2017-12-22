@@ -2,9 +2,10 @@ package ie.ucd.setup;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import ie.ucd.items.Room;
-import ie.ucd.items.Weapon;
-import ie.ucd.items.WeaponPawn;
+
+import ie.ucd.gameEntities.Room;
+import ie.ucd.gameEntities.Weapon;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class SetupWeaponPawns extends Setup{
 
@@ -26,7 +27,8 @@ public class SetupWeaponPawns extends Setup{
 		for(Weapon wp : Weapon.values()) 
 		{
 			location = gameBoard.getRoomLocation(rooms.get(roomIndex));
-			weaponPawn = new WeaponPawn(gameBoard, location, wp);
+			weaponPawn = new WeaponPawn(location, wp);
+			gameBoard.getSlot(location).setHasPawn(true);
 			pawnCollection.add(weaponPawn);
 			roomIndex++;
 		}

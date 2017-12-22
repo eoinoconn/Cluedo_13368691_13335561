@@ -3,10 +3,10 @@ package ie.ucd.gameRules;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.ucd.items.Card;
-import ie.ucd.items.GameBoard;
-import ie.ucd.items.Player;
-import ie.ucd.items.WeaponPawn;
+import ie.ucd.gameEntities.Card;
+import ie.ucd.gameEntities.GameBoard;
+import ie.ucd.gameEntities.Player;
+import ie.ucd.gameEntities.WeaponPawn;
 
 public class TurnManager {
 
@@ -67,7 +67,7 @@ public class TurnManager {
 				gameBoard.printBoard(playerIndex, playerCollection, weaponPawns);
 				
 				// Ask user which action they would like to perform
-				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "Check Cards(C)\n" + "End your turn (E)");
+				System.out.println("Would you like to:\n" + "Enter move mode (M)\n" + "Check your notebook (N)\n" + "Make a hypothesis (H)\n" + "Make an accusation (A)\n" + "Check Cards (C)\n" + "End your turn (E)");
 				String str = sc.nextLine();
 				switch(Character.toUpperCase(str.charAt(0))) {
 				case('M'):
@@ -81,7 +81,7 @@ public class TurnManager {
 					new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc);
 					break;
 				case('C'):
-					currentPlayer.lookAtHand();
+					System.out.print(currentPlayer.lookAtHand());
 					break;
 				case('A'):
 					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc);
