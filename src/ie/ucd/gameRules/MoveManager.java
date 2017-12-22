@@ -17,12 +17,11 @@ public class MoveManager{
 	protected Player currentPlayer;
 
 
-	public MoveManager(Player currentPlayer, GameBoard gameBoard, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns, int playerIndex, Scanner sc) {
+	public MoveManager(Player currentPlayer, GameBoard gameBoard, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns) {
 		this.gameBoard = gameBoard;
 		this.playerCollection = playerCollection;
 		this.weaponPawns = weaponPawns;
 		this.currentPlayer = currentPlayer;
-		moveMode(playerIndex, sc);
 	}
 	
 	public void moveMode(int playerIndex, Scanner sc) {

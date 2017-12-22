@@ -1,0 +1,10 @@
+Cluedo project
+Module: COMP41670 Software Engineering
+Students:	Eoin O'Connell - 13335561
+			Andrew Cullen - 13368691
+
+The programme is fully functional. The user provides input from the command line and a board interface is 
+displayed using ASCII characters on screen.
+
+First the players must choose their characters. Then when the game starts they roll a dice and are presented 
+with the gameboard and the main menu.

@@ -10,7 +10,6 @@ public class NotebookManager {
 	
 	public NotebookManager(Notebook nb, Scanner sc) {
 		this.nb = nb;
-		openNotebook(sc);
 	}
 
 	public void openNotebook(Scanner sc) {

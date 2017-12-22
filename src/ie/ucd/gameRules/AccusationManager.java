@@ -41,7 +41,6 @@ public class AccusationManager {
 		this.playerIndex = playerIndex;
 		this.murdererCards = murdererCards;
 		this.sc = sc;
-		makeAccusation();
 	}
 	
 	/**

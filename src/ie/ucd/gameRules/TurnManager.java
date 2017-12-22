@@ -71,20 +71,19 @@ public class TurnManager {
 				String str = sc.nextLine();
 				switch(Character.toUpperCase(str.charAt(0))) {
 				case('M'):
-					new MoveManager(currentPlayer, gameBoard, playerCollection, weaponPawns, playerIndex, sc);
+					new MoveManager(currentPlayer, gameBoard, playerCollection, weaponPawns).moveMode(playerIndex, sc);;
 					break;
 				case('N'):
-					new NotebookManager(currentPlayer.getNotebook(), sc);
+					new NotebookManager(currentPlayer.getNotebook(), sc).openNotebook(sc);
 					break;
 				case('H'):
-
-					new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc);
+					new HypothesisManager(gameBoard, playerCollection, weaponPawns, playerIndex, sc).makeHypothesis();;
 					break;
 				case('C'):
 					System.out.print(currentPlayer.lookAtHand());
 					break;
 				case('A'):
-					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc);
+					new AccusationManager(currentPlayer, gameBoard, playerCollection, playerIndex, murdererCards, sc).makeAccusation();
 					break;
 					
 				case('E'):

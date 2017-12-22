@@ -29,7 +29,6 @@ public class HypothesisManager {
 		this.weaponPawns = weaponPawns;
 		this.playerIndex = playerIndex;
 		this.sc = sc;
-		makeHypothesis();
 	}
 
 	
