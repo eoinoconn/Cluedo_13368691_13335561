@@ -33,7 +33,7 @@ public class HypothesisManager {
 	}
 
 	
-public void makeHypothesis() {
+	public void makeHypothesis() {
 		
 		currentPlayer = playerCollection.get(playerIndex);
 		SuspectPawn sp = currentPlayer.getSuspectPawn();
@@ -53,6 +53,7 @@ public void makeHypothesis() {
 			System.out.println("With which weapon?");
 			Weapon murderWeapon = this.getMurderWeapon(sc);
 		
+			// Next move the involved suspect and weapon pawns to the room
 			
 			// get an available slot in the murder room
 			location = gameBoard.getRoomLocation(murderRoom);
@@ -75,7 +76,7 @@ public void makeHypothesis() {
 			
 			//Create the string to add to the notebooks of all players
 			String str_1 = "Player " + (playerCollection.get(playerIndex).playerNumber()) + " suspects that " + murderer.toString() + " committed the murder with the " + murderWeapon.toString() + " in the " + murderRoom.toString();
-			
+
 			boolean refuted = false;
 			
 			// Loop to iterate through every Player
@@ -166,6 +167,10 @@ public void makeHypothesis() {
 		return Weapon.values()[weaponIndex];
 	}
 	
+	/**
+	 * 
+	 * @return true if the current player is in a room and has not already made a hypothesis, else false
+	 */
 	private boolean checkEligible() {
 		if(currentSlot.getType()!=3) {
 
