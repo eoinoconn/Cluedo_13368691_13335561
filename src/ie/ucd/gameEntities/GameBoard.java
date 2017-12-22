@@ -14,6 +14,12 @@ public class GameBoard {
 		return uniqueInstance;
 	}
 	
+	/**
+	 * This constructor uses the values in an integer grid to assign a type and number to every slot.
+	 * Each slot is initialised with no pawn on it.
+	 * Then Slots are linked to all adjacent slots.
+	 * @param grid integer grid read in from csv
+	 */
 	private GameBoard(int[][] grid) {
 		Slot above, below, left, right;
 		
@@ -103,6 +109,11 @@ public class GameBoard {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param room
+	 * @return location coordinates of a free space in the room
+	 */
 	public int[] getRoomLocation(Room room) {
 		int[] location = new int[2];
 		boolean byDoor, inRoom, taken;
@@ -125,20 +136,40 @@ public class GameBoard {
 		return location; // will return first grid square room slot found
 	}
 	
+	/**
+	 * 
+	 * @param location coordinates of this slot
+	 * @return the slot object at this location on the board grid
+	 */
 	public Slot getSlot(int[] location) {
 		return grid[location[0]][location[1]];
 	}
 	
+	/**
+	 * 
+	 * @param row coordinate of this slot
+	 * @param col coordinate of this slot
+	 * @return the slot object at this location on the board grid
+	 */
 	public Slot getSlot(int row, int col) {
 		return grid[row][col];
 	}
 	
+	/**
+	 * Moves a pawn to a new location, updating the board slots to reflect it's new position
+	 * @param pawn
+	 * @param row
+	 * @param col
+	 */
 	public void changePawnLocation(Pawn pawn, int row, int col) {
 		getSlot(row, col).setHasPawn(true);
 		getSlot(pawn.getLocation()).setHasPawn(false);
 		pawn.setLocation(row, col);
 	}
 	
+	/**
+	 * Prints the board to the console with pawns in position
+	 */
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns) {
 		SuspectPawn sp;
 		int pawnId;
@@ -213,6 +244,10 @@ public class GameBoard {
 		System.out.println("[] = suspect pawn, () = weapon pawn, ' = corridor, # = doorway\n");
 	}
 	
+	/**
+	 * 
+	 * @return gameboard dimensions
+	 */
 	public int getDimensions() {
 		return DIMENSIONS;
 	}
