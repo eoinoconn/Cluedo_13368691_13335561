@@ -27,8 +27,6 @@ public class MoveManager{
 	
 	public void moveMode(int playerIndex, Scanner sc) {
 		
-		
-		
 		// Enter move-mode contained in while loop
 		boolean inMoveMode = true;
 		while((currentPlayer.getMoves() > 0) & (inMoveMode)) {

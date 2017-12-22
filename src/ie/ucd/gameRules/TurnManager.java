@@ -27,8 +27,16 @@ public class TurnManager {
 		startTurn();
 	}
 
-	
-private void startTurn() {
+	/**
+	 * User is presented with options to:
+	 * - Enter move mode
+	 * - Check notebook 
+	 * - Make a hypothesis
+	 * - Make an accusation
+	 * - Check Cards
+	 * - End your turn
+	 */
+	private void startTurn() {
 		
 		
 		// Select current turns player
@@ -45,14 +53,11 @@ private void startTurn() {
 			sc.nextLine();
 			
 			// Randomly assign number of moves
-			/* As a normal set of playing die is skewed for certain 
-			 * values of roles the random integer is called twice
-			 * to simulate this real life instance. 
-			 */
 			int numMovesRemaining = currentPlayer.rollDice();
 			
-			// Inform player of his moves and location
+			// Inform player of their moves and location
 			System.out.println("You have " + numMovesRemaining + " moves.");
+			
 			
 			// Begin action loop where the player makes his decisions for their turn
 			boolean playerTurnOver = false;

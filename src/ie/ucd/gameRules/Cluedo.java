@@ -12,6 +12,7 @@ public class Cluedo {
 	}
 	
 	public Cluedo() {
+		// csv containing a modifiable grid representing the gameboard
 		String fileName = "GameBoard1.csv";	
 
 		// Scanner instance for reading user input
