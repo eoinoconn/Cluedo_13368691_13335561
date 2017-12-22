@@ -21,7 +21,7 @@ public class Cluedo {
 		// Initialise Setup instance
 		GameSetup setup = new GameSetup(fileName, sc);
 		
-		// setup.startGame returns Turn object
+		// setup.getGameManager returns gameManager object
 		GameManager gameManager = setup.getGameManager();
 		
 		// Begin 

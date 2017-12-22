@@ -129,14 +129,14 @@ public class GameBoard {
 		return grid[location[0]][location[1]];
 	}
 	
-	public Slot getSlot(int x, int y) {
-		return grid[x][y];
+	public Slot getSlot(int row, int col) {
+		return grid[row][col];
 	}
 	
-	public void changePawnLocation(Pawn pawn, int x, int y) {
-		getSlot(x, y).setHasPawn(true);
+	public void changePawnLocation(Pawn pawn, int row, int col) {
+		getSlot(row, col).setHasPawn(true);
 		getSlot(pawn.getLocation()).setHasPawn(false);
-		pawn.setLocation(x, y);
+		pawn.setLocation(row, col);
 	}
 	
 	public void printBoard(int currentPlayerId, ArrayList<Player> playerCollection, ArrayList<WeaponPawn> weaponPawns) {

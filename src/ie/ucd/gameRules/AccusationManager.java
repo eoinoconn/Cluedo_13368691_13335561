@@ -61,13 +61,12 @@ public class AccusationManager {
 		
 		else {
 			
-			// get the current room and print it to the screen
-			int roomIndex = currentSlot.getNumber();
-			murderRoom = Room.values()[roomIndex-1];
-			System.out.println("You are currently in the " + murderRoom.toString());
+			// Take suspect input
+			System.out.println("Where do you believe the murder took place?");
+			murderRoom = this.getRoomChoice(sc);
 			
 			// Take suspect input
-			System.out.println("Who do believe is the murderer?");
+			System.out.println("Who do you believe is the murderer?");
 			murderer = this.getSuspectChoice(sc);
 			
 			// Take weapon input
@@ -158,6 +157,23 @@ public class AccusationManager {
 				sc.nextLine();
 			}
 		}		
+	}
+	
+	/**
+	 * 
+	 * @param sc
+	 * scanner to read in the user's choice
+	 * @return
+	 * the murder weapon being accused
+	 */
+	private Room getRoomChoice(Scanner sc) {
+		int i = 1;
+		for(Room rm: Room.values()) {
+			System.out.println(i + " " + rm.toString());
+			i++;
+		}
+		int weaponIndex = sc.nextInt() - 1;
+		return Room.values()[weaponIndex];
 	}
 	
 	/**
