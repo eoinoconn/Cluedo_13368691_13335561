@@ -21,7 +21,7 @@ class SuspectCardTest {
 	@Test
 	void testToString() {
 		String str = susCard.toString();
-		String expected = "DENNIS";
+		String expected = "COLONELMUSTARD";
 		assertEquals(expected, str);
 	}
 	

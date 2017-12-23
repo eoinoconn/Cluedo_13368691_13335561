@@ -85,7 +85,10 @@ class PlayerTest {
 		player.giveCard(new WeaponCard(Weapon.values()[2]));
 		player.giveCard(new RoomCard(Room.values()[5]));
 		String str = player.lookAtHand();
-		String expected = "MAC\nCRUTCH\nDEESAPPARTMENT\nFRANK\nRUMHAM\nUNDERTHEBRIDGE\n";
+		String expected = "MISSSCARLET\nDAGGER\nBALLROOM\n" + 
+				"MRSPEACOCK\n" + 
+				"LEADPIPE\n" + 
+				"LIBRARY\n";
 		assertEquals(expected, str);
 	}
 }

@@ -19,7 +19,7 @@ class RoomCardTest {
 	@Test
 	void testToString() {
 		String str = roomCard.toString();
-		String expected = "THEBAR";
+		String expected = "KITCHEN";
 		assertEquals(expected, str);
 	}
 	

@@ -42,7 +42,9 @@ class TestHand {
 	@Test
 	public void testToString() {
 		String str = hand.toString();
-		String expected = "THEBAR\nPOCKETSAND\nDENNIS\n";
+		String expected = "KITCHEN\n" + 
+				"CANDLESTICK\n" + 
+				"COLONELMUSTARD\n";
 		assertEquals(expected, str);
 	}
 
