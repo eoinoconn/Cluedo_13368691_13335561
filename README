@@ -6,5 +6,36 @@ Students:	Eoin O'Connell - 13335561
 The programme is fully functional. The user provides input from the command line and a board interface is 
 displayed using ASCII characters on screen.
 
-First the players must choose their characters. Then when the game starts they roll a dice and are presented 
-with the gameboard and the main menu.
+UnitTests are provided. Main contained in Cluedo class.
+
+Diagrams included in Diagrams  folder.
+
+A note on productivity and work division. We utilised Agile methods in our development of the programme. We split the 
+workload and kept track using a scrum board, a picture of which is contained in the diagrams folder. This was made easier 
+by utilising branching in Git which made merging our work simple.
+
+Game function:
+	First the players must choose their characters. There must be a minimum of two players, after that additional 
+	players may or may not be added. Then when the game starts the first player willbe prompted to roll a dice and are presented 
+	with the gameboard and the main menu. They can choose from the following options:
+	Enter move mode:
+		The user now has the amount of moves they are entitled to. They can move freely in a room without using a move but once 
+		they are in the corridor they start expending moves. The user may not pass through walls or exit the gameboard. There is 
+		also an unreachable region in the middle of the board. The user decides if they are moving up, down left or right and 
+		each time they move the updated gameboard is printed to screen.
+	Check your notebook:
+		The notebook keeps a log of all the game actions for each player. The player chooses how many of the latest entries 
+		they would like to display.
+	Make a hypothesis:
+		If the player is in a room they may make a hypothesis. The player chooses the murderer and the weapon and the room 
+		depends on which one they are in. When the accusation is made the suspect pawn and weapon pawn are moved to the room 
+		the hypothesis maker is in. Then the hand of each player is checked for the corresponding cards. If the cards are present 
+		in other players hands the hypothesis is refuted. If not the hypothesis is not refuted. Either way an entry is added to 
+		every players notebook.
+	Make an accusation
+		Similar to making a hypothesis except it can be made from anywhere including corridors. If the player is right, they win
+		the game and the programme exits. If not he player is removed fromt he game and an entry is added to every players notebook. 
+	Check Cards:
+		Allows the player to check what cards they have in their hand.
+	End your turn
+		Ends this players turn and allows the next player to roll the dice and choose from the same main menu.
