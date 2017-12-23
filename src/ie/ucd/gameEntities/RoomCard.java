@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameEntities;
 
 public class RoomCard extends Card {
 	
@@ -12,5 +12,8 @@ public class RoomCard extends Card {
 		return name;
 	}
 	
+	public String toString() {
+		return name.toString();
+	}
 	
 }

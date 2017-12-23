@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameEntities;
 
 public class WeaponCard extends Card {
 
@@ -10,5 +10,9 @@ public class WeaponCard extends Card {
 	
 	public Weapon getName() {
 		return name;
+	}
+	
+	public String toString() {
+		return name.toString();
 	}
 }

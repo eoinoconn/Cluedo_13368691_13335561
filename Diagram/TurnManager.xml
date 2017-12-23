@@ -1,0 +1,39 @@
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>230</x><y>120</y><w>30</w><h>520</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>220</x><y>20</y><w>60</w><h>110</h></coordinates><panel_attributes>Player</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>150</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+.get(index)</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>120</y><w>60</w><h>520</h></coordinates><panel_attributes>player
+Collection
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>10</y><w>1010</w><h>640</h></coordinates><panel_attributes>TurnManager.startTurn()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>120</y><w>70</w><h>520</h></coordinates><panel_attributes>Notebook</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>330</y><w>360</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>340;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>470</x><y>120</y><w>70</w><h>520</h></coordinates><panel_attributes>Move
+Manager</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>260</y><w>240</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>220;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>120</y><w>70</w><h>520</h></coordinates><panel_attributes>Hypothesis
+Manager</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>120</y><w>70</w><h>520</h></coordinates><panel_attributes>Hand</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>830</x><y>120</y><w>70</w><h>520</h></coordinates><panel_attributes>Accusation
+Manager</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>390</y><w>480</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>460;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>460</y><w>600</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>580;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>520</y><w>720</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>700;10;10;10</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>110</x><y>190</y><w>950</w><h>440</h></coordinates><panel_attributes>User Selection
+--
+
+-.
+Enter move mode (M)
+
+
+
+-.
+Check your notebook (N)
+
+
+
+-.
+Make a hypothesis (H)
+
+
+
+-.
+Make an accusation (A)
+
+
+
+-.
+Check Cards (C)
+
+
+
+-.
+End your turn (E)
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>580</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+.get(++index)</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element></diagram>

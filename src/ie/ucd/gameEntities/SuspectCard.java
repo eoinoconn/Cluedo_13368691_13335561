@@ -1,4 +1,4 @@
-package ie.ucd.items;
+package ie.ucd.gameEntities;
 
 public class SuspectCard extends Card {
 
@@ -10,5 +10,9 @@ public class SuspectCard extends Card {
 	
 	public Suspect getName() {
 		return name;
+	}
+	
+	public String toString() {
+		return name.toString();
 	}
 }
